@@ -1,0 +1,10 @@
+[2026-03-23 18:57:26] ==========================================
+[2026-03-23 18:57:26] Arkived Continuous Course Processor
+[2026-03-23 18:57:26] ==========================================
+[2026-03-23 18:57:26] Processing 10 courses from Google Drive
+[2026-03-23 18:57:26] Max parallel: 2
+[2026-03-23 18:57:26] Repository: https://github.com/clawdbotinstaller/arkived-courses
+[2026-03-23 18:57:26] ==========================================
+[2026-03-23 18:57:26] Starting processing of 10 courses
+[2026-03-23 18:57:26] [MTH141] Starting processing...
+[2026-03-23 18:57:26] [MTH141] Launching Claude subagent...

@@ -1,0 +1,94 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1774292241369,
+  "projectRoot": "/home/ubuntu/courses",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "scripts"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "course-generation-bundle": {
+      "path": "course-generation-bundle",
+      "purpose": null,
+      "fileCount": 5,
+      "lastAccessed": 1774292241361,
+      "keyFiles": [
+        "GENERATE.md",
+        "PROCESSING.md",
+        "PROMPT.md",
+        "README.md",
+        "SKILL.md"
+      ]
+    },
+    "generated": {
+      "path": "generated",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1774292241365,
+      "keyFiles": []
+    },
+    "logs": {
+      "path": "logs",
+      "purpose": null,
+      "fileCount": 3,
+      "lastAccessed": 1774292241365,
+      "keyFiles": [
+        "MTH141_20260323_185719.log",
+        "master-process.log",
+        "process-all-20260323_185719.log"
+      ]
+    },
+    "processing": {
+      "path": "processing",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1774292241366,
+      "keyFiles": []
+    },
+    "raw": {
+      "path": "raw",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1774292241366,
+      "keyFiles": []
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 4,
+      "lastAccessed": 1774292241367,
+      "keyFiles": [
+        "download-drive.sh",
+        "generate-course.sh",
+        "process-all-courses.sh",
+        "subagent-harness.sh"
+      ]
+    }
+  },
+  "hotPaths": [],
+  "userDirectives": []
+}
