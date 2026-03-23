@@ -1,0 +1,58 @@
+{
+  "topic_id": "derivatives",
+  "meta": {
+    "display_name": "Derivatives",
+    "course_context": "MTH141 - Core concept of differential calculus",
+    "professor_methodology": "Geometric interpretation (slope of tangent) then computational techniques",
+    "core_formula": "f'(x) = \\lim_{h \\to 0} \\frac{f(x+h)-f(x)}{h}",
+    "description": "The derivative as rate of change and slope of tangent line"
+  },
+  "patterns": [
+    {
+      "id": "derivative_limit_def",
+      "name": "Limit Definition",
+      "recognition_signal": "Find derivative using definition",
+      "canonical_forms": ["f'(x) = \\lim_{h\\to 0} \\frac{f(x+h)-f(x)}{h}"],
+      "logic": "Derivative is limit of difference quotient",
+      "worked_example": {
+        "title": "From Definition",
+        "problem_latex": "f(x) = x^2, \\text{ find } f'(x)",
+        "solution_steps": [
+          {"step": 1, "action": "Set up limit", "latex": "\\lim_{h\\to 0} \\frac{(x+h)^2-x^2}{h}"},
+          {"step": 2, "action": "Expand", "latex": "\\lim_{h\\to 0} \\frac{x^2+2xh+h^2-x^2}{h} = \\lim_{h\\to 0} \\frac{2xh+h^2}{h}"},
+          {"step": 3, "action": "Simplify", "latex": "\\lim_{h\\to 0} (2x+h) = 2x"}
+        ]
+      }
+    },
+    {
+      "id": "derivative_power_rule",
+      "name": "Power Rule",
+      "recognition_signal": "Power of x: x^n",
+      "canonical_forms": ["\\frac{d}{dx}[x^n] = nx^{n-1}"],
+      "logic": "Bring down exponent, subtract one",
+      "worked_example": {
+        "title": "Power Rule",
+        "problem_latex": "\\frac{d}{dx}[x^5]",
+        "solution_steps": [
+          {"step": 1, "action": "Apply power rule", "latex": "5x^4"}
+        ]
+      }
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "Asked to use definition?", "yes": "Use limit definition", "no": "Use shortcut rules"}
+    ],
+    "professor_tips": [
+      "Power rule handles most polynomial terms",
+      "Don't forget d/dx[constant] = 0",
+      "Linearity: derivative of sum is sum of derivatives"
+    ]
+  },
+  "confidence_checklist": [
+    "I can compute derivatives using the limit definition",
+    "I can apply the power rule correctly",
+    "I understand the geometric meaning of derivative",
+    "I can find the equation of a tangent line"
+  ]
+}

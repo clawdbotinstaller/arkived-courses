@@ -1,0 +1,78 @@
+{
+  "id": "area_between_curves",
+  "name": "Area Between Curves",
+  "description": "Computing area between two curves using definite integrals",
+  "canonical_form_latex": "A = \\int_a^b [f_{\\text{top}}(x) - f_{\\text{bottom}}(x)] \\, dx",
+  "identification_signal": "Area enclosed by, area between, region bounded by",
+  "frequency": "Very Common",
+  "estimated_time": "8-12 minutes",
+  "strategy": {
+    "step_1": "Sketch curves and identify region",
+    "step_2": "Find intersection points (set f(x) = g(x))",
+    "step_3": "Determine which function is on top",
+    "step_4": "Set up integral: ∫[top - bottom]dx",
+    "step_5": "Evaluate the definite integral"
+  },
+  "exam_references": ["MTH141-2018-F-Q7", "MTH141-2020-M-Q6"],
+  "related_techniques": ["area_vertical", "area_horizontal", "ftc_part2"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Recognize area problems",
+      "flashcards": [
+        {
+          "front": {"latex": "\\text{Area between } y=x^2 \\text{ and } y=x"},
+          "back": {"title": "Area between curves", "explanation": "Find intersections, determine top, integrate"}
+        }
+      ],
+      "spot_it": {
+        "instructions": "Spot area problems",
+        "items": [
+          {"prompt_latex": "Find area enclosed by y=x² and y=2-x", "is_match": true, "explanation": "Area between two curves"},
+          {"prompt_latex": "Find volume of solid of revolution", "is_match": false, "explanation": "Volume, not area"}
+        ]
+      }
+    },
+    "phase_2_strategy": {
+      "purpose": "Compute area",
+      "steps": [
+        {
+          "title": "Sketch",
+          "instruction": "Draw curves and shade region",
+          "why": "Visual understanding of the problem"
+        },
+        {
+          "title": "Intersections",
+          "instruction": "Solve f(x) = g(x) for limits",
+          "why": "Limits of integration"
+        },
+        {
+          "title": "Top/bottom",
+          "instruction": "Test point to see which is larger",
+          "why": "Must subtract in correct order"
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice area problems",
+      "problem_cards": [
+        {
+          "id": "area-1",
+          "difficulty": "Easy",
+          "task": "Find area between y=x² and y=x from 0 to 1",
+          "prompt_latex": "\\int_0^1 (x - x^2) \\, dx",
+          "solution": {"final_answer_latex": "\\frac{1}{6}"}
+        },
+        {
+          "id": "area-2",
+          "difficulty": "Medium",
+          "task": "Find area between y=x² and y=2-x",
+          "prompt_latex": "\\text{Intersections at } x=-2, 1",
+          "solution": {"final_answer_latex": "\\frac{9}{2}"}
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "Area Between Curves Master", "pattern_id": "area_between_curves"}
+    }
+  }
+}

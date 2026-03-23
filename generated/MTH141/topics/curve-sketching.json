@@ -1,0 +1,62 @@
+{
+  "topic_id": "curve_sketching",
+  "meta": {
+    "display_name": "Curve Sketching",
+    "course_context": "MTH141 - Using derivatives to analyze functions",
+    "professor_methodology": "First derivative for increase/decrease and extrema, second derivative for concavity",
+    "core_formula": "f'(x) > 0 \\Rightarrow \\text{increasing}, \\quad f''(x) > 0 \\Rightarrow \\text{concave up}",
+    "description": "Analyzing and sketching curves using first and second derivatives"
+  },
+  "patterns": [
+    {
+      "id": "increasing_decreasing",
+      "name": "Increasing/Decreasing",
+      "recognition_signal": "Where is f increasing? Decreasing?",
+      "canonical_forms": ["f'(x) > 0 \\Rightarrow \\text{inc}, f'(x) < 0 \\Rightarrow \\text{dec}"],
+      "logic": "Sign of first derivative tells increasing/decreasing",
+      "worked_example": {
+        "title": "Intervals of Increase",
+        "problem_latex": "f(x) = x^3 - 3x^2, \\text{ find inc/dec intervals}",
+        "solution_steps": [
+          {"step": 1, "action": "Find derivative", "latex": "f'(x) = 3x^2 - 6x = 3x(x-2)"},
+          {"step": 2, "action": "Critical points", "latex": "x = 0, 2"},
+          {"step": 3, "action": "Test intervals", "reasoning": "x < 0: f' > 0 (inc); 0 < x < 2: f' < 0 (dec); x > 2: f' > 0 (inc)"}
+        ]
+      }
+    },
+    {
+      "id": "concavity",
+      "name": "Concavity",
+      "recognition_signal": "Concave up/down, inflection points",
+      "canonical_forms": ["f''(x) > 0 \\Rightarrow \\text{concave up (cup)}, f''(x) < 0 \\Rightarrow \\text{concave down (frown)}"],
+      "logic": "Sign of second derivative tells concavity",
+      "worked_example": {
+        "title": "Concavity Analysis",
+        "problem_latex": "f(x) = x^3, \\text{ find concavity}",
+        "solution_steps": [
+          {"step": 1, "action": "First derivative", "latex": "f'(x) = 3x^2"},
+          {"step": 2, "action": "Second derivative", "latex": "f''(x) = 6x"},
+          {"step": 3, "action": "Inflection point", "latex": "f'' = 0 \\text{ at } x = 0"},
+          {"step": 4, "action": "Test", "reasoning": "x < 0: f'' < 0 (down); x > 0: f'' > 0 (up)"}
+        ]
+      }
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "First derivative tells...", "yes": "Increasing/decreasing and extrema", "no": "Learn the connection"},
+      {"step": 2, "question": "Second derivative tells...", "yes": "Concavity and inflection", "no": "Learn the connection"}
+    ],
+    "professor_tips": [
+      "Concave up = cup = holds water",
+      "Concave down = frown = spills water",
+      "First derivative test works even when second derivative is zero"
+    ]
+  },
+  "confidence_checklist": [
+    "I can find intervals of increase and decrease",
+    "I can find and classify local extrema",
+    "I can determine concavity",
+    "I can find inflection points"
+  ]
+}

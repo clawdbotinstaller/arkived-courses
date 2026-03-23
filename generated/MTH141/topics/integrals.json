@@ -1,0 +1,64 @@
+{
+  "topic_id": "integrals",
+  "meta": {
+    "display_name": "Integrals",
+    "course_context": "MTH141 - Introduction to integration",
+    "professor_methodology": "Riemann sums to FTC to substitution",
+    "core_formula": "\\int_a^b f(x) \\, dx = F(b) - F(a), \\quad F' = f",
+    "description": "Definite and indefinite integrals, Fundamental Theorem of Calculus"
+  },
+  "patterns": [
+    {
+      "id": "ftc_evaluation",
+      "name": "FTC Evaluation",
+      "recognition_signal": "Evaluate definite integral with bounds",
+      "canonical_forms": ["\\int_a^b f(x) \\, dx = F(b) - F(a)"],
+      "logic": "Find antiderivative, evaluate at bounds, subtract",
+      "worked_example": {
+        "title": "FTC Part II",
+        "problem_latex": "\\int_0^2 (3x^2 + 2x) \\, dx",
+        "solution_steps": [
+          {"step": 1, "action": "Antiderivative", "latex": "F(x) = x^3 + x^2"},
+          {"step": 2, "action": "F(2)", "latex": "8 + 4 = 12"},
+          {"step": 3, "action": "F(0)", "latex": "0"},
+          {"step": 4, "action": "Subtract", "latex": "12 - 0 = 12"}
+        ]
+      }
+    },
+    {
+      "id": "u_substitution",
+      "name": "Integration by Substitution",
+      "recognition_signal": "Composite function with inner function derivative present",
+      "canonical_forms": ["\\int f(g(x))g'(x) \\, dx = \\int f(u) \\, du"],
+      "logic": "Let u = inner function, du = derivative dx, rewrite and integrate",
+      "worked_example": {
+        "title": "u-Substitution",
+        "problem_latex": "\\int 2x \\cos(x^2) \\, dx",
+        "solution_steps": [
+          {"step": 1, "action": "Choose u", "latex": "u = x^2"},
+          {"step": 2, "action": "Find du", "latex": "du = 2x \\, dx"},
+          {"step": 3, "action": "Substitute", "latex": "\\int \\cos(u) \\, du"},
+          {"step": 4, "action": "Integrate", "latex": "\\sin(u) + C"},
+          {"step": 5, "action": "Back-substitute", "latex": "\\sin(x^2) + C"}
+        ]
+      }
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "Is it a composite function?", "yes": "Try u-substitution", "no": "Basic antiderivative"},
+      {"step": 2, "question": "Definite integral?", "yes": "Use FTC II", "no": "Indefinite - add +C"}
+    ],
+    "professor_tips": [
+      "Don't forget +C for indefinite integrals",
+      "For definite integrals with substitution, either change bounds or back-substitute",
+      "Check by differentiating your answer"
+    ]
+  },
+  "confidence_checklist": [
+    "I can evaluate definite integrals using FTC",
+    "I can find basic antiderivatives",
+    "I can apply u-substitution",
+    "I know when to use substitution"
+  ]
+}

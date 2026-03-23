@@ -1,0 +1,44 @@
+{
+  "topic_id": "implicit_differentiation",
+  "meta": {
+    "display_name": "Implicit Differentiation",
+    "course_context": "MTH141 - Advanced differentiation technique",
+    "professor_methodology": "Treat y as function of x, use chain rule",
+    "core_formula": "\\frac{d}{dx}[y^n] = ny^{n-1}\\frac{dy}{dx}",
+    "description": "Finding derivatives when y is not explicitly defined as function of x"
+  },
+  "patterns": [
+    {
+      "id": "implicit_basic",
+      "name": "Implicit Differentiation",
+      "recognition_signal": "y not isolated, equation involving both x and y",
+      "canonical_forms": ["x^2 + y^2 = r^2, \\quad xy + \\sin y = x"],
+      "logic": "Differentiate both sides, apply chain rule to y terms, solve for dy/dx",
+      "worked_example": {
+        "title": "Implicit Differentiation",
+        "problem_latex": "x^2 + y^2 = 25, \\text{ find } \\frac{dy}{dx}",
+        "solution_steps": [
+          {"step": 1, "action": "Differentiate", "latex": "2x + 2y\\frac{dy}{dx} = 0"},
+          {"step": 2, "action": "Isolate dy/dx term", "latex": "2y\\frac{dy}{dx} = -2x"},
+          {"step": 3, "action": "Solve", "latex": "\\frac{dy}{dx} = -\\frac{x}{y}"}
+        ]
+      }
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "Is y isolated?", "yes": "Explicit differentiation", "no": "Implicit differentiation"}
+    ],
+    "professor_tips": [
+      "Every y term gets a dy/dx factor",
+      "Product rule applies when x and y are multiplied",
+      "Final answer can have both x and y"
+    ]
+  },
+  "confidence_checklist": [
+    "I can differentiate implicitly",
+    "I remember to use chain rule on y terms",
+    "I can solve for dy/dx",
+    "I can find tangent lines to implicit curves"
+  ]
+}

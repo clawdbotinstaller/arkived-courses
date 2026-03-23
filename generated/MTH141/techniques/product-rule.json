@@ -1,0 +1,266 @@
+{
+  "id": "product_rule",
+  "displayName": "Product Rule",
+  "recognition": {
+    "visualSignals": [
+      "Product of two functions: f(x) · g(x)",
+      "Polynomial times trig function: x² sin x",
+      "Exponential times polynomial: e^x · x³",
+      "Two functions multiplied together"
+    ],
+    "verbalTriggers": [
+      "Find the derivative of the product",
+      "Differentiate f(x)g(x)",
+      "What is d/dx of this multiplication"
+    ],
+    "nonExamples": [
+      "Single function like sin x or x³",
+      "Composition like sin(x³) - use chain rule",
+      "Quotient like sin x / x² - use quotient rule"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Is the function a product of two functions?",
+        "ifYes": "Use product rule: first' · second + first · second'",
+        "ifNo": "Check if chain rule or quotient rule applies"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Identify the two factors: call them u and v",
+        "pitfall": "Make sure you identify both factors correctly",
+        "check": "Can you write it as u(x) · v(x)?"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Compute the derivative of the first factor: u'",
+        "pitfall": "Differentiate carefully - may need chain rule",
+        "check": "u' is the derivative of just the first factor"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Compute the derivative of the second factor: v'",
+        "pitfall": "Differentiate carefully - may need chain rule",
+        "check": "v' is the derivative of just the second factor"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Apply formula: (uv)' = u'v + uv'",
+        "pitfall": "Don't mix up the order - it's first' times second plus first times second'",
+        "check": "You should have two terms added together"
+      }
+    ],
+    "timeEstimate": "4-6 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Getting only one term instead of two",
+      "diagnosis": "Forgot the second term of product rule",
+      "fix": "Remember product rule always gives TWO terms: u'v + uv'",
+      "example": "d/dx[x·sin x] = 1·sin x + x·cos x, not just sin x or x·cos x"
+    },
+    {
+      "symptom": "Wrong sign in answer",
+      "diagnosis": "Confused product rule with quotient rule",
+      "fix": "Product rule has PLUS between terms, not minus",
+      "example": "d/dx[x·cos x] = cos x - x·sin x (the minus comes from derivative of cos)"
+    },
+    {
+      "symptom": "Missing derivative on one factor",
+      "diagnosis": "Applied formula incorrectly",
+      "fix": "First term has derivative of FIRST factor, second term has derivative of SECOND factor",
+      "example": "d/dx[e^x·x²] = e^x·x² + e^x·2x, not e^x + x²"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "Find the derivative of f(x) = x³ · e^x",
+      "solution": [
+        {
+          "step": 1,
+          "math": "u = x^3, \\quad v = e^x",
+          "explanation": "Identify the two factors"
+        },
+        {
+          "step": 2,
+          "math": "u' = 3x^2, \\quad v' = e^x",
+          "explanation": "Compute derivatives of each factor"
+        },
+        {
+          "step": 3,
+          "math": "f'(x) = u'v + uv' = 3x^2 \\cdot e^x + x^3 \\cdot e^x",
+          "explanation": "Apply product rule formula"
+        },
+        {
+          "step": 4,
+          "math": "f'(x) = e^x(3x^2 + x^3) = x^2e^x(3 + x)",
+          "explanation": "Factor to simplify"
+        }
+      ],
+      "keyInsight": "Always write out u, v, u', v' explicitly to avoid errors",
+      "timeEstimate": "3-4 min"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Find the derivative of g(x) = x² · sin x · cos x",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{First, let } u = x^2, \\quad v = \\sin x \\cdot \\cos x",
+          "explanation": "Group two factors together - we'll need product rule twice"
+        },
+        {
+          "step": 2,
+          "math": "\\text{For } v = \\sin x \\cdot \\cos x: \\quad v' = \\cos x \\cdot \\cos x + \\sin x \\cdot (-\\sin x) = \\cos^2 x - \\sin^2 x",
+          "explanation": "Apply product rule to find v'"
+        },
+        {
+          "step": 3,
+          "math": "u' = 2x",
+          "explanation": "Derivative of u = x²"
+        },
+        {
+          "step": 4,
+          "math": "g'(x) = u'v + uv' = 2x(\\sin x \\cos x) + x^2(\\cos^2 x - \\sin^2 x)",
+          "explanation": "Apply product rule to the main product"
+        },
+        {
+          "step": 5,
+          "math": "g'(x) = x\\sin(2x) + x^2\\cos(2x)",
+          "explanation": "Simplify using double-angle identities"
+        }
+      ],
+      "keyInsight": "For products of three or more functions, apply product rule iteratively",
+      "timeEstimate": "6-8 min"
+    },
+    {
+      "difficulty": "Hard",
+      "problem": "Find the derivative of h(x) = (x²+1)³ · ln(x³+2x)",
+      "solution": [
+        {
+          "step": 1,
+          "math": "u = (x^2+1)^3, \\quad v = \\ln(x^3+2x)",
+          "explanation": "Identify the two main factors"
+        },
+        {
+          "step": 2,
+          "math": "u' = 3(x^2+1)^2 \\cdot 2x = 6x(x^2+1)^2",
+          "explanation": "Derivative of u requires chain rule"
+        },
+        {
+          "step": 3,
+          "math": "v' = \\frac{1}{x^3+2x} \\cdot (3x^2+2) = \\frac{3x^2+2}{x^3+2x}",
+          "explanation": "Derivative of v requires chain rule"
+        },
+        {
+          "step": 4,
+          "math": "h'(x) = 6x(x^2+1)^2 \\cdot \\ln(x^3+2x) + (x^2+1)^3 \\cdot \\frac{3x^2+2}{x^3+2x}",
+          "explanation": "Apply product rule: u'v + uv'"
+        },
+        {
+          "step": 5,
+          "math": "h'(x) = (x^2+1)^2\\left[6x\\ln(x^3+2x) + \\frac{(x^2+1)(3x^2+2)}{x^3+2x}\\right]",
+          "explanation": "Factor out common term (x²+1)²"
+        }
+      ],
+      "keyInsight": "When each factor requires chain rule, be systematic and label your work",
+      "timeEstimate": "8-10 min"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Product Rule Recognition",
+      "questions": [
+        {
+          "integral": "\\frac{d}{dx}[x \\cdot \\sin x]",
+          "options": ["Product rule", "Chain rule", "Quotient rule", "Power rule"],
+          "correctAnswer": 0,
+          "explanation": "Two functions multiplied: x and sin x"
+        },
+        {
+          "integral": "\\frac{d}{dx}[e^x \\cdot \\ln x]",
+          "options": ["Product rule", "Chain rule", "Quotient rule", "None"],
+          "correctAnswer": 0,
+          "explanation": "e^x times ln x is a product"
+        },
+        {
+          "integral": "\\frac{d}{dx}[x^2 \\cdot e^{3x}]",
+          "options": ["Product rule", "Chain rule only", "Both product and chain", "Power rule"],
+          "correctAnswer": 2,
+          "explanation": "Product rule for the product, chain rule for e^(3x)"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Product Rule Execution",
+      "problems": [
+        {
+          "problem": "Find \\frac{d}{dx}[x \\cdot \\cos x]",
+          "answer": "\\cos x - x\\sin x",
+          "hint": "u = x, v = cos x; u' = 1, v' = -sin x",
+          "difficulty": "Easy"
+        },
+        {
+          "problem": "Find \\frac{d}{dx}[x^2 \\cdot \\ln x]",
+          "answer": "2x\\ln x + x",
+          "hint": "u = x², v = ln x; remember u'v + uv'",
+          "difficulty": "Medium"
+        },
+        {
+          "problem": "Find \\frac{d}{dx}[\\sqrt{x} \\cdot e^{x^2}]",
+          "answer": "\\frac{e^{x^2}}{2\\sqrt{x}} + 2x\\sqrt{x}e^{x^2}",
+          "hint": "Requires both product rule and chain rule",
+          "difficulty": "Hard"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Exam-Style Product Rule Problems",
+      "problems": [
+        {
+          "problem": "If f(x) = x³e^(2x), find f'(0)",
+          "context": "Product rule evaluation at a point",
+          "primaryTechnique": "product_rule",
+          "secondaryTechniques": ["chain_rule_basic"]
+        },
+        {
+          "problem": "Find the equation of the tangent line to y = x sin x at x = π/2",
+          "context": "Product rule with tangent line application",
+          "primaryTechnique": "product_rule",
+          "secondaryTechniques": ["tangent_line"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "First' times second plus first times second'",
+    "whenToUse": [
+      "Product of two functions",
+      "x^n · trig(x)",
+      "e^x · polynomial",
+      "ln x · anything"
+    ],
+    "formula": "\\frac{d}{dx}[u \\cdot v] = u'v + uv'",
+    "quickCheck": "If there's multiplication between different function types, use product rule"
+  },
+  "patternConnections": [
+    "derivative_power_rule",
+    "chain_rule_basic",
+    "derivatives_exp_log",
+    "derivatives_trig"
+  ],
+  "masteryCriteria": {
+    "recognitionSpeed": "< 5 seconds to identify product rule",
+    "executionSpeed": "< 4 minutes for simple, < 7 for combined with chain rule",
+    "accuracyTarget": "90% correct on drill sets",
+    "selfCheckQuestions": [
+      "Do I always get exactly two terms?",
+      "Am I correctly identifying which factor to differentiate in each term?",
+      "Do I remember chain rule when needed on individual factors?"
+    ]
+  }
+}

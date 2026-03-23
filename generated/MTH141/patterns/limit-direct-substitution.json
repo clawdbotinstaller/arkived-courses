@@ -1,0 +1,70 @@
+{
+  "id": "limit_direct_substitution",
+  "name": "Direct Substitution Limits",
+  "description": "Evaluating limits by direct substitution when the function is continuous at the point",
+  "canonical_form_latex": "\\lim_{x \\to a} f(x) = f(a)",
+  "identification_signal": "Function appears continuous, no division by zero expected",
+  "frequency": "Common",
+  "estimated_time": "1-2 minutes",
+  "strategy": {
+    "step_1": "Try substituting x = a into f(x)",
+    "step_2": "If you get a finite number, that's the limit",
+    "step_3": "If you get 0/0, need factoring or L'Hôpital's rule"
+  },
+  "exam_references": ["MTH141-2018-M-Q1", "MTH141-2019-F-Q2"],
+  "related_techniques": ["limit_numerical", "limit_graphical", "factoring_limits"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Identify when direct substitution applies",
+      "flashcards": [
+        {
+          "front": {"latex": "\\lim_{x \\to 3} (x^2 + 2x - 1)"},
+          "back": {"title": "Direct Substitution", "explanation": "Polynomial - continuous everywhere, just plug in x = 3"}
+        },
+        {
+          "front": {"latex": "\\lim_{x \\to 0} \\cos x"},
+          "back": {"title": "Direct Substitution", "explanation": "Cosine is continuous, cos(0) = 1"}
+        }
+      ],
+      "spot_it": {
+        "instructions": "Identify which limits can use direct substitution",
+        "items": [
+          {"prompt_latex": "\\lim_{x \\to 2} \\frac{x^2-4}{x-2}", "is_match": false, "explanation": "Gives 0/0, need factoring"},
+          {"prompt_latex": "\\lim_{x \\to 2} \\frac{x+3}{x+1}", "is_match": true, "explanation": "Gives 5/3, direct substitution works"}
+        ]
+      }
+    },
+    "phase_2_strategy": {
+      "purpose": "Apply direct substitution correctly",
+      "steps": [
+        {
+          "title": "Substitute",
+          "instruction": "Replace x with the limit value a",
+          "why": "For continuous functions, limit equals function value"
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice direct substitution",
+      "problem_cards": [
+        {
+          "id": "ds-1",
+          "difficulty": "Easy",
+          "task": "Evaluate the limit",
+          "prompt_latex": "\\lim_{x \\to 1} (3x^2 - 2x + 5)",
+          "solution": {"final_answer_latex": "6"}
+        },
+        {
+          "id": "ds-2", 
+          "difficulty": "Easy",
+          "task": "Evaluate the limit",
+          "prompt_latex": "\\lim_{x \\to 0} e^x",
+          "solution": {"final_answer_latex": "1"}
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "Direct Substitution Master", "pattern_id": "limit_direct_substitution"}
+    }
+  }
+}

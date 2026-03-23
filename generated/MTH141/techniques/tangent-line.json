@@ -1,0 +1,302 @@
+{
+  "id": "tangent_line",
+  "displayName": "Tangent Line Equations",
+  "recognition": {
+    "visualSignals": [
+      "Find the equation of the tangent line",
+      "Tangent to curve at point",
+      "Line touching curve at one point",
+      "Slope of curve at specific point"
+    ],
+    "verbalTriggers": [
+      "Find the tangent line to... at...",
+      "Equation of the line tangent to...",
+      "What is the tangent line..."
+    ],
+    "nonExamples": [
+      "Find the normal line (perpendicular, not tangent)",
+      "Find where tangent is horizontal (find critical points)",
+      "Find secant line"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Do you have a point and need the slope?",
+        "ifYes": "Find derivative for slope, use point-slope form",
+        "ifNo": "May need to find point of tangency first"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Identify the function f(x) and point of tangency x = a",
+        "pitfall": "Make sure you have both function and point",
+        "check": "Point may be given as (a, f(a)) or just x = a"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Find the derivative f'(x)",
+        "pitfall": "Differentiation errors affect final answer",
+        "check": "Correct derivative"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Evaluate slope: m = f'(a)",
+        "pitfall": "Substitute correctly into derivative",
+        "check": "m is a number"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Find y-coordinate: y₀ = f(a)",
+        "pitfall": "Evaluate original function, not derivative",
+        "check": "y₀ is the function value"
+      },
+      {
+        "stepNumber": 5,
+        "instruction": "Use point-slope form: y - y₀ = m(x - a)",
+        "pitfall": "Don't mix up x and y coordinates",
+        "check": "Correct point (a, y₀) and slope m"
+      },
+      {
+        "stepNumber": 6,
+        "instruction": "Simplify to slope-intercept form if requested",
+        "pitfall": "Algebra errors in simplification",
+        "check": "Final form matches what's asked"
+      }
+    ],
+    "timeEstimate": "4-6 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Wrong slope",
+      "diagnosis": "Used wrong formula or wrong point",
+      "fix": "Slope comes from f'(a), not f(a)",
+      "example": "For f(x) = x² at x = 3, slope = f'(3) = 6, not f(3) = 9"
+    },
+    {
+      "symptom": "Line doesn't pass through point",
+      "diagnosis": "Used wrong y-coordinate or wrong form",
+      "fix": "Point is (a, f(a)), verify by substitution",
+      "example": "Plug x = a into your tangent line equation, should get y = f(a)"
+    },
+    {
+      "symptom": "Wrong sign in final answer",
+      "diagnosis": "Sign errors in point-slope formula",
+      "fix": "y - y₀ = m(x - a), watch minus signs",
+      "example": "y - 5 = 2(x - 3) gives y = 2x - 1, not y = 2x + 5 - 3 = 2x + 2"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "Find the tangent line to f(x) = x² at x = 2",
+      "solution": [
+        {
+          "step": 1,
+          "math": "f(x) = x^2, \\quad a = 2",
+          "explanation": "Identify function and point"
+        },
+        {
+          "step": 2,
+          "math": "f'(x) = 2x",
+          "explanation": "Find derivative"
+        },
+        {
+          "step": 3,
+          "math": "m = f'(2) = 2(2) = 4",
+          "explanation": "Slope at x = 2"
+        },
+        {
+          "step": 4,
+          "math": "y_0 = f(2) = 4",
+          "explanation": "Point is (2, 4)"
+        },
+        {
+          "step": 5,
+          "math": "y - 4 = 4(x - 2)",
+          "explanation": "Point-slope form"
+        },
+        {
+          "step": 6,
+          "math": "y = 4x - 4",
+          "explanation": "Simplify to slope-intercept"
+        }
+      ],
+      "keyInsight": "Slope from derivative, point from original function, then point-slope",
+      "timeEstimate": "2-3 min"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Find the tangent line to f(x) = e^x at x = 0",
+      "solution": [
+        {
+          "step": 1,
+          "math": "f(x) = e^x, \\quad a = 0",
+          "explanation": "Given"
+        },
+        {
+          "step": 2,
+          "math": "f'(x) = e^x",
+          "explanation": "Derivative of e^x is e^x"
+        },
+        {
+          "step": 3,
+          "math": "m = f'(0) = e^0 = 1",
+          "explanation": "Slope at x = 0"
+        },
+        {
+          "step": 4,
+          "math": "y_0 = f(0) = e^0 = 1",
+          "explanation": "y-coordinate"
+        },
+        {
+          "step": 5,
+          "math": "y - 1 = 1(x - 0)",
+          "explanation": "Point-slope: (0, 1) with slope 1"
+        },
+        {
+          "step": 6,
+          "math": "y = x + 1",
+          "explanation": "Simplify"
+        }
+      ],
+      "keyInsight": "e^x has the special property that f(0) = f'(0) = 1",
+      "timeEstimate": "3-4 min"
+    },
+    {
+      "difficulty": "Hard",
+      "problem": "Find the tangent line to f(x) = x³ - 2x + 1 that is parallel to y = x",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Parallel to } y = x \\text{ means slope } m = 1",
+          "explanation": "Parallel lines have equal slopes"
+        },
+        {
+          "step": 2,
+          "math": "f'(x) = 3x^2 - 2",
+          "explanation": "Find derivative"
+        },
+        {
+          "step": 3,
+          "math": "3x^2 - 2 = 1, \\quad 3x^2 = 3, \\quad x^2 = 1, \\quad x = \\pm 1",
+          "explanation": "Set derivative equal to desired slope, solve for x"
+        },
+        {
+          "step": 4,
+          "math": "\\text{At } x = 1: y = 1 - 2 + 1 = 0, \\text{ point } (1, 0)",
+          "explanation": "Find point for x = 1"
+        },
+        {
+          "step": 5,
+          "math": "\\text{At } x = -1: y = -1 + 2 + 1 = 2, \\text{ point } (-1, 2)",
+          "explanation": "Find point for x = -1"
+        },
+        {
+          "step": 6,
+          "math": "\\text{Tangent 1: } y - 0 = 1(x - 1) \\Rightarrow y = x - 1",
+          "explanation": "First tangent line"
+        },
+        {
+          "step": 7,
+          "math": "\\text{Tangent 2: } y - 2 = 1(x + 1) \\Rightarrow y = x + 3",
+          "explanation": "Second tangent line"
+        }
+      ],
+      "keyInsight": "When slope isn't given directly, use geometric conditions (parallel, perpendicular) to find it",
+      "timeEstimate": "7-9 min"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Tangent Line Recognition",
+      "questions": [
+        {
+          "integral": "Find the equation of the line tangent to y = x² at (1,1)",
+          "options": ["Tangent line", "Normal line", "Secant line", "Derivative"],
+          "correctAnswer": 0,
+          "explanation": "'Tangent to' indicates tangent line"
+        },
+        {
+          "integral": "Find the line perpendicular to the curve at x = 2",
+          "options": ["Tangent line", "Normal line", "Horizontal line", "Vertical line"],
+          "correctAnswer": 1,
+          "explanation": "Perpendicular to curve = normal line"
+        },
+        {
+          "integral": "Find the slope of the tangent to f(x) = sin x at x = 0",
+          "options": ["Need full tangent line", "Just find f'(0)", "Need point-slope form", "Need y-intercept"],
+          "correctAnswer": 1,
+          "explanation": "Just need f'(0) for the slope"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Tangent Line Execution",
+      "problems": [
+        {
+          "problem": "Find tangent line to f(x) = x³ at x = 1",
+          "answer": "y = 3x - 2",
+          "hint": "f'(x) = 3x², so m = 3. Point: (1,1). y - 1 = 3(x - 1)",
+          "difficulty": "Easy"
+        },
+        {
+          "problem": "Find tangent line to f(x) = ln x at x = 1",
+          "answer": "y = x - 1",
+          "hint": "f'(x) = 1/x, so m = 1. Point: (1,0). y = 1(x-1)",
+          "difficulty": "Medium"
+        },
+        {
+          "problem": "Find all tangent lines to f(x) = x² that pass through (0, -4)",
+          "answer": "y = 4x - 4 \\text{ and } y = -4x - 4",
+          "hint": "Let point of tangency be (a, a²). Tangent: y - a² = 2a(x-a). Plug in (0,-4)",
+          "difficulty": "Hard"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Exam-Style Tangent Line Problems",
+      "problems": [
+        {
+          "problem": "Find where the tangent to y = x³ - 3x is horizontal",
+          "context": "Horizontal tangent means slope = 0",
+          "primaryTechnique": "tangent_line",
+          "secondaryTechniques": ["critical_points"]
+        },
+        {
+          "problem": "Find the tangent line to the curve x² + y² = 25 at (3, 4)",
+          "context": "Implicit curve tangent line",
+          "primaryTechnique": "tangent_line",
+          "secondaryTechniques": ["implicit_basic"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "1) Find f'(x), 2) m = f'(a), 3) y₀ = f(a), 4) y - y₀ = m(x - a)",
+    "whenToUse": [
+      "Finding tangent line equations",
+      "Linear approximation",
+      "Finding where tangent has specific slope"
+    ],
+    "formula": "y - f(a) = f'(a)(x - a) \\text{ or } y = f'(a)(x-a) + f(a)",
+    "quickCheck": "Verify: line passes through (a, f(a)) with slope f'(a)"
+  },
+  "patternConnections": [
+    "power_rule_basic",
+    "product_rule",
+    "chain_rule_basic",
+    "implicit_basic"
+  ],
+  "masteryCriteria": {
+    "recognitionSpeed": "< 5 seconds to identify tangent line problem",
+    "executionSpeed": "< 5 minutes for standard problems",
+    "accuracyTarget": "90% correct on drill sets",
+    "selfCheckQuestions": [
+      "Did I find f'(x) correctly?",
+      "Did I evaluate at the right point?",
+      "Does my line pass through the point of tangency?"
+    ]
+  }
+}

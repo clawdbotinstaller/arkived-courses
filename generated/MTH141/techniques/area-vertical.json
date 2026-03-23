@@ -1,0 +1,287 @@
+{
+  "id": "area_vertical",
+  "displayName": "Area Between Curves (Vertical)",
+  "recognition": {
+    "visualSignals": [
+      "Find the area enclosed by curves",
+      "Area between f(x) and g(x)",
+      "Region bounded by curves",
+      "∫[top function - bottom function] dx"
+    ],
+    "verbalTriggers": [
+      "Find the area between...",
+      "Area enclosed by...",
+      "Region bounded by...",
+      "Set up integral for area"
+    ],
+    "nonExamples": [
+      "Volume of solid (use different method)",
+      "Arc length",
+      "Surface area"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Are the curves given as y = f(x) and y = g(x)?",
+        "ifYes": "Use vertical slices: ∫[top - bottom]dx",
+        "ifNo": "May need horizontal slices"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Sketch the curves and identify the region",
+        "pitfall": "Drawing helps identify which curve is on top",
+        "check": "Visual representation of the region"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Find intersection points (limits of integration)",
+        "pitfall": "Set f(x) = g(x) and solve for x",
+        "check": "All intersection points found"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Determine which function is on top in the interval",
+        "pitfall": "Test a point between intersections",
+        "check": "Top function has larger y-values"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Set up integral: ∫[top(x) - bottom(x)]dx from a to b",
+        "pitfall": "Order matters - always top minus bottom",
+        "check": "Integrand is positive"
+      },
+      {
+        "stepNumber": 5,
+        "instruction": "Evaluate the definite integral",
+        "pitfall": "Integration and evaluation errors",
+        "check": "Area should be positive"
+      }
+    ],
+    "timeEstimate": "8-12 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Negative area",
+      "diagnosis": "Subtracted functions in wrong order",
+      "fix": "Always top minus bottom (or right minus left for horizontal)",
+      "example": "If f(x) > g(x) on [a,b], area = ∫[f(x) - g(x)]dx, not ∫[g(x) - f(x)]dx"
+    },
+    {
+      "symptom": "Wrong intersection points",
+      "diagnosis": "Algebra errors solving f(x) = g(x)",
+      "fix": "Solve carefully and verify intersections",
+      "example": "x² = x gives x = 0 and x = 1, not just x = 1"
+    },
+    {
+      "symptom": "Area too large or obviously wrong",
+      "diagnosis": "Missed that curves cross (need multiple integrals)",
+      "fix": "Check if top/bottom changes - if so, split integral",
+      "example": "If f is on top for [a,c] and g is on top for [c,b], need two integrals"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "Find the area between y = x² and y = x from x = 0 to x = 1",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Parabola } y=x^2 \\text{ and line } y=x \\text{ intersect at } x=0, 1",
+          "explanation": "Sketch and identify intersection"
+        },
+        {
+          "step": 2,
+          "math": "\\text{On } [0,1]: x \\geq x^2 \\text{ (test } x=0.5: 0.5 > 0.25)",
+          "explanation": "Determine which is on top"
+        },
+        {
+          "step": 3,
+          "math": "\\text{Area} = \\int_0^1 (x - x^2) \\, dx",
+          "explanation": "Top minus bottom"
+        },
+        {
+          "step": 4,
+          "math": "= \\left[\\frac{x^2}{2} - \\frac{x^3}{3}\\right]_0^1",
+          "explanation": "Find antiderivative"
+        },
+        {
+          "step": 5,
+          "math": "= \\left(\\frac{1}{2} - \\frac{1}{3}\\right) - 0 = \\frac{1}{6}",
+          "explanation": "Evaluate"
+        }
+      ],
+      "keyInsight": "Always check which function is on top in the interval",
+      "timeEstimate": "4-5 min"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Find the area enclosed by y = x² and y = 2 - x",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Find intersections: } x^2 = 2 - x",
+          "explanation": "Set equal to find bounds"
+        },
+        {
+          "step": 2,
+          "math": "x^2 + x - 2 = 0, \\quad (x+2)(x-1) = 0, \\quad x = -2, 1",
+          "explanation": "Solve quadratic"
+        },
+        {
+          "step": 3,
+          "math": "\\text{At } x=0: y=x^2 \\text{ gives } 0, \\quad y=2-x \\text{ gives } 2",
+          "explanation": "Test point: line is on top"
+        },
+        {
+          "step": 4,
+          "math": "\\text{Area} = \\int_{-2}^{1} [(2-x) - x^2] \\, dx",
+          "explanation": "Top (line) minus bottom (parabola)"
+        },
+        {
+          "step": 5,
+          "math": "= \\left[2x - \\frac{x^2}{2} - \\frac{x^3}{3}\\right]_{-2}^{1}",
+          "explanation": "Antiderivative"
+        },
+        {
+          "step": 6,
+          "math": "= \\left(2 - \\frac{1}{2} - \\frac{1}{3}\\right) - \\left(-4 - 2 + \\frac{8}{3}\\right) = \\frac{7}{6} - \\left(-\\frac{10}{3}\\right) = \\frac{27}{6} = \\frac{9}{2}",
+          "explanation": "Evaluate at bounds"
+        }
+      ],
+      "keyInsight": "Must find intersection points first - they become limits of integration",
+      "timeEstimate": "7-9 min"
+    },
+    {
+      "difficulty": "Hard",
+      "problem": "Find the area between y = sin x and y = cos x from x = 0 to x = π",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Find where } \\sin x = \\cos x: \\quad \\tan x = 1, \\quad x = \\frac{\\pi}{4}",
+          "explanation": "Curves cross in the interval"
+        },
+        {
+          "step": 2,
+          "math": "\\text{On } [0, \\pi/4]: \\cos x > \\sin x",
+          "explanation": "Test x=0: cos(0)=1 > sin(0)=0"
+        },
+        {
+          "step": 3,
+          "math": "\\text{On } [\\pi/4, \\pi]: \\sin x > \\cos x",
+          "explanation": "Test x=π/2: sin(π/2)=1 > cos(π/2)=0"
+        },
+        {
+          "step": 4,
+          "math": "\\text{Area} = \\int_0^{\\pi/4} (\\cos x - \\sin x) \\, dx + \\int_{\\pi/4}^{\\pi} (\\sin x - \\cos x) \\, dx",
+          "explanation": "Two integrals needed since top/bottom switches"
+        },
+        {
+          "step": 5,
+          "math": "= \\left[\\sin x + \\cos x\\right]_0^{\\pi/4} + \\left[-\\cos x - \\sin x\\right]_{\\pi/4}^{\\pi}",
+          "explanation": "Antiderivatives"
+        },
+        {
+          "step": 6,
+          "math": "= \\left(\\frac{\\sqrt{2}}{2} + \\frac{\\sqrt{2}}{2} - 0 - 1\\right) + \\left(1 + 0 + \\frac{\\sqrt{2}}{2} + \\frac{\\sqrt{2}}{2}\\right) = (\\sqrt{2}-1) + (1+\\sqrt{2}) = 2\\sqrt{2}",
+          "explanation": "Evaluate and simplify"
+        }
+      ],
+      "keyInsight": "When curves cross within the interval, split into multiple integrals",
+      "timeEstimate": "10-12 min"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Area Between Curves Recognition",
+      "questions": [
+        {
+          "integral": "Find area between y = x² and y = x",
+          "options": ["Area between curves", "Volume", "Arc length", "Surface area"],
+          "correctAnswer": 0,
+          "explanation": "'Area between' indicates this technique"
+        },
+        {
+          "integral": "Area bounded by y = sin x, x-axis, x = 0 to π",
+          "options": ["Area under curve", "Area between curves", "Volume", "Curve length"],
+          "correctAnswer": 0,
+          "explanation": "Area under/bounded by curve - use area technique with y = 0"
+        },
+        {
+          "integral": "Region enclosed by y = x and y = x³",
+          "options": ["Area between curves", "Optimization", "Integration", "Differentiation"],
+          "correctAnswer": 0,
+          "explanation": "'Region enclosed' means area between curves"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Area Between Curves Execution",
+      "problems": [
+        {
+          "problem": "Find area between y = x² and y = 4",
+          "answer": "\\frac{32}{3}",
+          "hint": "Intersections at x = ±2. Top: y=4, Bottom: y=x². ∫_{-2}^{2}(4-x²)dx",
+          "difficulty": "Easy"
+        },
+        {
+          "problem": "Find area between y = x³ and y = x",
+          "answer": "\\frac{1}{2}",
+          "hint": "Intersections at x = -1, 0, 1. Need two integrals. Symmetric so compute 2×∫_0^1(x-x³)dx",
+          "difficulty": "Medium"
+        },
+        {
+          "problem": "Find area enclosed by y = e^x, y = e^{-x}, x = 0, x = 1",
+          "answer": "e + \\frac{1}{e} - 2",
+          "hint": "On [0,1], e^x > e^{-x}. Area = ∫_0^1(e^x - e^{-x})dx = [e^x + e^{-x}]_0^1",
+          "difficulty": "Medium"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Exam-Style Area Problems",
+      "problems": [
+        {
+          "problem": "Find area between y = x² - 2x and y = x",
+          "context": "Parabola and line - find intersections first",
+          "primaryTechnique": "area_vertical",
+          "secondaryTechniques": ["area_intersection"]
+        },
+        {
+          "problem": "Find area bounded by y = ln x, y = 0, x = e",
+          "context": "Area with logarithmic curve",
+          "primaryTechnique": "area_vertical",
+          "secondaryTechniques": []
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "∫[top function - bottom function]dx from left intersection to right intersection",
+    "whenToUse": [
+      "Area between two curves",
+      "Area enclosed by curves",
+      "Curves given as y = f(x) form"
+    ],
+    "formula": "\\text{Area} = \\int_a^b [f_{\\text{top}}(x) - f_{\\text{bottom}}(x)] \\, dx",
+    "quickCheck": "Integrand should always be positive (top - bottom > 0)"
+  },
+  "patternConnections": [
+    "area_horizontal",
+    "area_intersection",
+    "ftc_part2",
+    "u_substitution"
+  ],
+  "masteryCriteria": {
+    "recognitionSpeed": "< 5 seconds to identify area problem",
+    "executionSpeed": "< 10 minutes for standard problems",
+    "accuracyTarget": "85% correct on drill sets",
+    "selfCheckQuestions": [
+      "Did I find all intersection points?",
+      "Did I check which function is on top?",
+      "Is my final answer positive?"
+    ]
+  }
+}

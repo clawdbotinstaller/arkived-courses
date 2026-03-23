@@ -1,0 +1,254 @@
+{
+  "id": "lhopital_0_0",
+  "displayName": "L'Hôpital's Rule (0/0)",
+  "recognition": {
+    "visualSignals": [
+      "Limit produces 0/0 when substituting",
+      "Rational function with common root in num/den",
+      "Indeterminate form 0/0"
+    ],
+    "verbalTriggers": [
+      "Evaluate this limit that gives 0/0",
+      "Find the limit using L'Hôpital's rule",
+      "This limit is indeterminate"
+    ],
+    "nonExamples": [
+      "Limits that give finite/0 = ∞",
+      "Limits that give 0/finite = 0",
+      "Limits that give finite/finite (direct substitution works)"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Does direct substitution give 0/0?",
+        "ifYes": "Apply L'Hôpital's rule: differentiate numerator and denominator separately",
+        "ifNo": "Try direct substitution, factoring, or other methods"
+      },
+      {
+        "question": "After one application, still 0/0?",
+        "ifYes": "Apply L'Hôpital's rule again",
+        "ifNo": "Evaluate the limit"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Verify the limit is in 0/0 form by direct substitution",
+        "pitfall": "Don't apply L'Hôpital's rule unless you have 0/0 or ∞/∞",
+        "check": "Both numerator and denominator must approach 0"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Differentiate the numerator and denominator separately (not as a quotient)",
+        "pitfall": "Do NOT use quotient rule - differentiate num and den independently",
+        "check": "You should have f'(x) / g'(x), not (f/g)'"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Evaluate the new limit: lim f'(x) / g'(x)",
+        "pitfall": "Check if still indeterminate - you may need to apply L'Hôpital again",
+        "check": "If still 0/0, repeat step 2"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Continue until you get a determinate form",
+        "pitfall": "Don't give up too early - some limits need multiple applications",
+        "check": "Final answer should be a number, ±∞, or DNE"
+      }
+    ],
+    "timeEstimate": "5-8 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Wrong answer and overly complex derivative",
+      "diagnosis": "Used quotient rule instead of differentiating numerator and denominator separately",
+      "fix": "L'Hôpital: differentiate f(x) to get f'(x), differentiate g(x) to get g'(x), then form f'/g'",
+      "example": "For lim (sin x)/x, differentiate sin x → cos x and x → 1, giving lim cos x / 1 = 1"
+    },
+    {
+      "symptom": "Applied L'Hôpital when not valid",
+      "diagnosis": "Didn't check that limit is actually 0/0 form",
+      "fix": "Always verify 0/0 or ∞/∞ before applying",
+      "example": "lim(x→0) x/1 = 0/1 = 0, no L'Hôpital needed"
+    },
+    {
+      "symptom": "Derivative errors",
+      "diagnosis": "Made mistakes differentiating numerator or denominator",
+      "fix": "Differentiate carefully - may need chain rule",
+      "example": "d/dx[sin(2x)] = 2cos(2x), not just cos(2x)"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "Evaluate \\lim_{x \\to 0} \\frac{\\sin x}{x}",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Direct substitution: } \\frac{\\sin 0}{0} = \\frac{0}{0} \\text{ (indeterminate)}",
+          "explanation": "Verify we have 0/0 form"
+        },
+        {
+          "step": 2,
+          "math": "\\frac{d}{dx}[\\sin x] = \\cos x, \\quad \\frac{d}{dx}[x] = 1",
+          "explanation": "Differentiate numerator and denominator separately"
+        },
+        {
+          "step": 3,
+          "math": "\\lim_{x \\to 0} \\frac{\\cos x}{1} = \\frac{\\cos 0}{1} = 1",
+          "explanation": "Evaluate the new limit"
+        }
+      ],
+      "keyInsight": "The fundamental limit sin(x)/x = 1 can be proven with L'Hôpital's rule",
+      "timeEstimate": "3-4 min"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Evaluate \\lim_{x \\to 1} \\frac{x^3 - 1}{x^2 - 1}",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Direct substitution: } \\frac{1-1}{1-1} = \\frac{0}{0}",
+          "explanation": "Verify indeterminate form"
+        },
+        {
+          "step": 2,
+          "math": "\\frac{d}{dx}[x^3-1] = 3x^2, \\quad \\frac{d}{dx}[x^2-1] = 2x",
+          "explanation": "Differentiate numerator and denominator"
+        },
+        {
+          "step": 3,
+          "math": "\\lim_{x \\to 1} \\frac{3x^2}{2x} = \\frac{3(1)^2}{2(1)} = \\frac{3}{2}",
+          "explanation": "Evaluate - no longer indeterminate"
+        }
+      ],
+      "keyInsight": "Could also factor: (x-1)(x²+x+1)/((x-1)(x+1)) = (x²+x+1)/(x+1) → 3/2",
+      "timeEstimate": "4-5 min"
+    },
+    {
+      "difficulty": "Hard",
+      "problem": "Evaluate \\lim_{x \\to 0} \\frac{e^x - 1 - x}{x^2}",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Direct substitution: } \\frac{e^0 - 1 - 0}{0} = \\frac{0}{0}",
+          "explanation": "Verify 0/0 form"
+        },
+        {
+          "step": 2,
+          "math": "\\text{First application: } \\frac{d}{dx}[e^x-1-x] = e^x - 1, \\quad \\frac{d}{dx}[x^2] = 2x",
+          "explanation": "Differentiate numerator and denominator"
+        },
+        {
+          "step": 3,
+          "math": "\\lim_{x \\to 0} \\frac{e^x - 1}{2x} = \\frac{0}{0} \\text{ (still indeterminate)}",
+          "explanation": "Check if still 0/0 - yes, need second application"
+        },
+        {
+          "step": 4,
+          "math": "\\text{Second application: } \\frac{d}{dx}[e^x-1] = e^x, \\quad \\frac{d}{dx}[2x] = 2",
+          "explanation": "Differentiate again"
+        },
+        {
+          "step": 5,
+          "math": "\\lim_{x \\to 0} \\frac{e^x}{2} = \\frac{e^0}{2} = \\frac{1}{2}",
+          "explanation": "Evaluate - no longer indeterminate"
+        }
+      ],
+      "keyInsight": "Some limits require multiple applications of L'Hôpital's rule - keep going until you get a determinate form",
+      "timeEstimate": "8-10 min"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "L'Hôpital's Rule Recognition",
+      "questions": [
+        {
+          "integral": "\\lim_{x \\to 0} \\frac{\\sin x}{x}",
+          "options": ["L'Hôpital applies (0/0)", "Direct substitution works", "Not indeterminate", "Undefined"],
+          "correctAnswer": 0,
+          "explanation": "sin(0)/0 = 0/0, so L'Hôpital applies"
+        },
+        {
+          "integral": "\\lim_{x \\to 0} \\frac{x}{\\sin x}",
+          "options": ["L'Hôpital applies", "Answer is 0", "Answer is undefined", "Answer is 1"],
+          "correctAnswer": 0,
+          "explanation": "0/sin(0) = 0/0, L'Hôpital applies (answer is 1)"
+        },
+        {
+          "integral": "\\lim_{x \\to 0} \\frac{x+1}{x+2}",
+          "options": ["L'Hôpital applies", "Direct substitution gives 1/2", "0/0 form", "Undefined"],
+          "correctAnswer": 1,
+          "explanation": "(0+1)/(0+2) = 1/2, not indeterminate"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "L'Hôpital's Rule Execution",
+      "problems": [
+        {
+          "problem": "Evaluate \\lim_{x \\to 0} \\frac{\\tan x}{x}",
+          "answer": "1",
+          "hint": "tan(0) = 0, so we have 0/0. Derivative of tan is sec²",
+          "difficulty": "Easy"
+        },
+        {
+          "problem": "Evaluate \\lim_{x \\to 2} \\frac{x^2-4}{x^2-2x}",
+          "answer": "2",
+          "hint": "0/0 form. Differentiate: 2x/(2x-2), then substitute x=2",
+          "difficulty": "Medium"
+        },
+        {
+          "problem": "Evaluate \\lim_{x \\to 0} \\frac{1-\\cos x}{x^2}",
+          "answer": "\\frac{1}{2}",
+          "hint": "Apply L'Hôpital twice. First: sin x / 2x, still 0/0. Second: cos x / 2",
+          "difficulty": "Hard"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Exam-Style L'Hôpital Problems",
+      "problems": [
+        {
+          "problem": "Find \\lim_{x \\to 0} \\frac{\\ln(1+x)}{x}",
+          "context": "L'Hôpital with logarithm",
+          "primaryTechnique": "lhopital_0_0",
+          "secondaryTechniques": ["derivatives_exp_log"]
+        },
+        {
+          "problem": "Find \\lim_{x \\to 0} \\frac{e^{3x} - 1 - 3x}{x^2}",
+          "context": "L'Hôpital requiring multiple applications",
+          "primaryTechnique": "lhopital_0_0",
+          "secondaryTechniques": ["derivatives_exp_log", "chain_rule_basic"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "For 0/0 or ∞/∞: differentiate top and bottom separately, then retry",
+    "whenToUse": [
+      "Limit gives 0/0 form",
+      "Limit gives ∞/∞ form",
+      "Other methods (factoring) are difficult"
+    ],
+    "formula": "\\text{If } \\lim \\frac{f(x)}{g(x)} = \\frac{0}{0}, \\text{ then } \\lim \\frac{f(x)}{g(x)} = \\lim \\frac{f'(x)}{g'(x)}",
+    "quickCheck": "Always verify 0/0 or ∞/∞ before applying"
+  },
+  "patternConnections": [
+    "lhopital_infinity",
+    "indeterminate_forms",
+    "limit_factoring",
+    "derivatives_exp_log"
+  ],
+  "masteryCriteria": {
+    "recognitionSpeed": "< 5 seconds to identify 0/0 form",
+    "executionSpeed": "< 5 minutes for single application, < 10 for multiple",
+    "accuracyTarget": "90% correct on drill sets",
+    "selfCheckQuestions": [
+      "Did I verify 0/0 or ∞/∞ before starting?",
+      "Am I differentiating numerator and denominator separately (not using quotient rule)?",
+      "Do I need to apply L'Hôpital more than once?"
+    ]
+  }
+}

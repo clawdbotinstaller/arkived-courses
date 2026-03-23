@@ -1,0 +1,63 @@
+{
+  "topic_id": "differentiation_rules",
+  "meta": {
+    "display_name": "Differentiation Rules",
+    "course_context": "MTH141 - Building computational fluency",
+    "professor_methodology": "Master product rule, quotient rule, and chain rule through practice",
+    "core_formula": "(uv)' = u'v + uv', \\quad \\left(\\frac{u}{v}\\right)' = \\frac{u'v-uv'}{v^2}",
+    "description": "Product, quotient, and chain rules for differentiating complex functions"
+  },
+  "patterns": [
+    {
+      "id": "product_rule",
+      "name": "Product Rule",
+      "recognition_signal": "Product of two functions",
+      "canonical_forms": ["(fg)' = f'g + fg'"],
+      "logic": "First' times second plus first times second'",
+      "worked_example": {
+        "title": "Product Rule",
+        "problem_latex": "\\frac{d}{dx}[x^2 \\sin x]",
+        "solution_steps": [
+          {"step": 1, "action": "Identify parts", "reasoning": "f = x², g = sin x"},
+          {"step": 2, "action": "Differentiate", "latex": "f' = 2x, g' = \\cos x"},
+          {"step": 3, "action": "Apply formula", "latex": "2x\\sin x + x^2\\cos x"}
+        ]
+      }
+    },
+    {
+      "id": "chain_rule_basic",
+      "name": "Chain Rule",
+      "recognition_signal": "Composition of functions",
+      "canonical_forms": ["(f(g(x)))' = f'(g(x)) \\cdot g'(x)"],
+      "logic": "Derivative of outer evaluated at inner times derivative of inner",
+      "worked_example": {
+        "title": "Chain Rule",
+        "problem_latex": "\\frac{d}{dx}[(3x+1)^4]",
+        "solution_steps": [
+          {"step": 1, "action": "Identify", "reasoning": "outer = ( )⁴, inner = 3x+1"},
+          {"step": 2, "action": "Differentiate outer", "latex": "4(3x+1)^3"},
+          {"step": 3, "action": "Differentiate inner", "latex": "3"},
+          {"step": 4, "action": "Multiply", "latex": "12(3x+1)^3"}
+        ]
+      }
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "Is it a composition?", "yes": "Use chain rule", "no": "Continue"},
+      {"step": 2, "question": "Is it a product?", "yes": "Use product rule", "no": "Continue"},
+      {"step": 3, "question": "Is it a quotient?", "yes": "Use quotient rule", "no": "Basic rules"}
+    ],
+    "professor_tips": [
+      "Chain rule is the most important - most common error is forgetting it",
+      "Always identify inner and outer functions explicitly",
+      "Multiple rules can apply - be methodical"
+    ]
+  },
+  "confidence_checklist": [
+    "I can apply the product rule correctly",
+    "I can apply the quotient rule correctly",
+    "I can apply the chain rule correctly",
+    "I can handle combinations of rules"
+  ]
+}

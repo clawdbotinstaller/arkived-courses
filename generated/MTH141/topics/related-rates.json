@@ -1,0 +1,47 @@
+{
+  "topic_id": "related_rates",
+  "meta": {
+    "display_name": "Related Rates",
+    "course_context": "MTH141 - Applications of derivatives",
+    "professor_methodology": "Draw diagrams, write equation, differentiate with respect to time",
+    "core_formula": "\\frac{d}{dt}[f(x)] = f'(x)\\frac{dx}{dt}",
+    "description": "Finding rates of change using implicit differentiation with respect to time"
+  },
+  "patterns": [
+    {
+      "id": "related_rates_setup",
+      "name": "Related Rates Setup",
+      "recognition_signal": "How fast is... changing? Rate word problem",
+      "canonical_forms": ["Given dV/dt, find dh/dt", "Given dx/dt, find dy/dt"],
+      "logic": "Write equation relating variables, differentiate with respect to t, substitute",
+      "worked_example": {
+        "title": "Ladder Problem",
+        "problem_latex": "\\text{10-ft ladder slides away at 1 ft/s. Find top's speed when bottom is 6 ft from wall.}",
+        "solution_steps": [
+          {"step": 1, "action": "Diagram and variables", "reasoning": "x from wall, y up wall"},
+          {"step": 2, "action": "Equation", "latex": "x^2 + y^2 = 100"},
+          {"step": 3, "action": "Differentiate", "latex": "2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 0"},
+          {"step": 4, "action": "Substitute", "latex": "x=6, y=8, dx/dt=1"},
+          {"step": 5, "action": "Solve", "latex": "dy/dt = -3/4 \\text{ ft/s}"}
+        ]
+      }
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "Draw diagram", "yes": "Label variables", "no": "Always draw diagram"},
+      {"step": 2, "question": "Find equation relating variables", "yes": "Proceed", "no": "Look for geometry formulas"}
+    ],
+    "professor_tips": [
+      "Always draw a diagram first",
+      "Differentiate BEFORE substituting values",
+      "Negative rate means decreasing"
+    ]
+  },
+  "confidence_checklist": [
+    "I can draw and label diagrams",
+    "I can write equations relating variables",
+    "I can differentiate with respect to time",
+    "I can solve for unknown rates"
+  ]
+}

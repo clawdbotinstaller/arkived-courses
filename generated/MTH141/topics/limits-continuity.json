@@ -1,0 +1,59 @@
+{
+  "topic_id": "limits_continuity",
+  "meta": {
+    "display_name": "Limits and Continuity",
+    "course_context": "MTH141 - First chapter of Calculus 1",
+    "professor_methodology": "Focus on graphical, numerical, and algebraic approaches",
+    "core_formula": "\\lim_{x \\to a} f(x) = L",
+    "description": "Understanding limits intuitively and calculating them using various techniques"
+  },
+  "patterns": [
+    {
+      "id": "limit_direct_substitution",
+      "name": "Direct Substitution",
+      "recognition_signal": "Function continuous at point, plug in value",
+      "canonical_forms": ["\\lim_{x \\to a} f(x) = f(a)"],
+      "logic": "If f is continuous at a, the limit is just f(a)",
+      "worked_example": {
+        "title": "Basic Substitution",
+        "problem_latex": "\\lim_{x \\to 2} (3x^2 - 1)",
+        "solution_steps": [
+          {"step": 1, "action": "Substitute x = 2", "latex": "3(2)^2 - 1 = 12 - 1 = 11"}
+        ]
+      }
+    },
+    {
+      "id": "limit_factoring",
+      "name": "Factoring Method",
+      "recognition_signal": "0/0 form with polynomials",
+      "canonical_forms": ["\\lim_{x \\to a} \\frac{P(x)}{Q(x)} \\text{ where } P(a)=Q(a)=0"],
+      "logic": "Factor and cancel common factor (x-a)",
+      "worked_example": {
+        "title": "Factor and Cancel",
+        "problem_latex": "\\lim_{x \\to 2} \\frac{x^2-4}{x-2}",
+        "solution_steps": [
+          {"step": 1, "action": "Factor numerator", "latex": "\\frac{(x-2)(x+2)}{x-2}"},
+          {"step": 2, "action": "Cancel", "latex": "x + 2"},
+          {"step": 3, "action": "Substitute", "latex": "2 + 2 = 4"}
+        ]
+      }
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "Does direct substitution work?", "yes": "Done", "no": "Go to step 2"},
+      {"step": 2, "question": "Is it 0/0 with polynomials?", "yes": "Factor and cancel", "no": "Try other methods"}
+    ],
+    "professor_tips": [
+      "Always try direct substitution first",
+      "0/0 means there's a hole in the graph",
+      "Graphical estimation can verify algebraic answers"
+    ]
+  },
+  "confidence_checklist": [
+    "I can evaluate limits by direct substitution",
+    "I can factor and cancel to find limits",
+    "I understand when limits don't exist",
+    "I can check continuity at a point"
+  ]
+}

@@ -1,0 +1,335 @@
+{
+  "id": "optimization_setup",
+  "displayName": "Optimization Setup",
+  "recognition": {
+    "visualSignals": [
+      "Word problems asking for maximum or minimum",
+      "Keywords: maximize, minimize, largest, smallest, best",
+      "Applied problems with constraints"
+    ],
+    "verbalTriggers": [
+      "Find the maximum value of...",
+      "What dimensions minimize...",
+      "Determine the optimal...",
+      "Largest possible...",
+      "Smallest possible..."
+    ],
+    "nonExamples": [
+      "Find the derivative (no optimization requested)",
+      "Evaluate the integral",
+      "Find the limit"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "What quantity needs to be maximized or minimized?",
+        "ifYes": "Define this as your objective function",
+        "ifNo": "Re-read problem carefully to identify goal"
+      },
+      {
+        "question": "What constraints are given?",
+        "ifYes": "Use constraints to eliminate variables",
+        "ifNo": "Look for implicit constraints like x > 0"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Read problem and identify what to maximize or minimize",
+        "pitfall": "Don't start calculating before understanding the goal",
+        "check": "Can you state: 'I need to maximize/minimize [quantity]'"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Draw a diagram and label variables",
+        "pitfall": "Don't skip the diagram - it helps identify relationships",
+        "check": "All relevant quantities labeled with variables"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Write the objective function (what to optimize) in terms of variables",
+        "pitfall": "Make sure this is what the problem asks for",
+        "check": "Objective function is what needs to be max/minimized"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Write constraint equations based on given information",
+        "pitfall": "Don't miss implicit constraints (like dimensions must be positive)",
+        "check": "All given information translated to equations"
+      },
+      {
+        "stepNumber": 5,
+        "instruction": "Use constraints to eliminate variables, getting objective in one variable",
+        "pitfall": "Algebra errors when solving constraint for substitution",
+        "check": "Objective is now a function of a single variable"
+      },
+      {
+        "stepNumber": 6,
+        "instruction": "Find critical points: take derivative, set equal to zero",
+        "pitfall": "Don't forget to check where derivative is undefined",
+        "check": "All critical points found"
+      },
+      {
+        "stepNumber": 7,
+        "instruction": "Use first or second derivative test to classify critical points",
+        "pitfall": "Don't forget to verify it's max or min, not just critical point",
+        "check": "Maximum or minimum confirmed"
+      },
+      {
+        "stepNumber": 8,
+        "instruction": "Answer the specific question asked, with units",
+        "pitfall": "Don't just give the x-value - answer what was asked",
+        "check": "Answer matches what the problem requested"
+      }
+    ],
+    "timeEstimate": "12-18 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Wrong answer that doesn't make sense",
+      "diagnosis": "Misidentified what needs to be optimized",
+      "fix": "Clearly state objective before doing any math",
+      "example": "If asked for dimensions, give length and width, not just area"
+    },
+    {
+      "symptom": "Critical point found but answer rejected",
+      "diagnosis": "Ignored domain restrictions or physical constraints",
+      "fix": "Always check that solution makes sense in context",
+      "example": "If x represents length, x must be positive"
+    },
+    {
+      "symptom": "Too many variables, can't solve",
+      "diagnosis": "Didn't use constraints to eliminate variables",
+      "fix": "Number of constraints should equal number of variables to eliminate",
+      "example": "If you have 2 variables, you need 1 constraint equation"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "Find two numbers whose sum is 20 and whose product is maximum.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Maximize: } P = xy",
+          "explanation": "Objective is to maximize product P"
+        },
+        {
+          "step": 2,
+          "math": "\\text{Constraint: } x + y = 20",
+          "explanation": "Given that sum is 20"
+        },
+        {
+          "step": 3,
+          "math": "y = 20 - x, \\text{ so } P = x(20-x) = 20x - x^2",
+          "explanation": "Use constraint to eliminate y"
+        },
+        {
+          "step": 4,
+          "math": "\\frac{dP}{dx} = 20 - 2x = 0",
+          "explanation": "Find critical points"
+        },
+        {
+          "step": 5,
+          "math": "x = 10, \\text{ so } y = 10",
+          "explanation": "Solve and find corresponding y"
+        },
+        {
+          "step": 6,
+          "math": "\\frac{d^2P}{dx^2} = -2 < 0, \\text{ so maximum confirmed}",
+          "explanation": "Verify it's a maximum"
+        },
+        {
+          "step": 7,
+          "math": "\\text{The two numbers are } \\boxed{10 \\text{ and } 10}",
+          "explanation": "State final answer"
+        }
+      ],
+      "keyInsight": "For fixed sum, product is maximized when numbers are equal",
+      "timeEstimate": "6-8 min"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "A farmer has 200m of fencing to enclose a rectangular field along a river (no fence needed on river side). Find dimensions for maximum area.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Let } x = \\text{width (perpendicular to river)}, y = \\text{length (parallel to river)}",
+          "explanation": "Define variables with diagram"
+        },
+        {
+          "step": 2,
+          "math": "\\text{Maximize: } A = xy",
+          "explanation": "Objective is area"
+        },
+        {
+          "step": 3,
+          "math": "\\text{Constraint: } 2x + y = 200",
+          "explanation": "Fencing on 3 sides only"
+        },
+        {
+          "step": 4,
+          "math": "y = 200 - 2x, \\text{ so } A = x(200-2x) = 200x - 2x^2",
+          "explanation": "Eliminate y using constraint"
+        },
+        {
+          "step": 5,
+          "math": "\\frac{dA}{dx} = 200 - 4x = 0",
+          "explanation": "Find critical points"
+        },
+        {
+          "step": 6,
+          "math": "x = 50, \\quad y = 200 - 2(50) = 100",
+          "explanation": "Solve for dimensions"
+        },
+        {
+          "step": 7,
+          "math": "\\frac{d^2A}{dx^2} = -4 < 0, \\text{ confirms maximum}",
+          "explanation": "Verify maximum"
+        },
+        {
+          "step": 8,
+          "math": "\\text{Dimensions: } \\boxed{50\\text{m} \\times 100\\text{m}}",
+          "explanation": "Final answer with units"
+        }
+      ],
+      "keyInsight": "The river constraint changes the relationship - only 3 sides of fencing needed",
+      "timeEstimate": "10-12 min"
+    },
+    {
+      "difficulty": "Hard",
+      "problem": "Find the point on the parabola y = x² closest to the point (0, 1).",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Let point on parabola be } (x, x^2)",
+          "explanation": "Parameterize the point on parabola"
+        },
+        {
+          "step": 2,
+          "math": "\\text{Minimize distance to } (0,1): d = \\sqrt{(x-0)^2 + (x^2-1)^2}",
+          "explanation": "Distance formula - but minimizing d² is equivalent and easier"
+        },
+        {
+          "step": 3,
+          "math": "\\text{Minimize: } f(x) = x^2 + (x^2-1)^2 = x^2 + x^4 - 2x^2 + 1 = x^4 - x^2 + 1",
+          "explanation": "Simplify - equivalent to minimize d² instead of d"
+        },
+        {
+          "step": 4,
+          "math": "f'(x) = 4x^3 - 2x = 2x(2x^2 - 1) = 0",
+          "explanation": "Find critical points"
+        },
+        {
+          "step": 5,
+          "math": "x = 0 \\text{ or } x = \\pm\\frac{1}{\\sqrt{2}} = \\pm\\frac{\\sqrt{2}}{2}",
+          "explanation": "Solve for critical points"
+        },
+        {
+          "step": 6,
+          "math": "f(0) = 1, \\quad f(\\pm\\frac{\\sqrt{2}}{2}) = \\frac{1}{4} - \\frac{1}{2} + 1 = \\frac{3}{4}",
+          "explanation": "Evaluate f(x) at critical points"
+        },
+        {
+          "step": 7,
+          "math": "\\text{Minimum at } x = \\pm\\frac{\\sqrt{2}}{2}, \\text{ so points are } \\left(\\pm\\frac{\\sqrt{2}}{2}, \\frac{1}{2}\\right)",
+          "explanation": "Two closest points, symmetric about y-axis"
+        }
+      ],
+      "keyInsight": "Minimizing d² instead of d avoids square root and gives same answer",
+      "timeEstimate": "12-15 min"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Optimization Recognition",
+      "questions": [
+        {
+          "integral": "Find the maximum area of a rectangle with perimeter 100m",
+          "options": ["Optimization problem", "Related rates", "Integration", "Limit"],
+          "correctAnswer": 0,
+          "explanation": "Keywords: maximum, area - classic optimization"
+        },
+        {
+          "integral": "How fast is the water level rising?",
+          "options": ["Optimization", "Related rates", "Integration", "Curve sketching"],
+          "correctAnswer": 1,
+          "explanation": "'How fast' and 'rising' indicate related rates, not optimization"
+        },
+        {
+          "integral": "Find dimensions that minimize the cost of materials",
+          "options": ["Limit problem", "Related rates", "Optimization", "Tangent line"],
+          "correctAnswer": 2,
+          "explanation": "'Minimize cost' is an optimization problem"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Optimization Execution",
+      "problems": [
+        {
+          "problem": "Find two positive numbers whose product is 100 and whose sum is minimum.",
+          "answer": "x = y = 10",
+          "hint": "Minimize S = x + y with constraint xy = 100",
+          "difficulty": "Easy"
+        },
+        {
+          "problem": "A box with square base and open top has volume 32,000 cm³. Find dimensions that minimize material used.",
+          "answer": "Base: 40cm × 40cm, Height: 20cm",
+          "hint": "Minimize surface area = x² + 4xh with constraint x²h = 32000",
+          "difficulty": "Medium"
+        },
+        {
+          "problem": "Find the area of the largest rectangle that can be inscribed in a semicircle of radius r.",
+          "answer": "r²",
+          "hint": "Rectangle has vertices at (±x, 0) and (±x, √(r²-x²)). Maximize A = 2x√(r²-x²)",
+          "difficulty": "Hard"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Exam-Style Optimization Problems",
+      "problems": [
+        {
+          "problem": "A cylindrical can with bottom and top must hold 1000 cm³ of liquid. Find dimensions that minimize the surface area.",
+          "context": "Classic optimization with cylinder",
+          "primaryTechnique": "optimization_setup",
+          "secondaryTechniques": ["critical_points", "second_derivative_test"]
+        },
+        {
+          "problem": "Find the point on the line y = 2x + 3 closest to the origin.",
+          "context": "Distance minimization",
+          "primaryTechnique": "optimization_setup",
+          "secondaryTechniques": ["critical_points"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "1) Identify objective, 2) Write constraints, 3) Eliminate variables, 4) Find critical points, 5) Verify max/min",
+    "whenToUse": [
+      "Maximum/minimum word problems",
+      "Applied problems with constraints",
+      "Problems asking for optimal values"
+    ],
+    "formula": "\\text{Objective function} = f(x), \\text{ use constraints to write as single variable}",
+    "quickCheck": "Always draw a diagram and label variables"
+  },
+  "patternConnections": [
+    "critical_points",
+    "first_derivative_test",
+    "second_derivative_test",
+    "optimization_box_problem"
+  ],
+  "masteryCriteria": {
+    "recognitionSpeed": "< 10 seconds to identify optimization problem",
+    "executionSpeed": "< 15 minutes for standard problems",
+    "accuracyTarget": "85% correct on drill sets",
+    "selfCheckQuestions": [
+      "Did I clearly identify what to maximize/minimize?",
+      "Did I use all given constraints?",
+      "Does my answer make physical sense?"
+    ]
+  }
+}

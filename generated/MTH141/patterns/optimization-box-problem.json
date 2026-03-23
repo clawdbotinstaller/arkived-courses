@@ -1,0 +1,72 @@
+{
+  "id": "optimization_box_problem",
+  "name": "Box Optimization",
+  "description": "Maximizing volume or minimizing surface area of boxes with constraints",
+  "canonical_form_latex": "\\text{Maximize } V = lwh \\text{ subject to constraint}",
+  "identification_signal": "Box, container, open-top box, cutting squares from corners",
+  "frequency": "Common on exams",
+  "estimated_time": "10-15 minutes",
+  "strategy": {
+    "step_1": "Draw diagram and label variables (length, width, height)",
+    "step_2": "Write objective function (what to optimize)",
+    "step_3": "Write constraint equation (given information)",
+    "step_4": "Use constraint to eliminate variables",
+    "step_5": "Find critical points by taking derivative",
+    "step_6": "Verify maximum/minimum and answer question"
+  },
+  "exam_references": ["MTH141-2018-M-Q6", "MTH141-2020-F-Q5"],
+  "related_techniques": ["optimization_setup", "critical_points", "first_derivative_test"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Identify box optimization problems",
+      "flashcards": [
+        {
+          "front": {"text": "A box with square base and open top must have volume 1000 cm³. Find dimensions that minimize material."},
+          "back": {"title": "Box optimization", "explanation": "Minimize surface area with volume constraint"}
+        }
+      ],
+      "spot_it": {
+        "instructions": "Identify box problems",
+        "items": [
+          {"prompt_latex": "Squares cut from corners to make open box", "is_match": true, "explanation": "Classic box optimization setup"},
+          {"prompt_latex": "Find area between curves", "is_match": false, "explanation": "Integration problem, not optimization"}
+        ]
+      }
+    },
+    "phase_2_strategy": {
+      "purpose": "Solve box optimization",
+      "steps": [
+        {
+          "title": "Define variables",
+          "instruction": "Label length, width, height",
+          "why": "Need clear variables for objective and constraint"
+        },
+        {
+          "title": "Objective",
+          "instruction": "Write formula for what to optimize",
+          "why": "Usually volume V = lwh or surface area SA = 2(lw + lh + wh)"
+        },
+        {
+          "title": "Constraint",
+          "instruction": "Write given constraint",
+          "why": "Use to eliminate one variable"
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice box problems",
+      "problem_cards": [
+        {
+          "id": "box-1",
+          "difficulty": "Medium",
+          "task": "Squares of side x cut from corners of 10×10 square. Find x for max volume.",
+          "prompt_latex": "V = x(10-2x)^2, \\text{ find max}",
+          "solution": {"final_answer_latex": "x = \\frac{5}{3}"}
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "Box Optimization Master", "pattern_id": "optimization_box_problem"}
+    }
+  }
+}

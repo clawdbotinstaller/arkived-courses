@@ -1,0 +1,82 @@
+{
+  "id": "limit_factoring",
+  "name": "Limits by Factoring",
+  "description": "Evaluating 0/0 indeterminate limits by factoring and canceling common factors",
+  "canonical_form_latex": "\\lim_{x \\to a} \\frac{P(x)}{Q(x)} = \\lim_{x \\to a} \\frac{(x-a)P_1(x)}{(x-a)Q_1(x)} = \\lim_{x \\to a} \\frac{P_1(x)}{Q_1(x)}",
+  "identification_signal": "0/0 form with polynomials, common factor (x-a) present",
+  "frequency": "Very Common",
+  "estimated_time": "4-6 minutes",
+  "strategy": {
+    "step_1": "Verify 0/0 form by direct substitution",
+    "step_2": "Factor numerator completely",
+    "step_3": "Factor denominator completely",
+    "step_4": "Cancel common factors",
+    "step_5": "Substitute into simplified expression"
+  },
+  "exam_references": ["MTH141-2017-M-Q3", "MTH141-2020-F-Q1"],
+  "related_techniques": ["factoring_limits", "rationalizing_limits", "lhopital_0_0"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Recognize when factoring is needed",
+      "flashcards": [
+        {
+          "front": {"latex": "\\lim_{x \\to 2} \\frac{x^2-4}{x-2}"},
+          "back": {"title": "Factor as difference of squares", "explanation": "x²-4 = (x-2)(x+2), cancel (x-2)"}
+        },
+        {
+          "front": {"latex": "\\lim_{x \\to 3} \\frac{x^2-5x+6}{x^2-9}"},
+          "back": {"title": "Factor both", "explanation": "Num: (x-2)(x-3), Den: (x-3)(x+3)"}
+        }
+      ],
+      "spot_it": {
+        "instructions": "Spot limits that need factoring",
+        "items": [
+          {"prompt_latex": "\\lim_{x \\to 1} \\frac{x^2-1}{x-1}", "is_match": true, "explanation": "0/0, factor as difference of squares"},
+          {"prompt_latex": "\\lim_{x \\to 1} \\frac{x+1}{x-1}", "is_match": false, "explanation": "Not 0/0, numerator is 2"}
+        ]
+      }
+    },
+    "phase_2_strategy": {
+      "purpose": "Execute factoring strategy",
+      "steps": [
+        {
+          "title": "Verify 0/0",
+          "instruction": "Check direct substitution gives 0/0",
+          "why": "Factoring only helps when there's a hole"
+        },
+        {
+          "title": "Factor",
+          "instruction": "Factor numerator and denominator",
+          "why": "Common factor creates removable discontinuity"
+        },
+        {
+          "title": "Cancel and substitute",
+          "instruction": "Cancel common factor, then substitute",
+          "why": "Simplified function has same limit"
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice factoring limits",
+      "problem_cards": [
+        {
+          "id": "factor-1",
+          "difficulty": "Easy",
+          "task": "Evaluate by factoring",
+          "prompt_latex": "\\lim_{x \\to -1} \\frac{x^2-1}{x+1}",
+          "solution": {"final_answer_latex": "-2"}
+        },
+        {
+          "id": "factor-2",
+          "difficulty": "Medium", 
+          "task": "Evaluate by factoring",
+          "prompt_latex": "\\lim_{x \\to 2} \\frac{x^3-8}{x^2-4}",
+          "solution": {"final_answer_latex": "3"}
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "Factoring Limits Master", "pattern_id": "limit_factoring"}
+    }
+  }
+}

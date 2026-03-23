@@ -1,0 +1,280 @@
+{
+  "id": "u_substitution",
+  "displayName": "Integration by Substitution",
+  "recognition": {
+    "visualSignals": [
+      "Composite function structure",
+      "Inner function whose derivative appears (or nearly appears) nearby",
+      "Forms like f(g(x)) · g'(x)",
+      "∫ sin(x²) · 2x dx, ∫ e^(3x) dx, ∫ x·cos(x²) dx"
+    ],
+    "verbalTriggers": [
+      "Use substitution to evaluate",
+      "Integrate using u-substitution",
+      "Find the antiderivative"
+    ],
+    "nonExamples": [
+      "Simple polynomials ∫ x³ dx (use power rule directly)",
+      "Products that don't have the chain rule structure (may need integration by parts - MTH240)",
+      "Rational functions needing partial fractions"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Is there an inner function whose derivative appears (or nearly appears)?",
+        "ifYes": "Try u = inner function",
+        "ifNo": "Consider other integration techniques"
+      },
+      {
+        "question": "After substituting u, can you integrate ∫ f(u) du?",
+        "ifYes": "Proceed with substitution",
+        "ifNo": "Try a different choice of u"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Identify u = g(x) where g(x) is the 'inner' function",
+        "pitfall": "Poor choice of u makes the integral harder",
+        "check": "The derivative g'(x) should appear in the integrand"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Compute du = g'(x) dx",
+        "pitfall": "Don't forget the dx - you need to substitute for dx",
+        "check": "du/dx = g'(x), so dx = du/g'(x)"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Rewrite the entire integral in terms of u",
+        "pitfall": "Must substitute for all x terms including dx",
+        "check": "No x terms should remain"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Evaluate the simpler integral ∫ f(u) du",
+        "pitfall": "Don't forget +C",
+        "check": "This should be easier than the original"
+      },
+      {
+        "stepNumber": 5,
+        "instruction": "Substitute back u = g(x) to get answer in terms of x",
+        "pitfall": "Don't leave answer in terms of u",
+        "check": "Final answer in original variable"
+      }
+    ],
+    "timeEstimate": "6-10 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Can't eliminate all x terms",
+      "diagnosis": "Poor choice of u - derivative doesn't match remaining terms",
+      "fix": "Look for the inner function whose derivative (or a multiple) appears in the integrand",
+      "example": "In ∫ x·sin(x²) dx, choose u = x² since du = 2x dx, and x dx is present"
+    },
+    {
+      "symptom": "Missing constant factor in answer",
+      "diagnosis": "Didn't adjust for the derivative factor properly",
+      "fix": "If du = k·f(x)dx but you only have f(x)dx, multiply by k/k and put 1/k outside",
+      "example": "∫ x·e^(x²) dx: u=x², du=2x dx. We have x dx = du/2, so integral = ½∫e^u du = ½e^(x²) + C"
+    },
+    {
+      "symptom": "Left answer in terms of u",
+      "diagnosis": "Forgot to substitute back",
+      "fix": "Always do the back-substitution u → g(x)",
+      "example": "Final answer should be ½e^(x²) + C, not ½e^u + C"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "Evaluate ∫ 2x·cos(x²) dx",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Let } u = x^2",
+          "explanation": "Inner function is x², and 2x (its derivative) is present"
+        },
+        {
+          "step": 2,
+          "math": "du = 2x \\, dx",
+          "explanation": "Differential of u"
+        },
+        {
+          "step": 3,
+          "math": "\\int \\cos(u) \\, du",
+          "explanation": "Substitute: 2x dx becomes du, cos(x²) becomes cos(u)"
+        },
+        {
+          "step": 4,
+          "math": "\\sin(u) + C",
+          "explanation": "Integrate with respect to u"
+        },
+        {
+          "step": 5,
+          "math": "\\sin(x^2) + C",
+          "explanation": "Substitute back u = x²"
+        }
+      ],
+      "keyInsight": "When the derivative of the inner function is already present, substitution works cleanly",
+      "timeEstimate": "3-4 min"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Evaluate ∫ x·e^(x²) dx",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Let } u = x^2",
+          "explanation": "Inner function x², derivative 2x is almost present"
+        },
+        {
+          "step": 2,
+          "math": "du = 2x \\, dx, \\text{ so } x \\, dx = \\frac{du}{2}",
+          "explanation": "Solve for x dx since that's what we have"
+        },
+        {
+          "step": 3,
+          "math": "\\int e^u \\cdot \\frac{du}{2} = \\frac{1}{2} \\int e^u \\, du",
+          "explanation": "Factor out the constant ½"
+        },
+        {
+          "step": 4,
+          "math": "\\frac{1}{2}e^u + C",
+          "explanation": "Integrate e^u"
+        },
+        {
+          "step": 5,
+          "math": "\\frac{1}{2}e^{x^2} + C",
+          "explanation": "Substitute back"
+        }
+      ],
+      "keyInsight": "When derivative is off by a constant factor, adjust with a constant multiplier",
+      "timeEstimate": "5-6 min"
+    },
+    {
+      "difficulty": "Hard",
+      "problem": "Evaluate ∫ tan x dx",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\int \\frac{\\sin x}{\\cos x} \\, dx",
+          "explanation": "Rewrite tan x as sin x / cos x"
+        },
+        {
+          "step": 2,
+          "math": "\\text{Let } u = \\cos x",
+          "explanation": "Inner function cos x, derivative -sin x is present (with sign change)"
+        },
+        {
+          "step": 3,
+          "math": "du = -\\sin x \\, dx, \\text{ so } \\sin x \\, dx = -du",
+          "explanation": "Differential and solve for sin x dx"
+        },
+        {
+          "step": 4,
+          "math": "\\int \\frac{-du}{u} = -\\int \\frac{du}{u}",
+          "explanation": "Substitute"
+        },
+        {
+          "step": 5,
+          "math": "-\\ln|u| + C = -\\ln|\\cos x| + C = \\ln|\\sec x| + C",
+          "explanation": "Integrate and substitute back; can also write as ln|sec x|"
+        }
+      ],
+      "keyInsight": "Trigonometric integrals often require clever substitution after rewriting",
+      "timeEstimate": "7-9 min"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Substitution Recognition",
+      "questions": [
+        {
+          "integral": "\\int x^2 \\cdot \\sin(x^3) \\, dx",
+          "options": ["u = x²", "u = x³", "u = sin(x)", "No substitution needed"],
+          "correctAnswer": 1,
+          "explanation": "u = x³, du = 3x² dx, and x² dx is present"
+        },
+        {
+          "integral": "\\int \\frac{\\ln x}{x} \\, dx",
+          "options": ["u = ln x", "u = x", "u = 1/x", "Integration by parts"],
+          "correctAnswer": 0,
+          "explanation": "u = ln x, du = dx/x, and dx/x is present"
+        },
+        {
+          "integral": "\\int e^{5x} \\, dx",
+          "options": ["u = 5x", "u = e^x", "u = x", "Direct integration"],
+          "correctAnswer": 0,
+          "explanation": "u = 5x, du = 5 dx, need to adjust by factor of 5"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "u-Substitution Execution",
+      "problems": [
+        {
+          "problem": "Evaluate \\int 3x^2 \\cdot e^{x^3} \\, dx",
+          "answer": "e^{x^3} + C",
+          "hint": "u = x³, du = 3x² dx",
+          "difficulty": "Easy"
+        },
+        {
+          "problem": "Evaluate \\int \\frac{x}{\\sqrt{x^2+1}} \\, dx",
+          "answer": "\\sqrt{x^2+1} + C",
+          "hint": "u = x²+1, du = 2x dx, so x dx = du/2",
+          "difficulty": "Medium"
+        },
+        {
+          "problem": "Evaluate \\int \\frac{e^x}{1+e^x} \\, dx",
+          "answer": "\\ln(1+e^x) + C",
+          "hint": "u = 1 + e^x, du = e^x dx",
+          "difficulty": "Medium"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Exam-Style Substitution Problems",
+      "problems": [
+        {
+          "problem": "Evaluate ∫ x·cos(3x²+1) dx",
+          "context": "Substitution with chain rule structure",
+          "primaryTechnique": "u_substitution",
+          "secondaryTechniques": []
+        },
+        {
+          "problem": "Evaluate ∫ (ln x)²/x dx",
+          "context": "Nested substitution concept",
+          "primaryTechnique": "u_substitution",
+          "secondaryTechniques": []
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "Pick u = inner function, compute du, substitute, integrate, back-substitute",
+    "whenToUse": [
+      "Composite functions",
+      "When derivative of inner function appears in integrand",
+      "∫ f(g(x)) · g'(x) dx form"
+    ],
+    "formula": "\\int f(g(x)) \\cdot g'(x) \\, dx = \\int f(u) \\, du = F(u) + C = F(g(x)) + C",
+    "quickCheck": "Look for inner function and its derivative (or a multiple)"
+  },
+  "patternConnections": [
+    "definite_substitution",
+    "trig_substitution_basic",
+    "antiderivatives_basic"
+  ],
+  "masteryCriteria": {
+    "recognitionSpeed": "< 10 seconds to identify u-substitution applies",
+    "executionSpeed": "< 6 minutes for standard problems",
+    "accuracyTarget": "90% correct on drill sets",
+    "selfCheckQuestions": [
+      "Did I choose a good u where du appears in the integral?",
+      "Did I substitute for dx properly?",
+      "Did I substitute back to x at the end?"
+    ]
+  }
+}

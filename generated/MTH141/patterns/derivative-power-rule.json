@@ -1,0 +1,75 @@
+{
+  "id": "derivative_power_rule",
+  "name": "Power Rule Differentiation",
+  "description": "Differentiating functions of the form x^n using the power rule",
+  "canonical_form_latex": "\\frac{d}{dx}[x^n] = nx^{n-1}",
+  "identification_signal": "Power of x: x^n including roots and reciprocals",
+  "frequency": "Very Common",
+  "estimated_time": "2-3 minutes",
+  "strategy": {
+    "step_1": "Rewrite all terms as x^n form (including roots and denominators)",
+    "step_2": "Bring exponent down as coefficient",
+    "step_3": "Subtract 1 from exponent"
+  },
+  "exam_references": ["MTH141-2018-F-Q2", "MTH141-2019-M-Q4"],
+  "related_techniques": ["power_rule_basic", "power_rule", "chain_rule_basic"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Identify power rule applications",
+      "flashcards": [
+        {
+          "front": {"latex": "\\frac{d}{dx}[x^5]"},
+          "back": {"title": "Power rule", "explanation": "5x⁴"}
+        },
+        {
+          "front": {"latex": "\\frac{d}{dx}[\\sqrt{x}] = \\frac{d}{dx}[x^{1/2}]"},
+          "back": {"title": "Power rule with root", "explanation": "½x^(-½) = 1/(2√x)"}
+        }
+      ],
+      "spot_it": {
+        "instructions": "Spot derivatives using power rule",
+        "items": [
+          {"prompt_latex": "\\frac{d}{dx}[x^3 + 2x]", "is_match": true, "explanation": "Both terms use power rule"},
+          {"prompt_latex": "\\frac{d}{dx}[\\sin x]", "is_match": false, "explanation": "Trig derivative, not power rule"}
+        ]
+      }
+    },
+    "phase_2_strategy": {
+      "purpose": "Apply power rule systematically",
+      "steps": [
+        {
+          "title": "Rewrite",
+          "instruction": "Write all terms as x^n",
+          "why": "√x = x^(½), 1/x² = x^(-2)"
+        },
+        {
+          "title": "Apply rule",
+          "instruction": "Multiply by n, subtract 1 from exponent",
+          "why": "d/dx[x^n] = nx^(n-1)"
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice power rule",
+      "problem_cards": [
+        {
+          "id": "pr-1",
+          "difficulty": "Easy",
+          "task": "Differentiate",
+          "prompt_latex": "\\frac{d}{dx}[x^7]",
+          "solution": {"final_answer_latex": "7x^6"}
+        },
+        {
+          "id": "pr-2",
+          "difficulty": "Medium",
+          "task": "Differentiate",
+          "prompt_latex": "\\frac{d}{dx}\\left[\\frac{1}{x^3}\\right]",
+          "solution": {"final_answer_latex": "-\\frac{3}{x^4}"}
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "Power Rule Master", "pattern_id": "derivative_power_rule"}
+    }
+  }
+}

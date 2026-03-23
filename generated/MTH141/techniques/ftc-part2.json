@@ -1,0 +1,259 @@
+{
+  "id": "ftc_part2",
+  "displayName": "FTC Part II",
+  "recognition": {
+    "visualSignals": [
+      "Definite integral with specific bounds",
+      "∫_a^b f(x) dx notation",
+      "Evaluate the definite integral"
+    ],
+    "verbalTriggers": [
+      "Evaluate the definite integral",
+      "Compute the integral from a to b",
+      "Find the exact value of the integral"
+    ],
+    "nonExamples": [
+      "Indefinite integral (no bounds)",
+      "∫ f(x) dx (just find antiderivative, don't evaluate)",
+      "Derivative of integral with variable bound (FTC Part I)"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Is this a definite integral with constant bounds?",
+        "ifYes": "Use FTC Part II: F(b) - F(a)",
+        "ifNo": "May need FTC Part I if variable in bound"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Find an antiderivative F(x) of f(x)",
+        "pitfall": "Make sure F'(x) = f(x)",
+        "check": "Differentiate your answer to verify"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Evaluate F at upper bound: F(b)",
+        "pitfall": "Watch signs when substituting",
+        "check": "Substitute correctly"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Evaluate F at lower bound: F(a)",
+        "pitfall": "Don't forget this step",
+        "check": "Substitute correctly"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Compute F(b) - F(a)",
+        "pitfall": "Order matters - it's F(upper) - F(lower)",
+        "check": "Correct subtraction order"
+      }
+    ],
+    "timeEstimate": "4-8 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Wrong sign on answer",
+      "diagnosis": "Reversed the subtraction order",
+      "fix": "Remember: F(upper) - F(lower), not F(lower) - F(upper)",
+      "example": "∫_1^2 x dx = [x²/2]_1^2 = (4/2) - (1/2) = 3/2, not -3/2"
+    },
+    {
+      "symptom": "Forgot to evaluate at bounds",
+      "diagnosis": "Left answer as F(x) + C instead of evaluating",
+      "fix": "Definite integrals give numbers, not functions",
+      "example": "∫_0^1 x² dx = [x³/3]_0^1 = 1/3 - 0 = 1/3, not x³/3 + C"
+    },
+    {
+      "symptom": "Wrong antiderivative",
+      "diagnosis": "Integration errors",
+      "fix": "Always verify by differentiating",
+      "example": "∫ x³ dx = x⁴/4, not x⁴ (check: d/dx[x⁴/4] = x³ ✓)"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "Evaluate ∫_0^2 (3x² + 2x) dx",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\int (3x^2 + 2x) \\, dx = x^3 + x^2 + C",
+          "explanation": "Find antiderivative (power rule)"
+        },
+        {
+          "step": 2,
+          "math": "F(2) = 2^3 + 2^2 = 8 + 4 = 12",
+          "explanation": "Evaluate at upper bound"
+        },
+        {
+          "step": 3,
+          "math": "F(0) = 0^3 + 0^2 = 0",
+          "explanation": "Evaluate at lower bound"
+        },
+        {
+          "step": 4,
+          "math": "\\int_0^2 (3x^2 + 2x) \\, dx = 12 - 0 = \\boxed{12}",
+          "explanation": "Subtract: F(2) - F(0)"
+        }
+      ],
+      "keyInsight": "FTC Part II: ∫_a^b f(x) dx = F(b) - F(a) where F' = f",
+      "timeEstimate": "2-3 min"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Evaluate ∫_1^e (1/x) dx",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\int \\frac{1}{x} \\, dx = \\ln|x| + C",
+          "explanation": "Antiderivative of 1/x is ln|x|"
+        },
+        {
+          "step": 2,
+          "math": "F(e) = \\ln(e) = 1",
+          "explanation": "ln(e) = 1 by definition"
+        },
+        {
+          "step": 3,
+          "math": "F(1) = \\ln(1) = 0",
+          "explanation": "ln(1) = 0"
+        },
+        {
+          "step": 4,
+          "math": "\\int_1^e \\frac{1}{x} \\, dx = 1 - 0 = \\boxed{1}",
+          "explanation": "FTC Part II"
+        }
+      ],
+      "keyInsight": "Special limits 1 and e often give nice answers with logarithms",
+      "timeEstimate": "3-4 min"
+    },
+    {
+      "difficulty": "Hard",
+      "problem": "Evaluate ∫_0^(π/4) sec²(x) tan(x) dx",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Let } u = \\tan x, \\quad du = \\sec^2 x \\, dx",
+          "explanation": "Substitution: u = tan x, du = sec² x dx"
+        },
+        {
+          "step": 2,
+          "math": "\\text{When } x = 0: u = \\tan(0) = 0",
+          "explanation": "New lower bound"
+        },
+        {
+          "step": 3,
+          "math": "\\text{When } x = \\frac{\\pi}{4}: u = \\tan(\\frac{\\pi}{4}) = 1",
+          "explanation": "New upper bound"
+        },
+        {
+          "step": 4,
+          "math": "\\int_0^1 u \\, du = \\left[\\frac{u^2}{2}\\right]_0^1",
+          "explanation": "Substituted integral"
+        },
+        {
+          "step": 5,
+          "math": "= \\frac{1}{2} - 0 = \\boxed{\\frac{1}{2}}",
+          "explanation": "Evaluate"
+        }
+      ],
+      "keyInsight": "Substitution in definite integrals: change bounds to u-values, or substitute back to x",
+      "timeEstimate": "6-8 min"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "FTC Part II Recognition",
+      "questions": [
+        {
+          "integral": "\\int_0^3 x^2 \\, dx",
+          "options": ["FTC Part II", "FTC Part I", "Substitution only", "Integration by parts"],
+          "correctAnswer": 0,
+          "explanation": "Definite integral with constant bounds - FTC II"
+        },
+        {
+          "integral": "\\frac{d}{dx} \\int_0^x t^2 \\, dt",
+          "options": ["FTC Part II", "FTC Part I", "Chain rule", "Product rule"],
+          "correctAnswer": 1,
+          "explanation": "Derivative of integral with variable upper bound - FTC I"
+        },
+        {
+          "integral": "\\int x^3 \\, dx",
+          "options": ["FTC Part II", "Find antiderivative only", "FTC Part I", "Definite integral"],
+          "correctAnswer": 1,
+          "explanation": "Indefinite integral - just find antiderivative + C"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "FTC Part II Execution",
+      "problems": [
+        {
+          "problem": "Evaluate \\int_0^1 (4x^3 + 3x^2) \\, dx",
+          "answer": "2",
+          "hint": "Antiderivative: x⁴ + x³. Evaluate at 1 and 0",
+          "difficulty": "Easy"
+        },
+        {
+          "problem": "Evaluate \\int_0^{\\pi/2} \\cos x \\, dx",
+          "answer": "1",
+          "hint": "Antiderivative of cos is sin",
+          "difficulty": "Easy"
+        },
+        {
+          "problem": "Evaluate \\int_1^2 \\frac{1}{x^2} \\, dx",
+          "answer": "\\frac{1}{2}",
+          "hint": "Rewrite as x^(-2), antiderivative is -x^(-1) = -1/x",
+          "difficulty": "Medium"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Exam-Style FTC Part II Problems",
+      "problems": [
+        {
+          "problem": "Evaluate ∫_0^2 |x-1| dx (Hint: split at x=1)",
+          "context": "Absolute value requires splitting integral",
+          "primaryTechnique": "ftc_part2",
+          "secondaryTechniques": ["integral_properties"]
+        },
+        {
+          "problem": "Find the average value of f(x) = x² on [0, 3]",
+          "context": "Average value formula uses FTC II",
+          "primaryTechnique": "ftc_part2",
+          "secondaryTechniques": ["average_value"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "∫_a^b f(x) dx = F(b) - F(a) where F is any antiderivative",
+    "whenToUse": [
+      "Definite integrals with constant bounds",
+      "Computing accumulated change",
+      "Finding areas under curves"
+    ],
+    "formula": "\\int_a^b f(x) \\, dx = F(b) - F(a) = [F(x)]_a^b",
+    "quickCheck": "Definite integral gives a number, not a function"
+  },
+  "patternConnections": [
+    "ftc_part1",
+    "antiderivatives_basic",
+    "definite_substitution",
+    "average_value"
+  ],
+  "masteryCriteria": {
+    "recognitionSpeed": "< 5 seconds to identify FTC II applies",
+    "executionSpeed": "< 5 minutes for standard problems",
+    "accuracyTarget": "95% correct on drill sets",
+    "selfCheckQuestions": [
+      "Did I find the correct antiderivative?",
+      "Did I evaluate at upper minus lower (not reversed)?",
+      "Did I get a numerical answer (not a function)?"
+    ]
+  }
+}

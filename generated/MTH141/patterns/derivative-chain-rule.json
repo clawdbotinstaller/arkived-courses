@@ -1,0 +1,86 @@
+{
+  "id": "derivative_chain_rule",
+  "name": "Chain Rule Applications",
+  "description": "Differentiating composite functions using the chain rule",
+  "canonical_form_latex": "\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x)",
+  "identification_signal": "Function inside another function: e^(something), ln(something), (something)^n, trig(something)",
+  "frequency": "Very Common",
+  "estimated_time": "5-8 minutes",
+  "strategy": {
+    "step_1": "Identify outer function f(u) and inner function g(x)",
+    "step_2": "Differentiate outer with respect to inner: f'(u)",
+    "step_3": "Differentiate inner with respect to x: g'(x)",
+    "step_4": "Multiply: f'(g(x)) · g'(x)"
+  },
+  "exam_references": ["MTH141-2019-M-Q5", "MTH141-2020-M-Q3"],
+  "related_techniques": ["chain_rule_basic", "chain_rule_nested", "derivatives_exp_log", "derivatives_trig"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Identify chain rule situations",
+      "flashcards": [
+        {
+          "front": {"latex": "\\frac{d}{dx}[e^{3x}]"},
+          "back": {"title": "Chain rule", "explanation": "Outer: e^u, Inner: 3x. Result: e^(3x) · 3"}
+        },
+        {
+          "front": {"latex": "\\frac{d}{dx}[(2x+1)^4]"},
+          "back": {"title": "Chain rule (general power)", "explanation": "4(2x+1)³ · 2 = 8(2x+1)³"}
+        }
+      ],
+      "spot_it": {
+        "instructions": "Spot where chain rule is needed",
+        "items": [
+          {"prompt_latex": "\\frac{d}{dx}[\\sin(x^2)]", "is_match": true, "explanation": "sin(inside) - need chain rule"},
+          {"prompt_latex": "\\frac{d}{dx}[\\sin x]", "is_match": false, "explanation": "Just sin x, no chain rule needed"}
+        ]
+      }
+    },
+    "phase_2_strategy": {
+      "purpose": "Execute chain rule",
+      "steps": [
+        {
+          "title": "Identify",
+          "instruction": "Find inner and outer functions",
+          "why": "Need to know what to differentiate first"
+        },
+        {
+          "title": "Differentiate outer",
+          "instruction": "d/du of outer function",
+          "why": "First part of chain rule formula"
+        },
+        {
+          "title": "Differentiate inner",
+          "instruction": "d/dx of inner function",
+          "why": "Second part - chain rule factor"
+        },
+        {
+          "title": "Multiply",
+          "instruction": "Outer' evaluated at inner times inner'",
+          "why": "Chain rule formula"
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice chain rule",
+      "problem_cards": [
+        {
+          "id": "cr-1",
+          "difficulty": "Easy",
+          "task": "Differentiate",
+          "prompt_latex": "\\frac{d}{dx}[(3x+2)^5]",
+          "solution": {"final_answer_latex": "15(3x+2)^4"}
+        },
+        {
+          "id": "cr-2",
+          "difficulty": "Medium",
+          "task": "Differentiate",
+          "prompt_latex": "\\frac{d}{dx}[e^{x^2+1}]",
+          "solution": {"final_answer_latex": "2xe^{x^2+1}"}
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "Chain Rule Master", "pattern_id": "derivative_chain_rule"}
+    }
+  }
+}

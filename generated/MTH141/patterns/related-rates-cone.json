@@ -1,0 +1,66 @@
+{
+  "id": "related_rates_cone",
+  "name": "Conical Tank Related Rates",
+  "description": "Related rates problems involving conical tanks filling or emptying",
+  "canonical_form_latex": "\\frac{dV}{dt} = \\frac{1}{3}\\pi r^2 \\frac{dh}{dt} + \\frac{2}{3}\\pi rh \\frac{dr}{dt} \\text{ or use similar triangles}",
+  "identification_signal": "Cone, funnel, conical tank, sand pouring",
+  "frequency": "Common",
+  "estimated_time": "10-15 minutes",
+  "strategy": {
+    "step_1": "Draw cone diagram, label r, h, V",
+    "step_2": "Use similar triangles to relate r and h",
+    "step_3": "Write V in terms of single variable (usually h)",
+    "step_4": "Differentiate with respect to t",
+    "step_5": "Substitute known values and solve"
+  },
+  "exam_references": ["MTH141-2019-F-Q4", "MTH141-2021-M-Q5"],
+  "related_techniques": ["related_rates_setup", "related_rates_geometry", "chain_rule_basic"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Recognize cone problems",
+      "flashcards": [
+        {
+          "front": {"text": "Water pours into conical tank at 5 m³/min. How fast is level rising when h=3?"},
+          "back": {"title": "Cone related rates", "explanation": "Use similar triangles: r/h = R/H (constant ratio)"}
+        }
+      ],
+      "spot_it": {
+        "instructions": "Spot cone related rates",
+        "items": [
+          {"prompt_latex": "Sand falls forming conical pile", "is_match": true, "explanation": "Cone geometry with related rates"},
+          {"prompt_latex": "Ladder sliding down wall", "is_match": false, "explanation": "Pythagorean, not cone"}
+        ]
+      }
+    },
+    "phase_2_strategy": {
+      "purpose": "Solve cone problems",
+      "steps": [
+        {
+          "title": "Similar triangles",
+          "instruction": "Relate r and h using cone dimensions",
+          "why": "Eliminates one variable: r = (R/H)·h"
+        },
+        {
+          "title": "Volume formula",
+          "instruction": "V = (1/3)πr²h, substitute r in terms of h",
+          "why": "Get V as function of single variable"
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice cone problems",
+      "problem_cards": [
+        {
+          "id": "cone-1",
+          "difficulty": "Medium",
+          "task": "Cone with height 10m, radius 4m at top. dV/dt = 5. Find dh/dt when h=5.",
+          "prompt_latex": "r = 0.4h, V = \\frac{\\pi}{3}(0.4h)^2h = \\frac{0.16\\pi}{3}h^3",
+          "solution": {"final_answer_latex": "\\frac{dh}{dt} = \\frac{25}{16\\pi} \\text{ m/min}"}
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "Cone Related Rates Master", "pattern_id": "related_rates_cone"}
+    }
+  }
+}

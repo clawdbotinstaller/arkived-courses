@@ -1,0 +1,259 @@
+{
+  "id": "chain_rule_basic",
+  "displayName": "Chain Rule",
+  "recognition": {
+    "visualSignals": [
+      "Nested function structure f(g(x))",
+      "Composite functions like sin(x²), e^(3x), ln(cos x)",
+      "Functions within functions"
+    ],
+    "verbalTriggers": [
+      "Find the derivative of a composite function",
+      "Differentiate e^(something), ln(something), sin(something)",
+      "Multiple layers of operations"
+    ],
+    "nonExamples": [
+      "Simple polynomials like x³ + 2x",
+      "Sum of functions like sin x + cos x",
+      "Product of functions like x·sin x (use product rule)"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Is the function a composition f(g(x))?",
+        "ifYes": "Apply chain rule: derivative of outer evaluated at inner times derivative of inner",
+        "ifNo": "Use basic rules (power, product, or quotient rule)"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Identify the outer function f(u) and inner function g(x)",
+        "pitfall": "Don't confuse f and g - the outer function is what you would evaluate last",
+        "check": "Can you write the function as f(g(x))?"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Compute the derivative of the outer function f'(u)",
+        "pitfall": "Treat the inner function as a variable when differentiating outer",
+        "check": "Your answer should still contain g(x), not x directly"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Compute the derivative of the inner function g'(x)",
+        "pitfall": "Don't forget this step - chain rule requires both derivatives",
+        "check": "Differentiate g(x) with respect to x"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Multiply: f'(g(x)) · g'(x)",
+        "pitfall": "Make sure to substitute g(x) back into f'(u)",
+        "check": "Final answer should be in terms of x only"
+      }
+    ],
+    "timeEstimate": "5-8 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Getting the wrong answer with missing factor",
+      "diagnosis": "Forgot to multiply by derivative of inner function",
+      "fix": "Always multiply by g'(x) - the chain rule has two parts",
+      "example": "d/dx[sin(x²)] = cos(x²) · 2x, not just cos(x²)"
+    },
+    {
+      "symptom": "Wrong derivative of composite exponential",
+      "diagnosis": "Confused d/dx[e^u] with d/dx[u^e]",
+      "fix": "Remember d/dx[e^u] = e^u · u' (exponential doesn't change)",
+      "example": "d/dx[e^(3x)] = e^(3x) · 3, not 3x·e^(3x-1)"
+    },
+    {
+      "symptom": "Sign errors in trigonometric derivatives",
+      "diagnosis": "Not applying chain rule to argument of trig function",
+      "fix": "Always multiply by derivative of argument",
+      "example": "d/dx[cos(2x)] = -sin(2x) · 2 = -2sin(2x)"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "Find the derivative of f(x) = (3x + 1)⁵",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Let } u = 3x + 1 \\text{ (inner)}, \\text{ so } f(u) = u^5 \\text{ (outer)}",
+          "explanation": "Identify outer and inner functions"
+        },
+        {
+          "step": 2,
+          "math": "\\frac{df}{du} = 5u^4",
+          "explanation": "Differentiate outer function with respect to u"
+        },
+        {
+          "step": 3,
+          "math": "\\frac{du}{dx} = 3",
+          "explanation": "Differentiate inner function with respect to x"
+        },
+        {
+          "step": 4,
+          "math": "\\frac{df}{dx} = 5u^4 \\cdot 3 = 5(3x+1)^4 \\cdot 3 = 15(3x+1)^4",
+          "explanation": "Apply chain rule: multiply derivatives and substitute back"
+        }
+      ],
+      "keyInsight": "The power rule for composite functions multiplies by the derivative of the inner function",
+      "timeEstimate": "3-4 min"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Find the derivative of g(x) = e^(sin x)",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Let } u = \\sin x \\text{ (inner)}, \\text{ so } g(u) = e^u \\text{ (outer)}",
+          "explanation": "Identify the composition structure"
+        },
+        {
+          "step": 2,
+          "math": "\\frac{dg}{du} = e^u",
+          "explanation": "The exponential function is its own derivative"
+        },
+        {
+          "step": 3,
+          "math": "\\frac{du}{dx} = \\cos x",
+          "explanation": "Derivative of sine is cosine"
+        },
+        {
+          "step": 4,
+          "math": "\\frac{dg}{dx} = e^u \\cdot \\cos x = e^{\\sin x} \\cdot \\cos x",
+          "explanation": "Apply chain rule and substitute back u = sin x"
+        }
+      ],
+      "keyInsight": "For e^(anything), the derivative is e^(same thing) times derivative of the exponent",
+      "timeEstimate": "5-6 min"
+    },
+    {
+      "difficulty": "Hard",
+      "problem": "Find the derivative of h(x) = ln(cos(√x))",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Three layers: outer } \\ln(u), \\text{ middle } \\cos(v), \\text{ inner } \\sqrt{x}",
+          "explanation": "Identify all layers of composition"
+        },
+        {
+          "step": 2,
+          "math": "\\frac{d}{du}[\\ln u] = \\frac{1}{u} = \\frac{1}{\\cos(\\sqrt{x})}",
+          "explanation": "Derivative of outer layer"
+        },
+        {
+          "step": 3,
+          "math": "\\frac{d}{dv}[\\cos v] = -\\sin(v) = -\\sin(\\sqrt{x})",
+          "explanation": "Derivative of middle layer"
+        },
+        {
+          "step": 4,
+          "math": "\\frac{d}{dx}[\\sqrt{x}] = \\frac{1}{2\\sqrt{x}}",
+          "explanation": "Derivative of inner layer"
+        },
+        {
+          "step": 5,
+          "math": "h'(x) = \\frac{1}{\\cos(\\sqrt{x})} \\cdot (-\\sin(\\sqrt{x})) \\cdot \\frac{1}{2\\sqrt{x}} = -\\frac{\\tan(\\sqrt{x})}{2\\sqrt{x}}",
+          "explanation": "Multiply all three derivatives and simplify using sin/cos = tan"
+        }
+      ],
+      "keyInsight": "For nested compositions, apply chain rule repeatedly, working from outside in",
+      "timeEstimate": "8-10 min"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Chain Rule Recognition",
+      "questions": [
+        {
+          "integral": "\\frac{d}{dx}[(2x-1)^4]",
+          "options": ["Chain rule", "Product rule", "Quotient rule", "Power rule only"],
+          "correctAnswer": 0,
+          "explanation": "This is a composition: outer = ( )⁴, inner = 2x-1"
+        },
+        {
+          "integral": "\\frac{d}{dx}[x^2 \\cdot \\sin x]",
+          "options": ["Chain rule", "Product rule", "Quotient rule", "None of these"],
+          "correctAnswer": 1,
+          "explanation": "This is a product of two functions, use product rule"
+        },
+        {
+          "integral": "\\frac{d}{dx}[e^{x^3}]",
+          "options": ["Chain rule", "Product rule", "Quotient rule", "Power rule"],
+          "correctAnswer": 0,
+          "explanation": "Composition: outer = e^( ), inner = x³"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Chain Rule Execution",
+      "problems": [
+        {
+          "problem": "Find \\frac{d}{dx}[(5x+2)^3]",
+          "answer": "15(5x+2)^2",
+          "hint": "Outer: ( )³, Inner: 5x+2, d/dx[(5x+2)³] = 3(5x+2)² · 5",
+          "difficulty": "Easy"
+        },
+        {
+          "problem": "Find \\frac{d}{dx}[\\ln(x^2+1)]",
+          "answer": "\\frac{2x}{x^2+1}",
+          "hint": "d/dx[ln(u)] = u'/u where u = x²+1",
+          "difficulty": "Medium"
+        },
+        {
+          "problem": "Find \\frac{d}{dx}[\\sin(e^{2x})]",
+          "answer": "2e^{2x}\\cos(e^{2x})",
+          "hint": "Three layers: sin( ), e^( ), 2x",
+          "difficulty": "Hard"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Exam-Style Chain Rule Problems",
+      "problems": [
+        {
+          "problem": "Find f'(x) if f(x) = \\sqrt{\\tan(3x)}",
+          "context": "Chain rule with trigonometric function",
+          "primaryTechnique": "chain_rule_basic",
+          "secondaryTechniques": ["derivatives_trig"]
+        },
+        {
+          "problem": "If y = e^{x^2} \\sin(x^3), find dy/dx",
+          "context": "Chain rule combined with product rule",
+          "primaryTechnique": "chain_rule_basic",
+          "secondaryTechniques": ["product_rule"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "Outer' evaluated at inner times inner'",
+    "whenToUse": [
+      "Composite functions f(g(x))",
+      "Functions of the form (something)^n",
+      "e^(something), ln(something), trig(something)"
+    ],
+    "formula": "\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x)",
+    "quickCheck": "If you can write it as f(g(x)), you need chain rule"
+  },
+  "patternConnections": [
+    "chain_rule_nested",
+    "derivative_power_rule",
+    "derivatives_exp_log",
+    "derivatives_trig"
+  ],
+  "masteryCriteria": {
+    "recognitionSpeed": "< 10 seconds to identify chain rule is needed",
+    "executionSpeed": "< 5 minutes for standard problems, < 8 for nested",
+    "accuracyTarget": "90% correct on drill sets",
+    "selfCheckQuestions": [
+      "Can I identify the outer and inner functions?",
+      "Do I remember to multiply by the derivative of the inner function?",
+      "Can I handle three or more nested functions?"
+    ]
+  }
+}

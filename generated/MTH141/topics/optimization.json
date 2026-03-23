@@ -1,0 +1,48 @@
+{
+  "topic_id": "optimization",
+  "meta": {
+    "display_name": "Optimization",
+    "course_context": "MTH141 - Applied maximum/minimum problems",
+    "professor_methodology": "Define objective, find constraint, eliminate variables, find critical points",
+    "core_formula": "\\text{Maximize/minimize } f(x) \\text{ subject to constraint}",
+    "description": "Finding maximum and minimum values in applied problems"
+  },
+  "patterns": [
+    {
+      "id": "optimization_setup",
+      "name": "Optimization Setup",
+      "recognition_signal": "Maximize, minimize, largest, smallest, best dimensions",
+      "canonical_forms": ["Find dimensions that maximize volume", "Minimize cost of materials"],
+      "logic": "Objective function, constraint, eliminate, find critical points, verify",
+      "worked_example": {
+        "title": "Box with Fixed Perimeter",
+        "problem_latex": "\\text{Find two positive numbers with sum 20 and maximum product}",
+        "solution_steps": [
+          {"step": 1, "action": "Objective", "latex": "P = xy"},
+          {"step": 2, "action": "Constraint", "latex": "x + y = 20"},
+          {"step": 3, "action": "Eliminate", "latex": "y = 20-x, \\text{ so } P = x(20-x) = 20x-x^2"},
+          {"step": 4, "action": "Find critical point", "latex": "dP/dx = 20-2x = 0, \\text{ so } x = 10"},
+          {"step": 5, "action": "Verify max", "latex": "d^2P/dx^2 = -2 < 0, \\text{ confirms max}"},
+          {"step": 6, "action": "Answer", "latex": "x = y = 10"}
+        ]
+      }
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "What to optimize?", "yes": "Write objective function", "no": "Re-read problem"},
+      {"step": 2, "question": "What's the constraint?", "yes": "Use to eliminate", "no": "Look for given information"}
+    ],
+    "professor_tips": [
+      "Always identify objective and constraint first",
+      "Check that answer makes physical sense",
+      "Endpoints of domain may be extrema"
+    ]
+  },
+  "confidence_checklist": [
+    "I can identify objective functions",
+    "I can use constraints to eliminate variables",
+    "I can find and classify critical points",
+    "I can solve applied optimization problems"
+  ]
+}

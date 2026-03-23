@@ -1,0 +1,283 @@
+{
+  "id": "implicit_basic",
+  "displayName": "Implicit Differentiation",
+  "recognition": {
+    "visualSignals": [
+      "y is not isolated (not y = f(x) form)",
+      "Equation involving both x and y mixed together",
+      "x² + y² = r², xy + sin y = x, etc.",
+      "Cannot easily solve for y"
+    ],
+    "verbalTriggers": [
+      "Find dy/dx implicitly",
+      "Differentiate implicitly",
+      "Find the derivative using implicit differentiation",
+      "Given this equation, find dy/dx"
+    ],
+    "nonExamples": [
+      "y = f(x) explicitly (just use regular differentiation)",
+      "Find tangent line to explicit function",
+      "Find critical points of f(x)"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Is y defined implicitly (not isolated)?",
+        "ifYes": "Differentiate both sides with respect to x, treating y as function of x",
+        "ifNo": "Use explicit differentiation"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Differentiate both sides with respect to x",
+        "pitfall": "Remember y is a function of x, so use chain rule on y terms",
+        "check": "Every y term gets a dy/dx factor"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Apply chain rule to terms with y: d/dx[y^n] = n·y^(n-1)·(dy/dx)",
+        "pitfall": "Don't forget the dy/dx factor",
+        "check": "d/dx[y] = dy/dx, d/dx[y²] = 2y·dy/dx, etc."
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Collect all terms with dy/dx on one side",
+        "pitfall": "Watch signs when moving terms",
+        "check": "All dy/dx terms on LHS, others on RHS"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Factor out dy/dx",
+        "pitfall": "Factor carefully from all terms",
+        "check": "dy/dx is a common factor"
+      },
+      {
+        "stepNumber": 5,
+        "instruction": "Solve for dy/dx by dividing",
+        "pitfall": "Division by expression that could be zero",
+        "check": "Isolate dy/dx = (expression without dy/dx)"
+      }
+    ],
+    "timeEstimate": "6-10 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Missing dy/dx factors",
+      "diagnosis": "Forgot chain rule on y terms",
+      "fix": "Every time you differentiate a y term, multiply by dy/dx",
+      "example": "d/dx[y²] = 2y·dy/dx, not just 2y"
+    },
+    {
+      "symptom": "Can't isolate dy/dx",
+      "diagnosis": "Algebra errors collecting terms",
+      "fix": "Systematically move all dy/dx terms to one side",
+      "example": "x + y·dy/dx = 2x·dy/dx → x = 2x·dy/dx - y·dy/dx = (2x-y)·dy/dx"
+    },
+    {
+      "symptom": "Wrong answer with product rule errors",
+      "diagnosis": "Forgot product rule on xy terms",
+      "fix": "d/dx[xy] = y + x·dy/dx by product rule",
+      "example": "d/dx[xy] ≠ y, need product rule since both x and y vary"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "Find dy/dx if x² + y² = 25",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\frac{d}{dx}[x^2] + \\frac{d}{dx}[y^2] = \\frac{d}{dx}[25]",
+          "explanation": "Differentiate both sides"
+        },
+        {
+          "step": 2,
+          "math": "2x + 2y\\frac{dy}{dx} = 0",
+          "explanation": "Chain rule on y² gives 2y·dy/dx"
+        },
+        {
+          "step": 3,
+          "math": "2y\\frac{dy}{dx} = -2x",
+          "explanation": "Isolate dy/dx term"
+        },
+        {
+          "step": 4,
+          "math": "\\frac{dy}{dx} = -\\frac{x}{y}",
+          "explanation": "Solve for dy/dx"
+        }
+      ],
+      "keyInsight": "Circle equation gives dy/dx = -x/y, slope is negative reciprocal of slope from origin",
+      "timeEstimate": "3-4 min"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Find dy/dx if x³ + x²y + y³ = 5",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\frac{d}{dx}[x^3] + \\frac{d}{dx}[x^2y] + \\frac{d}{dx}[y^3] = 0",
+          "explanation": "Differentiate"
+        },
+        {
+          "step": 2,
+          "math": "3x^2 + (2xy + x^2\\frac{dy}{dx}) + 3y^2\\frac{dy}{dx} = 0",
+          "explanation": "Product rule on x²y, chain rule on y³"
+        },
+        {
+          "step": 3,
+          "math": "x^2\\frac{dy}{dx} + 3y^2\\frac{dy}{dx} = -3x^2 - 2xy",
+          "explanation": "Collect dy/dx terms on left, others on right"
+        },
+        {
+          "step": 4,
+          "math": "\\frac{dy}{dx}(x^2 + 3y^2) = -3x^2 - 2xy",
+          "explanation": "Factor out dy/dx"
+        },
+        {
+          "step": 5,
+          "math": "\\frac{dy}{dx} = \\frac{-3x^2 - 2xy}{x^2 + 3y^2}",
+          "explanation": "Solve for dy/dx"
+        }
+      ],
+      "keyInsight": "Product rule needed when x and y multiplied together",
+      "timeEstimate": "5-7 min"
+    },
+    {
+      "difficulty": "Hard",
+      "problem": "Find dy/dx if sin(xy) = x + y",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\frac{d}{dx}[\\sin(xy)] = \\frac{d}{dx}[x] + \\frac{d}{dx}[y]",
+          "explanation": "Differentiate both sides"
+        },
+        {
+          "step": 2,
+          "math": "\\cos(xy) \\cdot \\frac{d}{dx}[xy] = 1 + \\frac{dy}{dx}",
+          "explanation": "Chain rule: outer is sin, inner is xy"
+        },
+        {
+          "step": 3,
+          "math": "\\cos(xy) \\cdot (y + x\\frac{dy}{dx}) = 1 + \\frac{dy}{dx}",
+          "explanation": "Product rule on xy"
+        },
+        {
+          "step": 4,
+          "math": "y\\cos(xy) + x\\cos(xy)\\frac{dy}{dx} = 1 + \\frac{dy}{dx}",
+          "explanation": "Distribute"
+        },
+        {
+          "step": 5,
+          "math": "x\\cos(xy)\\frac{dy}{dx} - \\frac{dy}{dx} = 1 - y\\cos(xy)",
+          "explanation": "Collect dy/dx terms on left"
+        },
+        {
+          "step": 6,
+          "math": "\\frac{dy}{dx}(x\\cos(xy) - 1) = 1 - y\\cos(xy)",
+          "explanation": "Factor dy/dx"
+        },
+        {
+          "step": 7,
+          "math": "\\frac{dy}{dx} = \\frac{1 - y\\cos(xy)}{x\\cos(xy) - 1}",
+          "explanation": "Solve"
+        }
+      ],
+      "keyInsight": "Multiple chain rules may be needed - work from outside in",
+      "timeEstimate": "8-10 min"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Implicit Differentiation Recognition",
+      "questions": [
+        {
+          "integral": "Find dy/dx for x² + y² = 1",
+          "options": ["Implicit differentiation", "Direct differentiation", "Integration", "Chain rule only"],
+          "correctAnswer": 0,
+          "explanation": "y is not isolated - need implicit differentiation"
+        },
+        {
+          "integral": "Find slope of tangent to circle x² + y² = 25 at (3, 4)",
+          "options": ["Implicit differentiation", "Explicit formula", "Integration", "Not possible"],
+          "correctAnswer": 0,
+          "explanation": "Circle equation requires implicit differentiation for dy/dx"
+        },
+        {
+          "integral": "y = x² + 3x, find dy/dx",
+          "options": ["Implicit differentiation", "Explicit differentiation", "Integration first", "Solve for x"],
+          "correctAnswer": 1,
+          "explanation": "y is already isolated - use regular differentiation"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Implicit Differentiation Execution",
+      "problems": [
+        {
+          "problem": "Find dy/dx for x² - y² = 1",
+          "answer": "\\frac{x}{y}",
+          "hint": "2x - 2y(dy/dx) = 0, so dy/dx = x/y",
+          "difficulty": "Easy"
+        },
+        {
+          "problem": "Find dy/dx for xy = 4",
+          "answer": "-\\frac{y}{x}",
+          "hint": "y + x(dy/dx) = 0, so dy/dx = -y/x = -4/x²",
+          "difficulty": "Medium"
+        },
+        {
+          "problem": "Find dy/dx for x²y + y³ = x + 1",
+          "answer": "\\frac{1-2xy}{x^2+3y^2}",
+          "hint": "Use product rule on x²y",
+          "difficulty": "Hard"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Exam-Style Implicit Differentiation",
+      "problems": [
+        {
+          "problem": "Find tangent line to x² + xy + y² = 7 at (1, 2)",
+          "context": "Implicit with tangent line application",
+          "primaryTechnique": "implicit_basic",
+          "secondaryTechniques": ["tangent_line"]
+        },
+        {
+          "problem": "Find d²y/dx² for x² + y² = 1",
+          "context": "Second derivative with implicit differentiation",
+          "primaryTechnique": "implicit_basic",
+          "secondaryTechniques": ["second_derivative_implicit"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "Differentiate both sides with respect to x, apply chain rule to y terms, solve for dy/dx",
+    "whenToUse": [
+      "y is not isolated",
+      "Cannot easily solve for y",
+      "Finding slope of implicitly defined curve"
+    ],
+    "formula": "\\frac{d}{dx}[y^n] = ny^{n-1}\\frac{dy}{dx}, \\quad \\frac{d}{dx}[xy] = y + x\\frac{dy}{dx}",
+    "quickCheck": "Every y term should have a dy/dx factor after differentiation"
+  },
+  "patternConnections": [
+    "tangent_line",
+    "second_derivative_implicit",
+    "related_rates_setup",
+    "chain_rule_basic",
+    "product_rule"
+  ],
+  "masteryCriteria": {
+    "recognitionSpeed": "< 5 seconds to identify implicit differentiation needed",
+    "executionSpeed": "< 7 minutes for standard problems",
+    "accuracyTarget": "85% correct on drill sets",
+    "selfCheckQuestions": [
+      "Did I apply chain rule to all y terms?",
+      "Did I use product rule where needed?",
+      "Did I collect all dy/dx terms before factoring?"
+    ]
+  }
+}

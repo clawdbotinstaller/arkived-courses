@@ -1,0 +1,66 @@
+{
+  "id": "limit_rationalizing",
+  "name": "Rationalizing for Limits",
+  "description": "Evaluating limits involving radicals by rationalizing numerator or denominator",
+  "canonical_form_latex": "\\lim_{x \\to a} \\frac{\\sqrt{f(x)} - c}{g(x)} \\xrightarrow{\\text{multiply by conjugate}} \\lim_{x \\to a} \\frac{f(x) - c^2}{g(x)(\\sqrt{f(x)} + c)}",
+  "identification_signal": "Radicals in limit, 0/0 form, difference of square roots",
+  "frequency": "Common",
+  "estimated_time": "5-8 minutes",
+  "strategy": {
+    "step_1": "Identify if rationalizing can help (radicals present, 0/0 form)",
+    "step_2": "Multiply numerator and denominator by conjugate",
+    "step_3": "Simplify using difference of squares",
+    "step_4": "Cancel common factors if possible",
+    "step_5": "Evaluate limit"
+  },
+  "exam_references": ["MTH141-2019-F-Q3", "MTH141-2020-M-Q2"],
+  "related_techniques": ["rationalizing_limits", "factoring_limits", "lhopital_0_0"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Identify when to rationalize",
+      "flashcards": [
+        {
+          "front": {"latex": "\\lim_{x \\to 0} \\frac{\\sqrt{x+1} - 1}{x}"},
+          "back": {"title": "Rationalize", "explanation": "Multiply by (√(x+1)+1)/(√(x+1)+1)"}
+        }
+      ],
+      "spot_it": {
+        "instructions": "Spot rationalizing opportunities",
+        "items": [
+          {"prompt_latex": "\\lim_{h \\to 0} \\frac{\\sqrt{4+h} - 2}{h}", "is_match": true, "explanation": "Difference of radicals - rationalize"},
+          {"prompt_latex": "\\lim_{x \\to 4} \\frac{x^2-16}{x-4}", "is_match": false, "explanation": "No radicals - factor instead"}
+        ]
+      }
+    },
+    "phase_2_strategy": {
+      "purpose": "Execute rationalizing",
+      "steps": [
+        {
+          "title": "Conjugate",
+          "instruction": "Multiply num and den by conjugate of radical expression",
+          "why": "Creates difference of squares, eliminates radical"
+        },
+        {
+          "title": "Simplify",
+          "instruction": "Expand and simplify",
+          "why": "Should now have form that allows cancellation"
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice rationalizing",
+      "problem_cards": [
+        {
+          "id": "rat-1",
+          "difficulty": "Medium",
+          "task": "Evaluate",
+          "prompt_latex": "\\lim_{x \\to 0} \\frac{\\sqrt{1+x} - 1}{x}",
+          "solution": {"final_answer_latex": "\\frac{1}{2}"}
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "Rationalizing Limits Master", "pattern_id": "limit_rationalizing"}
+    }
+  }
+}

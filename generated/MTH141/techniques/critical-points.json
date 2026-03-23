@@ -1,0 +1,292 @@
+{
+  "id": "critical_points",
+  "displayName": "Finding Critical Points",
+  "recognition": {
+    "visualSignals": [
+      "Find critical numbers/points of f(x)",
+      "Find where f'(x) = 0",
+      "Locate stationary points",
+      "Find x-values where derivative is zero or undefined"
+    ],
+    "verbalTriggers": [
+      "Find the critical points",
+      "Find critical numbers",
+      "Where is the derivative zero?",
+      "Find stationary points"
+    ],
+    "nonExamples": [
+      "Find maximum/minimum (need to test critical points)",
+      "Find inflection points (need second derivative)",
+      "Find increasing/decreasing intervals"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Where is f'(x) = 0 or f'(x) undefined?",
+        "ifYes": "These are critical points (if in domain of f)",
+        "ifNo": "Function may have no critical points"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Find the domain of f(x)",
+        "pitfall": "Critical points must be in the domain of the original function",
+        "check": "Note any domain restrictions"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Compute f'(x)",
+        "pitfall": "Differentiation errors will give wrong critical points",
+        "check": "Differentiate carefully"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Solve f'(x) = 0",
+        "pitfall": "Algebra errors when solving",
+        "check": "Verify solutions by substituting back"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Find where f'(x) is undefined",
+        "pitfall": "Don't forget to check where derivative DNE",
+        "check": "Look for division by zero, undefined trig values, etc."
+      },
+      {
+        "stepNumber": 5,
+        "instruction": "Check that critical points are in domain of f",
+        "pitfall": "Exclude points not in domain of original function",
+        "check": "Verify x-values are valid for f(x)"
+      }
+    ],
+    "timeEstimate": "4-8 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Extra critical points not in domain",
+      "diagnosis": "Included points where f'(x) DNE but f(x) also DNE",
+      "fix": "Critical points must be in domain of original function f",
+      "example": "f(x) = 1/x has f'(x) = -1/x², undefined at x=0, but x=0 not in domain of f"
+    },
+    {
+      "symptom": "Missed critical points",
+      "diagnosis": "Forgot to check where f'(x) is undefined",
+      "fix": "Critical points occur where f'(x) = 0 OR f'(x) DNE",
+      "example": "f(x) = |x| has critical point at x=0 where derivative DNE"
+    },
+    {
+      "symptom": "Wrong critical points from algebra errors",
+      "diagnosis": "Made errors solving f'(x) = 0",
+      "fix": "Check algebra and verify solutions",
+      "example": "If f'(x) = 2x² - 8, then 2x² = 8, x² = 4, x = ±2"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "Find the critical points of f(x) = x³ - 6x² + 9x",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Domain: all real numbers}",
+          "explanation": "Polynomial, defined everywhere"
+        },
+        {
+          "step": 2,
+          "math": "f'(x) = 3x^2 - 12x + 9",
+          "explanation": "Differentiate"
+        },
+        {
+          "step": 3,
+          "math": "3x^2 - 12x + 9 = 0",
+          "explanation": "Set derivative equal to zero"
+        },
+        {
+          "step": 4,
+          "math": "x^2 - 4x + 3 = 0, \\quad (x-1)(x-3) = 0",
+          "explanation": "Divide by 3 and factor"
+        },
+        {
+          "step": 5,
+          "math": "x = 1 \\text{ or } x = 3",
+          "explanation": "Critical points are x = 1 and x = 3"
+        },
+        {
+          "step": 6,
+          "math": "f'(x) \\text{ defined everywhere, so critical points are } \\boxed{x = 1, 3}",
+          "explanation": "Check where derivative undefined (nowhere for polynomials)"
+        }
+      ],
+      "keyInsight": "For polynomials, critical points are where f'(x) = 0 since derivative always exists",
+      "timeEstimate": "3-4 min"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Find the critical points of f(x) = x^(2/3)",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Domain: all real numbers}",
+          "explanation": "Cube root defined for all x"
+        },
+        {
+          "step": 2,
+          "math": "f'(x) = \\frac{2}{3}x^{-1/3} = \\frac{2}{3x^{1/3}}",
+          "explanation": "Differentiate using power rule"
+        },
+        {
+          "step": 3,
+          "math": "f'(x) = 0: \\frac{2}{3x^{1/3}} = 0",
+          "explanation": "Set derivative equal to zero"
+        },
+        {
+          "step": 4,
+          "math": "\\text{No solution - numerator is never 0}",
+          "explanation": "f'(x) never equals zero"
+        },
+        {
+          "step": 5,
+          "math": "f'(x) \\text{ undefined when } x = 0",
+          "explanation": "Division by zero when x = 0"
+        },
+        {
+          "step": 6,
+          "math": "x = 0 \\text{ is in domain of } f, \\text{ so critical point is } \\boxed{x = 0}",
+          "explanation": "Check domain requirement"
+        }
+      ],
+      "keyInsight": "Critical points can occur where derivative is undefined (cusp at origin for x^(2/3))",
+      "timeEstimate": "4-5 min"
+    },
+    {
+      "difficulty": "Hard",
+      "problem": "Find the critical points of f(x) = x²e^(-x)",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Domain: all real numbers}",
+          "explanation": "Defined everywhere"
+        },
+        {
+          "step": 2,
+          "math": "f'(x) = 2x \\cdot e^{-x} + x^2 \\cdot (-e^{-x}) = e^{-x}(2x - x^2)",
+          "explanation": "Product rule and chain rule"
+        },
+        {
+          "step": 3,
+          "math": "e^{-x}(2x - x^2) = 0",
+          "explanation": "Set equal to zero"
+        },
+        {
+          "step": 4,
+          "math": "e^{-x} \\neq 0 \\text{ for all } x, \\text{ so } 2x - x^2 = 0",
+          "explanation": "e^(-x) is never zero"
+        },
+        {
+          "step": 5,
+          "math": "x(2-x) = 0, \\text{ so } x = 0 \\text{ or } x = 2",
+          "explanation": "Solve"
+        },
+        {
+          "step": 6,
+          "math": "f'(x) \\text{ defined everywhere, so critical points are } \\boxed{x = 0, 2}",
+          "explanation": "Final answer"
+        }
+      ],
+      "keyInsight": "Exponential functions are never zero, so focus on the polynomial factor",
+      "timeEstimate": "6-8 min"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Critical Points Recognition",
+      "questions": [
+        {
+          "integral": "Find where f(x) = x³ - 3x has horizontal tangents",
+          "options": ["Find critical points", "Find inflection points", "Find y-intercepts", "Find domain"],
+          "correctAnswer": 0,
+          "explanation": "Horizontal tangents occur where f'(x) = 0 - that's critical points"
+        },
+        {
+          "integral": "Where does f(x) = |x-2| have a corner?",
+          "options": ["Critical point", "Inflection point", "Maximum", "Undefined"],
+          "correctAnswer": 0,
+          "explanation": "Corner means derivative undefined - that's a critical point"
+        },
+        {
+          "integral": "Find where f'(x) = 0 for f(x) = sin(x)",
+          "options": ["Critical points", "Maximum only", "Minimum only", "Zeros of f"],
+          "correctAnswer": 0,
+          "explanation": "f'(x) = 0 gives critical points (which include max and min)"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Critical Points Execution",
+      "problems": [
+        {
+          "problem": "Find critical points of f(x) = x² - 4x + 3",
+          "answer": "x = 2",
+          "hint": "f'(x) = 2x - 4 = 0, so x = 2",
+          "difficulty": "Easy"
+        },
+        {
+          "problem": "Find critical points of f(x) = x^(1/3)",
+          "answer": "x = 0 (derivative undefined)",
+          "hint": "f'(x) = (1/3)x^(-2/3) = 1/(3x^(2/3)), undefined at x=0",
+          "difficulty": "Medium"
+        },
+        {
+          "problem": "Find critical points of f(x) = x²/(x-1)",
+          "answer": "x = 0, 2 (f'(x)=0), x=1 not in domain",
+          "hint": "Use quotient rule. f'(x) = (2x(x-1) - x²)/(x-1)² = (x²-2x)/(x-1)² = x(x-2)/(x-1)²",
+          "difficulty": "Hard"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Exam-Style Critical Points Problems",
+      "problems": [
+        {
+          "problem": "Find all critical points of f(x) = x - 2sin(x) on [0, 2π]",
+          "context": "Trigonometric critical points",
+          "primaryTechnique": "critical_points",
+          "secondaryTechniques": ["derivatives_trig"]
+        },
+        {
+          "problem": "Find critical points of f(x) = (x²-4)^(2/3)",
+          "context": "Critical points with chain rule and undefined derivative",
+          "primaryTechnique": "critical_points",
+          "secondaryTechniques": ["chain_rule_basic"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "Critical points: where f'(x) = 0 or f'(x) DNE (and x is in domain of f)",
+    "whenToUse": [
+      "Finding local maxima/minima",
+      "Curve sketching",
+      "Optimization problems"
+    ],
+    "formula": "\\text{Critical number } c: f'(c) = 0 \\text{ or } f'(c) \\text{ DNE, and } c \\in \\text{dom}(f)",
+    "quickCheck": "Always verify critical points are in the domain of the original function"
+  },
+  "patternConnections": [
+    "first_derivative_test",
+    "second_derivative_test",
+    "increasing_decreasing",
+    "optimization_setup"
+  ],
+  "masteryCriteria": {
+    "recognitionSpeed": "< 5 seconds to identify critical point problem",
+    "executionSpeed": "< 5 minutes for standard functions",
+    "accuracyTarget": "90% correct on drill sets",
+    "selfCheckQuestions": [
+      "Did I check where f'(x) = 0?",
+      "Did I check where f'(x) is undefined?",
+      "Are my critical points in the domain of f?"
+    ]
+  }
+}

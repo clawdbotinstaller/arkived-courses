@@ -1,0 +1,72 @@
+{
+  "id": "ftc_evaluation",
+  "name": "FTC Evaluation",
+  "description": "Evaluating definite integrals using the Fundamental Theorem of Calculus",
+  "canonical_form_latex": "\\int_a^b f(x) \\, dx = F(b) - F(a) \\text{ where } F' = f",
+  "identification_signal": "Definite integral with bounds, evaluate the integral",
+  "frequency": "Very Common",
+  "estimated_time": "4-8 minutes",
+  "strategy": {
+    "step_1": "Find antiderivative F(x)",
+    "step_2": "Evaluate F at upper bound: F(b)",
+    "step_3": "Evaluate F at lower bound: F(a)",
+    "step_4": "Compute F(b) - F(a)"
+  },
+  "exam_references": ["MTH141-2017-F-Q5", "MTH141-2019-M-Q7"],
+  "related_techniques": ["ftc_part2", "antiderivatives_basic", "u_substitution"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Recognize FTC II applications",
+      "flashcards": [
+        {
+          "front": {"latex": "\\int_0^2 x^3 \\, dx"},
+          "back": {"title": "FTC II", "explanation": "F(x) = x⁴/4, evaluate F(2) - F(0) = 4"}
+        }
+      ],
+      "spot_it": {
+        "instructions": "Spot definite integrals",
+        "items": [
+          {"prompt_latex": "\\int_1^e \\frac{1}{x} \\, dx", "is_match": true, "explanation": "Definite integral - use FTC II"},
+          {"prompt_latex": "\\int x^2 \\, dx", "is_match": false, "explanation": "Indefinite - just find antiderivative + C"}
+        ]
+      }
+    },
+    "phase_2_strategy": {
+      "purpose": "Apply FTC II",
+      "steps": [
+        {
+          "title": "Antiderivative",
+          "instruction": "Find F(x) where F' = f",
+          "why": "Needed for FTC formula"
+        },
+        {
+          "title": "Evaluate",
+          "instruction": "Compute F(b) - F(a)",
+          "why": "FTC II formula"
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice FTC evaluation",
+      "problem_cards": [
+        {
+          "id": "ftc-1",
+          "difficulty": "Easy",
+          "task": "Evaluate",
+          "prompt_latex": "\\int_0^3 (2x + 1) \\, dx",
+          "solution": {"final_answer_latex": "12"}
+        },
+        {
+          "id": "ftc-2",
+          "difficulty": "Medium",
+          "task": "Evaluate",
+          "prompt_latex": "\\int_0^{\\pi/2} \\cos x \\, dx",
+          "solution": {"final_answer_latex": "1"}
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "FTC Evaluation Master", "pattern_id": "ftc_evaluation"}
+    }
+  }
+}

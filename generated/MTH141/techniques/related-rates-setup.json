@@ -1,0 +1,303 @@
+{
+  "id": "related_rates_setup",
+  "displayName": "Related Rates Setup",
+  "recognition": {
+    "visualSignals": [
+      "Word problems with changing quantities",
+      "Keywords: rate, changing, increasing, decreasing",
+      "Geometric situations (ladder, cone, balloon, shadow)",
+      "Given one rate, asked to find another"
+    ],
+    "verbalTriggers": [
+      "How fast is... changing?",
+      "At what rate is...",
+      "Find the rate at which...",
+      "Given that... is increasing at..."
+    ],
+    "nonExamples": [
+      "Find the maximum area (optimization)",
+      "Evaluate the integral",
+      "Find the tangent line"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "What quantities are changing and what rates are given/requested?",
+        "ifYes": "Label them with variables",
+        "ifNo": "Re-read to identify the rates"
+      },
+      {
+        "question": "Is there a geometric relationship?",
+        "ifYes": "Draw a diagram",
+        "ifNo": "Find an equation relating the quantities"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Read carefully and identify all variables and rates",
+        "pitfall": "Don't skip this - misreading rates is common",
+        "check": "List: what's given, what's asked for"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Draw a diagram and label all variables",
+        "pitfall": "Diagrams help visualize relationships",
+        "check": "All changing quantities labeled"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Write an equation relating the variables",
+        "pitfall": "May need geometry (Pythagorean, similar triangles, volume formulas)",
+        "check": "Equation relates all relevant variables"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Differentiate both sides with respect to time t",
+        "pitfall": "Use implicit differentiation - all variables are functions of t",
+        "check": "Every term has a d/dt or derivative factor"
+      },
+      {
+        "stepNumber": 5,
+        "instruction": "Substitute known values and rates",
+        "pitfall": "Only substitute AFTER differentiating",
+        "check": "Known rates and values substituted"
+      },
+      {
+        "stepNumber": 6,
+        "instruction": "Solve for the unknown rate",
+        "pitfall": "Watch signs - negative means decreasing",
+        "check": "Answer makes sense physically"
+      }
+    ],
+    "timeEstimate": "8-12 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Wrong answer with premature substitution",
+      "diagnosis": "Substituted values before differentiating",
+      "fix": "Differentiate first, then substitute values",
+      "example": "For x² + y² = 25, differentiate to get 2x(dx/dt) + 2y(dy/dt) = 0, THEN substitute"
+    },
+    {
+      "symptom": "Missing chain rule factors",
+      "diagnosis": "Forgot that variables depend on t",
+      "fix": "Every variable gets a d/dt factor when differentiating",
+      "example": "d/dt[x²] = 2x·(dx/dt), not just 2x"
+    },
+    {
+      "symptom": "Wrong sign on answer",
+      "diagnosis": "Didn't interpret sign correctly",
+      "fix": "Negative rate means decreasing, positive means increasing",
+      "example": "If volume is decreasing, dV/dt is negative"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "A ladder 10 ft long rests against a vertical wall. If the bottom slides away at 1 ft/s, how fast is the top sliding down when the bottom is 6 ft from the wall?",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Let } x = \\text{distance from wall}, y = \\text{height on wall}",
+          "explanation": "Define variables"
+        },
+        {
+          "step": 2,
+          "math": "\\text{Given: } \\frac{dx}{dt} = 1 \\text{ ft/s}, \\text{ Find: } \\frac{dy}{dt} \\text{ when } x = 6",
+          "explanation": "Identify given and unknown rates"
+        },
+        {
+          "step": 3,
+          "math": "x^2 + y^2 = 100",
+          "explanation": "Pythagorean theorem (ladder is hypotenuse)"
+        },
+        {
+          "step": 4,
+          "math": "2x\\frac{dx}{dt} + 2y\\frac{dy}{dt} = 0",
+          "explanation": "Differentiate with respect to t"
+        },
+        {
+          "step": 5,
+          "math": "\\text{When } x = 6: 36 + y^2 = 100, \\text{ so } y = 8",
+          "explanation": "Find y at the instant in question"
+        },
+        {
+          "step": 6,
+          "math": "2(6)(1) + 2(8)\\frac{dy}{dt} = 0",
+          "explanation": "Substitute known values"
+        },
+        {
+          "step": 7,
+          "math": "\\frac{dy}{dt} = -\\frac{12}{16} = -\\frac{3}{4} \\text{ ft/s}",
+          "explanation": "Solve - negative means sliding down"
+        }
+      ],
+      "keyInsight": "The Pythagorean theorem relates the variables; implicit differentiation with respect to time gives the rate relationship",
+      "timeEstimate": "6-8 min"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "A spherical balloon is inflated at 100 cm³/s. How fast is the radius increasing when r = 5 cm?",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Given: } \\frac{dV}{dt} = 100 \\text{ cm}^3/\\text{s}, \\text{ Find: } \\frac{dr}{dt} \\text{ when } r = 5",
+          "explanation": "Identify rates"
+        },
+        {
+          "step": 2,
+          "math": "V = \\frac{4}{3}\\pi r^3",
+          "explanation": "Volume formula for sphere"
+        },
+        {
+          "step": 3,
+          "math": "\\frac{dV}{dt} = 4\\pi r^2 \\frac{dr}{dt}",
+          "explanation": "Differentiate with respect to t (chain rule on r)"
+        },
+        {
+          "step": 4,
+          "math": "100 = 4\\pi (25) \\frac{dr}{dt}",
+          "explanation": "Substitute r = 5 and dV/dt = 100"
+        },
+        {
+          "step": 5,
+          "math": "\\frac{dr}{dt} = \\frac{100}{100\\pi} = \\frac{1}{\\pi} \\text{ cm/s}",
+          "explanation": "Solve for unknown rate"
+        }
+      ],
+      "keyInsight": "Geometric formulas provide the relationship between variables",
+      "timeEstimate": "5-7 min"
+    },
+    {
+      "difficulty": "Hard",
+      "problem": "A street light is mounted at the top of a 15-ft pole. A man 6 ft tall walks away from the pole at 5 ft/s. How fast is his shadow lengthening when he is 30 ft from the pole?",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\text{Let } x = \\text{man's distance from pole}, s = \\text{shadow length}",
+          "explanation": "Define variables"
+        },
+        {
+          "step": 2,
+          "math": "\\text{Given: } \\frac{dx}{dt} = 5 \\text{ ft/s}, \\text{ Find: } \\frac{ds}{dt}",
+          "explanation": "Given rate, unknown rate"
+        },
+        {
+          "step": 3,
+          "math": "\\text{By similar triangles: } \\frac{15}{x+s} = \\frac{6}{s}",
+          "explanation": "Relate using similar triangles (light-man-shadow)"
+        },
+        {
+          "step": 4,
+          "math": "15s = 6(x+s), \\text{ so } 15s = 6x + 6s, \\text{ thus } 9s = 6x",
+          "explanation": "Simplify relationship"
+        },
+        {
+          "step": 5,
+          "math": "s = \\frac{2}{3}x",
+          "explanation": "Shadow is 2/3 of distance from pole"
+        },
+        {
+          "step": 6,
+          "math": "\\frac{ds}{dt} = \\frac{2}{3}\\frac{dx}{dt} = \\frac{2}{3}(5) = \\frac{10}{3} \\text{ ft/s}",
+          "explanation": "Differentiate and substitute"
+        }
+      ],
+      "keyInsight": "Similar triangles often provide the key relationship in shadow problems",
+      "timeEstimate": "10-12 min"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Related Rates Recognition",
+      "questions": [
+        {
+          "integral": "A conical tank is filling at 10 m³/min. How fast is the water level rising?",
+          "options": ["Related rates", "Optimization", "Integration", "Tangent line"],
+          "correctAnswer": 0,
+          "explanation": "'How fast' and 'rising' indicate related rates"
+        },
+        {
+          "integral": "Find the maximum volume of a box with given surface area",
+          "options": ["Related rates", "Optimization", "Curve sketching", "Area"],
+          "correctAnswer": 1,
+          "explanation": "'Maximum volume' indicates optimization"
+        },
+        {
+          "integral": "A circle's area is increasing at 5 cm²/s. Find dr/dt when r = 3",
+          "options": ["Related rates", "Implicit differentiation only", "Chain rule only", "Integration"],
+          "correctAnswer": 0,
+          "explanation": "Given rate of area, find rate of radius - related rates"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Related Rates Execution",
+      "problems": [
+        {
+          "problem": "The area of a circle is increasing at 10 cm²/s. Find dA/dt when r = 5 cm (actually find dr/dt).",
+          "answer": "\\frac{1}{\\pi} \\text{ cm/s}",
+          "hint": "A = πr², differentiate: dA/dt = 2πr(dr/dt)",
+          "difficulty": "Easy"
+        },
+        {
+          "problem": "A 13-ft ladder slides down a wall. If dx/dt = 2 ft/s, find dy/dt when x = 5 ft.",
+          "answer": "-\\frac{5}{6} \\text{ ft/s}",
+          "hint": "x² + y² = 169, when x=5, y=12",
+          "difficulty": "Medium"
+        },
+        {
+          "problem": "Water pours into a conical tank (height 10m, radius 4m) at 5 m³/min. Find dh/dt when h = 5m.",
+          "answer": "\\frac{5}{4\\pi} \\text{ m/min}",
+          "hint": "By similar triangles, r = (2/5)h. V = (1/3)πr²h = (4/75)πh³",
+          "difficulty": "Hard"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Exam-Style Related Rates Problems",
+      "problems": [
+        {
+          "problem": "A man walks along a dock pulling a boat with a rope. If his hands are 10 ft above water and he pulls at 2 ft/s, how fast is boat approaching when 20 ft from dock?",
+          "context": "Pythagorean related rates",
+          "primaryTechnique": "related_rates_setup",
+          "secondaryTechniques": ["related_rates_pythagorean"]
+        },
+        {
+          "problem": "Two cars start from same point, one going north at 60 mph, other east at 80 mph. How fast is distance between them changing after 2 hours?",
+          "context": "Distance problem with two moving objects",
+          "primaryTechnique": "related_rates_setup",
+          "secondaryTechniques": ["related_rates_pythagorean"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "1) Draw diagram, 2) Write equation, 3) Differentiate with respect to t, 4) Substitute, 5) Solve",
+    "whenToUse": [
+      "'How fast' questions",
+      "Rates of change problems",
+      "Changing geometric quantities"
+    ],
+    "formula": "\\text{Write relationship, then differentiate: } \\frac{d}{dt}[f(x)] = f'(x)\\frac{dx}{dt}",
+    "quickCheck": "Always differentiate before substituting values"
+  },
+  "patternConnections": [
+    "related_rates_geometry",
+    "related_rates_pythagorean",
+    "implicit_basic",
+    "chain_rule_basic"
+  ],
+  "masteryCriteria": {
+    "recognitionSpeed": "< 10 seconds to identify related rates problem",
+    "executionSpeed": "< 12 minutes for standard problems",
+    "accuracyTarget": "85% correct on drill sets",
+    "selfCheckQuestions": [
+      "Did I draw a diagram?",
+      "Did I differentiate before substituting values?",
+      "Does my answer have the right sign (increasing/decreasing)?"
+    ]
+  }
+}

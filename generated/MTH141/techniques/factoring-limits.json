@@ -1,0 +1,271 @@
+{
+  "id": "factoring_limits",
+  "displayName": "Factoring for Limits",
+  "recognition": {
+    "visualSignals": [
+      "Limit gives 0/0 form",
+      "Polynomials in numerator and denominator",
+      "Common factor can be cancelled",
+      "lim(x→a) P(x)/Q(x) where P(a) = Q(a) = 0"
+    ],
+    "verbalTriggers": [
+      "Evaluate the limit by factoring",
+      "Simplify and find the limit",
+      "This limit is indeterminate"
+    ],
+    "nonExamples": [
+      "Limit exists by direct substitution",
+      "Limits at infinity (use dominant term)",
+      "Limits with radicals (use rationalizing)"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Does direct substitution give 0/0?",
+        "ifYes": "Factor numerator and denominator, cancel common factors",
+        "ifNo": "Direct substitution should work"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Try direct substitution",
+        "pitfall": "If you get 0/0, you need to simplify",
+        "check": "If finite number, you're done. If 0/0, continue."
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Factor the numerator completely",
+        "pitfall": "Use appropriate factoring techniques",
+        "check": "All factors found"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Factor the denominator completely",
+        "pitfall": "Look for same factor as numerator",
+        "check": "Common factors identified"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Cancel common factors",
+        "pitfall": "Only cancel factors, not terms",
+        "check": "Simplified form"
+      },
+      {
+        "stepNumber": 5,
+        "instruction": "Evaluate the limit of simplified expression",
+        "pitfall": "Make sure simplified expression is defined at the limit point",
+        "check": "Direct substitution on simplified form"
+      }
+    ],
+    "timeEstimate": "4-6 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Can't factor",
+      "diagnosis": "Need to review factoring techniques",
+      "fix": "Look for: common factors, difference of squares/cubes, trinomials",
+      "example": "x² - 4 = (x-2)(x+2), x³ - 8 = (x-2)(x²+2x+4)"
+    },
+    {
+      "symptom": "Wrong answer after cancelling",
+      "diagnosis": "Cancelled terms instead of factors",
+      "fix": "Can only cancel factors (things being multiplied), not terms (things being added)",
+      "example": "(x²-4)/(x-2) = (x-2)(x+2)/(x-2) = x+2, not (x²-4)/(x-2) ≠ x²/1"
+    },
+    {
+      "symptom": "Still get 0/0 after factoring",
+      "diagnosis": "Didn't factor completely or multiple common factors",
+      "fix": "Check if factor appears with higher power",
+      "example": "(x-2)²/(x-2) = (x-2) after cancelling once"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "Evaluate lim(x→2) (x²-4)/(x-2)",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\frac{2^2-4}{2-2} = \\frac{0}{0}",
+          "explanation": "Direct substitution gives 0/0"
+        },
+        {
+          "step": 2,
+          "math": "\\frac{(x-2)(x+2)}{(x-2)}",
+          "explanation": "Factor numerator: difference of squares"
+        },
+        {
+          "step": 3,
+          "math": "x + 2, \\quad x \\neq 2",
+          "explanation": "Cancel common factor (x-2)"
+        },
+        {
+          "step": 4,
+          "math": "\\lim_{x \\to 2} (x+2) = 2 + 2 = \\boxed{4}",
+          "explanation": "Evaluate simplified limit"
+        }
+      ],
+      "keyInsight": "Difference of squares: a² - b² = (a-b)(a+b)",
+      "timeEstimate": "2-3 min"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Evaluate lim(x→3) (x²-5x+6)/(x²-9)",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\frac{9-15+6}{9-9} = \\frac{0}{0}",
+          "explanation": "0/0 form"
+        },
+        {
+          "step": 2,
+          "math": "\\text{Numerator: } x^2 - 5x + 6 = (x-2)(x-3)",
+          "explanation": "Factor trinomial"
+        },
+        {
+          "step": 3,
+          "math": "\\text{Denominator: } x^2 - 9 = (x-3)(x+3)",
+          "explanation": "Factor difference of squares"
+        },
+        {
+          "step": 4,
+          "math": "\\frac{(x-2)(x-3)}{(x-3)(x+3)} = \\frac{x-2}{x+3}, \\quad x \\neq 3",
+          "explanation": "Cancel (x-3)"
+        },
+        {
+          "step": 5,
+          "math": "\\frac{3-2}{3+3} = \\frac{1}{6}",
+          "explanation": "Evaluate at x = 3"
+        }
+      ],
+      "keyInsight": "Both numerator and denominator had (x-3) as a factor",
+      "timeEstimate": "4-5 min"
+    },
+    {
+      "difficulty": "Hard",
+      "problem": "Evaluate lim(x→1) (x³-1)/(x²-1)",
+      "solution": [
+        {
+          "step": 1,
+          "math": "\\frac{1-1}{1-1} = \\frac{0}{0}",
+          "explanation": "0/0 form"
+        },
+        {
+          "step": 2,
+          "math": "\\text{Numerator: } x^3 - 1 = (x-1)(x^2+x+1)",
+          "explanation": "Difference of cubes: a³-b³ = (a-b)(a²+ab+b²)"
+        },
+        {
+          "step": 3,
+          "math": "\\text{Denominator: } x^2 - 1 = (x-1)(x+1)",
+          "explanation": "Difference of squares"
+        },
+        {
+          "step": 4,
+          "math": "\\frac{(x-1)(x^2+x+1)}{(x-1)(x+1)} = \\frac{x^2+x+1}{x+1}, \\quad x \\neq 1",
+          "explanation": "Cancel (x-1)"
+        },
+        {
+          "step": 5,
+          "math": "\\frac{1+1+1}{1+1} = \\frac{3}{2}",
+          "explanation": "Evaluate at x = 1"
+        }
+      ],
+      "keyInsight": "Sum/difference of cubes: a³±b³ = (a±b)(a²∓ab+b²)",
+      "timeEstimate": "5-6 min"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Factoring Limits Recognition",
+      "questions": [
+        {
+          "integral": "\\lim_{x \\to 2} \\frac{x^2-4}{x-2}",
+          "options": ["Factor and cancel", "Direct substitution works", "Rationalize", "L'Hôpital"],
+          "correctAnswer": 0,
+          "explanation": "0/0 form, polynomials - factor and cancel"
+        },
+        {
+          "integral": "\\lim_{x \\to 3} \\frac{x^2-9}{x^2-5x+6}",
+          "options": ["Direct substitution", "Factor both", "Rationalize", "No limit"],
+          "correctAnswer": 1,
+          "explanation": "0/0 form - factor numerator and denominator"
+        },
+        {
+          "integral": "\\lim_{x \\to 4} \\frac{x+4}{x-4}",
+          "options": ["Factor", "Direct substitution", "Does not exist", "Equals 0"],
+          "correctAnswer": 2,
+          "explanation": "Not 0/0 - numerator is 8, denominator is 0, so limit DNE (infinite)"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Factoring Limits Execution",
+      "problems": [
+        {
+          "problem": "Evaluate \\lim_{x \\to -1} \\frac{x^2-1}{x+1}",
+          "answer": "-2",
+          "hint": "x²-1 = (x-1)(x+1), cancel (x+1)",
+          "difficulty": "Easy"
+        },
+        {
+          "problem": "Evaluate \\lim_{x \\to 2} \\frac{x^2-3x+2}{x^2-4}",
+          "answer": "\\frac{1}{4}",
+          "hint": "Num: (x-1)(x-2), Den: (x-2)(x+2)",
+          "difficulty": "Medium"
+        },
+        {
+          "problem": "Evaluate \\lim_{h \\to 0} \\frac{(2+h)^2-4}{h}",
+          "answer": "4",
+          "hint": "Expand (2+h)² = 4 + 4h + h², simplify numerator",
+          "difficulty": "Hard"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Exam-Style Factoring Limits",
+      "problems": [
+        {
+          "problem": "Evaluate lim(x→2) (x³-8)/(x²-4)",
+          "context": "Difference of cubes and squares",
+          "primaryTechnique": "factoring_limits",
+          "secondaryTechniques": []
+        },
+        {
+          "problem": "Find f'(2) using the limit definition for f(x) = x²",
+          "context": "Factoring in derivative definition",
+          "primaryTechnique": "factoring_limits",
+          "secondaryTechniques": ["derivative_limit_def"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "0/0 form → factor numerator and denominator → cancel common factors → substitute",
+    "whenToUse": [
+      "0/0 indeterminate form",
+      "Rational functions (polynomials)",
+      "Common factor visible or found by factoring"
+    ],
+    "formula": "\\lim_{x \\to a} \\frac{P(x)}{Q(x)} = \\lim_{x \\to a} \\frac{(x-a)P_1(x)}{(x-a)Q_1(x)} = \\lim_{x \\to a} \\frac{P_1(x)}{Q_1(x)} \\text{ (when } P(a)=Q(a)=0\\text{)}",
+    "quickCheck": "Always try direct substitution first - if 0/0, then factor"
+  },
+  "patternConnections": [
+    "limit_direct_substitution",
+    "limit_rationalizing",
+    "lhopital_0_0",
+    "derivative_limit_def"
+  ],
+  "masteryCriteria": {
+    "recognitionSpeed": "< 5 seconds to identify factoring approach",
+    "executionSpeed": "< 4 minutes for standard problems",
+    "accuracyTarget": "90% correct on drill sets",
+    "selfCheckQuestions": [
+      "Did I verify 0/0 form first?",
+      "Did I factor completely?",
+      "Did I cancel factors (not terms)?"
+    ]
+  }
+}
