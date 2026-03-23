@@ -6,29 +6,45 @@
 
 ---
 
+## ⚠️ Important: Queue Corrected (2026-03-23)
+
+**Removed hallucinated courses:** MTH141, CSC108, MAT186, MAT187, PHY180, CHM135, ECO100, STA130, MAT223
+
+These courses were in the original queue but have **no input materials** in the Google Drive. The harness was configured to generate courses from thin air using Claude's knowledge, which produces hallucinated content that doesn't match actual exam patterns.
+
+**Current approach:** Only process courses with REAL exam PDFs from the Drive.
+
+---
+
 ## Automated Processing
 
 **Cron Job:** `arkived-course-generator` (ID: 2ac8d0c79cb1)  
-**Schedule:** Every 6 hours  
+**Schedule:** Every 6 hours (360 minutes)  
 **Next Run:** March 24, 2026 00:53 UTC  
 **Status:** ✅ Active
 
 ---
 
-## Course Queue
+## Course Queue (REAL Courses Only)
 
-| # | Code | Name | Status | Techniques | Patterns | SQL | Last Updated |
-|---|------|------|--------|------------|----------|-----|--------------|
-| 1 | MTH141 | Calculus 1 | ⏳ Pending | - | - | - | - |
-| 2 | MTH240 | Calculus 2 | ⏳ Pending | - | - | - | - |
-| 3 | CSC108 | Programming | ⏳ Pending | - | - | - | - |
-| 4 | MAT186 | Calc 1 Eng | ⏳ Pending | - | - | - | - |
-| 5 | MAT187 | Calc 2 Eng | ⏳ Pending | - | - | - | - |
-| 6 | PHY180 | Mechanics | ⏳ Pending | - | - | - | - |
-| 7 | CHM135 | Chemistry | ⏳ Pending | - | - | - | - |
-| 8 | ECO100 | Economics | ⏳ Pending | - | - | - | - |
-| 9 | STA130 | Statistics | ⏳ Pending | - | - | - | - |
-| 10 | MAT223 | Linear Algebra | ⏳ Pending | - | - | - | - |
+| # | Code | Name | University | Status | Input PDFs | Last Updated |
+|---|------|------|------------|--------|------------|--------------|
+| 1 | ECN801 | Principles of Engineering Economics | Toronto Metropolitan University | ⏳ Pending | 14 | 2026-03-23 |
+| 2 | MTH240 | Calculus 2 (Verification) | Concordia University | ⏳ Pending | 61 | 2026-03-23 |
+
+**Total processable courses:** 2
+
+---
+
+## Future Courses (Need Download)
+
+| Code | Name | Status | Issue |
+|------|------|--------|-------|
+| AER222 | Aerospace Engineering | 🔴 Needs Download | Folder exists, empty |
+| CHE200 | Chemical Engineering | 🔴 Needs Download | Folder exists, empty |
+| CVL207 | Civil Engineering | 🔴 Needs Download | Folder empty |
+| ELE202 | Electrical Engineering | 🔴 Needs Download | Partial download |
+| MEC222 | Mechanical Engineering | 🔴 Needs Download | Partial download |
 
 ---
 
@@ -43,8 +59,7 @@ Each course goes through 6 stages:
 5. **Assemble** (15 min) - Create manifest and SQL
 6. **Validate** (15 min) - Run validation, commit to repo
 
-**Total per course:** ~4.5 hours  
-**Estimated completion:** 45-50 hours for all 10 courses
+**Total per course:** ~4.5 hours
 
 ---
 
@@ -55,17 +70,26 @@ Each course goes through 6 stages:
 cd /home/ubuntu/arkived/.agent/harness && ./status.sh
 
 # Trigger manual generation
-cd /home/ubuntu/arkived/.agent/harness && ./generate-course-now.sh MTH141
+cd /home/ubuntu/arkived/.agent/harness && ./generate-course-now.sh ECN801
 
 # View live logs
 tail -f /home/ubuntu/arkived/.agent/logs/cron-*.log
-tail -f /home/ubuntu/arkived/.agent/logs/MTH141*.log
+tail -f /home/ubuntu/arkived/.agent/logs/ECN801*.log
 
 # List cron jobs
 list_cronjobs
+```
 
-# See cron job details
-# Job ID: 2ac8d0c79cb1
+---
+
+## Input Materials Location
+
+```
+/home/ubuntu/courses/raw/
+├── ECN801/              # 14 PDFs - Engineering Economics exams
+├── MTH240/              # 61 PDFs - Calc 2 exams + notes
+└── 2nd TERM/            # Original download (reference only)
+    └── _General_/       # Source of ECN801 and MTH240
 ```
 
 ---
