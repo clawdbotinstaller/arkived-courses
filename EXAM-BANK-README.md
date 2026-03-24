@@ -6,6 +6,14 @@
 
 The exam bank contains extracted and enriched questions from TMU exam PDFs. Each question has been parsed, analyzed, and annotated with metadata for the Arkived platform.
 
+## Summary
+
+| Course | Status | Questions | Topics |
+|--------|--------|-----------|--------|
+| PCS125 | ✅ Complete | 480 | Physics (Waves, E&M, Modern) |
+| ECN801 | ✅ Complete | 401 | Engineering Economics |
+| **Total** | | **881** | |
+
 ---
 
 ## PCS125 - Physics: Waves, Electricity & Modern Physics
@@ -94,19 +102,31 @@ CREATE TABLE exam_bank (
 
 ## ECN801 - Engineering Economics
 
-**Status:** ⏳ Pending Exam Bank Processing  
+**Status:** ✅ Complete  
 **Source:** 14 PDF exam files (2007-2016)  
-**Location:** `raw/ECN801/`
+**Location:** `generated/ECN801/ECN801-exam-bank.sql`
 
-The course content has been generated (techniques, patterns, topics) but the individual exam questions have not yet been extracted and enriched.
+### Statistics
 
-### Next Steps for ECN801
+| Metric | Count |
+|--------|-------|
+| Total Questions | **401** |
+| Topics Covered | 12 major areas |
 
-1. Run extraction on 14 exam PDFs
-2. Parse individual questions
-3. Enrich with metadata (difficulty, techniques, common mistakes)
-4. Generate SQL seed
-5. Link questions to generated techniques
+### Topics Covered
+
+1. **Time Value of Money** (50+ questions) - F/P, P/F, P/A, A/P factors
+2. **Nominal & Effective Interest Rates** (50+ questions) - APR, compounding
+3. **Bond Valuation** (35+ questions) - Pricing, yields, coupons
+4. **Present Worth Analysis** (35+ questions) - NPW calculations
+5. **Annual Worth Analysis** (30+ questions) - EAC, capital recovery
+6. **Rate of Return Analysis** (35+ questions) - IRR, incremental
+7. **Benefit-Cost Ratio** (30+ questions) - B/C analysis
+8. **Payback Period** (30+ questions) - Simple and discounted
+9. **Replacement Analysis** (35+ questions) - Economic service life
+10. **Depreciation Methods** (30+ questions) - SL, DDB, SYD
+11. **Break-Even Analysis** (25+ questions) - Cost indifference
+12. **Gradient Series** (30+ questions) - Arithmetic gradients
 
 ---
 
