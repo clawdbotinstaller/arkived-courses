@@ -1,125 +1,95 @@
 # Arkived Courses - Processing Status
 
-**Started:** March 23, 2026  
+**Last Updated:** March 24, 2026  
 **Source:** https://drive.google.com/drive/folders/1Px6S_JTshiD24jzTqCl_fFt8_65g9wiT  
 **Repository:** https://github.com/clawdbotinstaller/arkived-courses
 
 ---
 
-## ⚠️ Important: Queue Corrected (2026-03-23)
+## 📊 Course Inventory
 
-**Removed hallucinated courses:** MTH141, CSC108, MAT186, MAT187, PHY180, CHM135, ECO100, STA130, MAT223
+### Ready to Process (PDFs committed to repo)
 
-These courses were in the original queue but have **no input materials** in the Google Drive. The harness was configured to generate courses from thin air using Claude's knowledge, which produces hallucinated content that doesn't match actual exam patterns.
+| Priority | Code | Name | University | PDFs | Status | Notes |
+|----------|------|------|------------|------|--------|-------|
+| 1 | **AER222** | Aerospace Engineering | TMU | 32 | ⏳ Pending | Includes CPS125 materials |
+| 2 | **MEC222** | Mechanical Engineering | TMU | 34 | ⏳ Pending | Includes MTL200 |
+| 3 | **PCS125_NEW** | Physics (Additional) | TMU | 33 | ⏳ Pending | More PCS125 exams |
+| 4 | **ECE** | Electrical & Computer Eng | TMU | 28 | ⏳ Pending | ELE202 + notes |
+| 5 | **ECN801** | Engineering Economics | TMU | 14 | ⏳ Pending | |
+| 6 | **CHE200** | Chemical Engineering | TMU | 3 | ⏳ Pending | ⚠️ Only 3 PDFs |
 
-**Current approach:** Only process courses with REAL exam PDFs from the Drive.
+### Already Completed
 
----
-
-## Automated Processing
-
-**Cron Job:** `arkived-course-generator` (ID: 2ac8d0c79cb1)  
-**Schedule:** Every 6 hours (360 minutes)  
-**Next Run:** March 24, 2026 00:53 UTC  
-**Status:** ✅ Active
-
----
-
-## Course Queue (REAL Courses Only)
-
-| # | Code | Name | University | Status | Input PDFs | Last Updated |
-|---|------|------|------------|--------|------------|--------------|
-| 1 | ECN801 | Principles of Engineering Economics | Toronto Metropolitan University | ⏳ Pending | 14 | 2026-03-23 |
-| 2 | MTH240 | Calculus 2 (Verification) | Concordia University | ⏳ Pending | 61 | 2026-03-23 |
-
-**Total processable courses:** 2
-
----
-
-## Future Courses (Need Download)
-
-| Code | Name | Status | Issue |
+| Code | Name | Status | Notes |
 |------|------|--------|-------|
-| AER222 | Aerospace Engineering | 🔴 Needs Download | Folder exists, empty |
-| CHE200 | Chemical Engineering | 🔴 Needs Download | Folder exists, empty |
-| CVL207 | Civil Engineering | 🔴 Needs Download | Folder empty |
-| ELE202 | Electrical Engineering | 🔴 Needs Download | Partial download |
-| MEC222 | Mechanical Engineering | 🔴 Needs Download | Partial download |
+| **PCS125** | Physics | ✅ Complete | 412 questions enriched, in D1 |
+| **MTH240** | Calculus 2 | ✅ Complete | Archetype course, reference implementation |
+
+### Skipped (No PDFs)
+
+| Code | Name | Reason |
+|------|------|--------|
+| **CVL207** | Civil Engineering | Only video files, no PDFs |
 
 ---
 
-## Processing Pipeline
+## 🎬 Video Files (Excluded from Git)
 
-Each course goes through 6 stages:
+Video files were excluded due to GitHub's 100MB file size limit:
 
-1. **Extract & Parse** (30 min) - Parse syllabus, extract exam questions
-2. **Analyze & Identify** (45 min) - Find patterns and techniques
-3. **Generate Content** (2 hours) - Create techniques, patterns, topics
-4. **Enrich Questions** (30 min) - Add metadata to exam questions
-5. **Assemble** (15 min) - Create manifest and SQL
-6. **Validate** (15 min) - Run validation, commit to repo
+- CHE200: 1 video (148 MB)
+- ECE: 2 videos (720 MB) 
+- 2nd TERM reference: 4 videos (~1.3 GB)
+- CVL207: 1 video (390 MB) - no PDFs
 
-**Total per course:** ~4.5 hours
+**Total videos:** 8 files (~2.5 GB)
 
 ---
 
-## Commands
+## 📁 Repository Structure
+
+```
+~/courses/raw/
+├── AER222/          # 32 PDFs - Aerospace
+├── CHE200/          # 3 PDFs - Chemical
+├── ECE/             # 28 PDFs - Electrical/Computer
+├── ECN801/          # 14 PDFs - Engineering Economics
+├── MEC222/          # 34 PDFs - Mechanical
+├── MTH240/          # 62 PDFs - Calculus 2 (done)
+├── PCS125/          # 29 PDFs - Physics (done)
+├── PCS125_NEW/      # 33 PDFs - More Physics
+├── 2nd TERM/        # Reference copy (213 PDFs + videos)
+└── complete/        # Original zip + extraction scripts
+```
+
+---
+
+## 🚀 Processing Pipeline
+
+The harness at `~/arkived/.agent/harness/` will process courses in priority order:
 
 ```bash
-# Check current status
-cd /home/ubuntu/arkived/.agent/harness && ./status.sh
+# Check status
+./status.sh
 
-# Trigger manual generation
-cd /home/ubuntu/arkived/.agent/harness && ./generate-course-now.sh ECN801
+# Process next course in queue
+./generate-course-now.sh AER222
 
-# View live logs
-tail -f /home/ubuntu/arkived/.agent/logs/cron-*.log
-tail -f /home/ubuntu/arkived/.agent/logs/ECN801*.log
-
-# List cron jobs
-list_cronjobs
+# Or wait for cron (runs every 6 hours)
 ```
+
+**Time estimate:** ~4.5 hours per course
 
 ---
 
-## Input Materials Location
+## 📋 Next Steps
 
-```
-/home/ubuntu/courses/raw/
-├── ECN801/              # 14 PDFs - Engineering Economics exams
-├── MTH240/              # 61 PDFs - Calc 2 exams + notes
-└── 2nd TERM/            # Original download (reference only)
-    └── _General_/       # Source of ECN801 and MTH240
-```
+1. **Start processing:** `./generate-course-now.sh AER222`
+2. **Monitor progress:** Check `~/arkived/.agent/logs/`
+3. **Validate output:** Each course generates techniques, patterns, topics, SQL
+4. **Deploy to D1:** Import generated SQL seeds
 
 ---
 
-## Validation Gates
-
-Each course is checked for:
-- [ ] 10-15 techniques with 3 worked examples each
-- [ ] 8-10 patterns with 2+ practice questions
-- [ ] 8-9 topic briefings
-- [ ] Valid LaTeX formatting
-- [ ] Correct cross-references
-- [ ] Valid SQL syntax
-- [ ] TypeScript manifest compiles
-
----
-
-## Output Locations
-
-```
-/home/ubuntu/courses/generated/{COURSE}/
-├── {COURSE}-manifest.ts
-├── {COURSE}-content.sql
-├── techniques/*.json (10-15 files)
-├── patterns/*.json (8-10 files)
-├── topics/*.json (8-9 files)
-└── validation-report.md
-```
-
----
-
-*Auto-generated by Arkived Course Generator*
-*Last updated: March 23, 2026*
+*Auto-generated by course organization pipeline*
