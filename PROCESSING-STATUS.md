@@ -12,12 +12,13 @@
 
 | Priority | Code | Name | University | PDFs | Status | Notes |
 |----------|------|------|------------|------|--------|-------|
-| 1 | **AER222** | Aerospace Engineering | TMU | 32 | ⏳ Pending | Includes CPS125 materials |
-| 2 | **MEC222** | Mechanical Engineering | TMU | 34 | ⏳ Pending | Includes MTL200 |
-| 3 | **PCS125_NEW** | Physics (Additional) | TMU | 33 | ⏳ Pending | More PCS125 exams |
-| 4 | **ECE** | Electrical & Computer Eng | TMU | 28 | ⏳ Pending | ELE202 + notes |
-| 5 | **ECN801** | Engineering Economics | TMU | 14 | ⏳ Pending | |
-| 6 | **CHE200** | Chemical Engineering | TMU | 3 | ⏳ Pending | ⚠️ Only 3 PDFs |
+| 1 | **PCS125** | Physics: Waves, Electricity & Modern Physics | TMU | 29 | ⏳ Pending | Priority - already have enrichment pipeline |
+| 2 | **ECN801** | Engineering Economics | TMU | 14 | ⏳ Pending | Priority - ready to process |
+| 3 | **AER222** | Aerospace Engineering | TMU | 32 | ⏳ Pending | Includes CPS125 materials |
+| 4 | **MEC222** | Mechanical Engineering | TMU | 34 | ⏳ Pending | Includes MTL200 |
+| 5 | **PCS125_NEW** | Physics (Additional) | TMU | 33 | ⏳ Pending | More PCS125 exams |
+| 6 | **ECE** | Electrical & Computer Eng | TMU | 28 | ⏳ Pending | ELE202 + notes |
+| 7 | **CHE200** | Chemical Engineering | TMU | 3 | ⏳ Pending | ⚠️ Only 3 PDFs |
 
 ### Already Completed
 
