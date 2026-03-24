@@ -1,0 +1,82 @@
+{
+  "id": "point_charge_field",
+  "name": "Electric Field from Point Charges",
+  "description": "Calculate electric field magnitude and direction due to one or more point charges using superposition principle",
+  "canonical_form_latex": "\\vec{E} = k\\frac{Q}{r^2}\\hat{r} \\text{ (single charge)}, \\quad \\vec{E}_{net} = \\sum_i \\vec{E}_i \\text{ (superposition)}",
+  "identification_signal": "Questions asking for electric field at a point due to point charges, or net field from multiple charges",
+  "frequency": "Very High",
+  "estimated_time": "6-10 minutes",
+  "strategy": {
+    "step_1": "Calculate magnitude of each contribution: E = k|Q|/r²",
+    "step_2": "Determine direction: away from positive, toward negative",
+    "step_3": "Break into components if needed (2D/3D problems)",
+    "step_4": "Add vectorially to find net field"
+  },
+  "exam_references": [
+    "2007F_PCS125_M_S_Q3",
+    "2010W_PCS125_M_TS_Q5",
+    "2014W_PCS125_M_S_Q4",
+    "2018W_PCS125_Final_Exam_Q2"
+  ],
+  "related_techniques": ["coulombs_law", "electric_field_superposition"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Recognize electric field calculation problems",
+      "flashcards": [
+        {
+          "front": {"text": "Find the electric field 0.5 m from a +3 μC charge"},
+          "back": {"title": "Point Charge Field", "explanation": "Use E = kQ/r². Direction: radially outward from positive charge."}
+        }
+      ],
+      "spot_it": {
+        "instructions": "Identify problems requiring electric field calculation vs electric force",
+        "items": [
+          {"prompt_latex": "Find E-field at point P due to charge Q", "is_match": true, "key_cue": "E-field due to", "explanation": "Use E = kQ/r²"},
+          {"prompt_latex": "Find force on charge q in E-field", "is_match": false, "key_cue": "force on test charge", "explanation": "Use F = qE, not this pattern"}
+        ]
+      }
+    },
+    "phase_2_strategy": {
+      "purpose": "Systematic approach to field calculations",
+      "steps": [
+        {
+          "title": "Source vs Test Charge",
+          "instruction": "Identify which charges CREATE the field (source Q), not any test charge",
+          "why": "E-field exists independent of test charges",
+          "common_errors": ["Using test charge q instead of source charge Q"]
+        },
+        {
+          "title": "Direction Convention",
+          "instruction": "Positive source: field points AWAY. Negative source: field points TOWARD.",
+          "why": "E-field direction is defined as force on positive test charge"
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice field calculations",
+      "problem_cards": [
+        {
+          "id": "pcf_1",
+          "difficulty": "Medium",
+          "task": "Net field from two charges",
+          "prompt_latex": "Q_1 = +2\\mu\\text{C at } x=0, Q_2 = -4\\mu\\text{C at } x=0.3\\text{m}. \\text{ Find } E \\text{ at } x=0.6\\text{m}",
+          "solution": {
+            "steps": [
+              "E₁ from Q₁: k(2μC)/(0.6)² in +x direction (away from +)",
+              "E₂ from Q₂: k(4μC)/(0.3)² in +x direction (toward -)",
+              "Calculate: E₁ = 50 kN/C, E₂ = 400 kN/C",
+              "E_net = 450 kN/C in +x direction"
+            ],
+            "final_answer_latex": "\\vec{E} = 4.5 \\times 10^5 \\text{ N/C} \\hat{i}",
+            "verification": "Both fields point right; negative charge attracts positive test charge"
+          }
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "E-Field Superposition Master", "pattern_id": "point_charge_field"},
+      "what_mastery_means": ["Can handle 2D and 3D arrangements", "Understands vector addition", "Never confuses source and test charge"]
+    }
+  },
+  "source_meta": {"from_db_patterns": false, "from_db_batch2": false, "from_frontend_legacy": false, "duah_mapped": false, "conflicts": []}
+}

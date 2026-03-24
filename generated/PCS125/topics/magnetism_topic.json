@@ -1,0 +1,55 @@
+{
+  "topic_id": "magnetism_topic",
+  "meta": {
+    "display_name": "Magnetic Fields and Forces",
+    "course_context": "PCS125 - Introduction to magnetism",
+    "professor_methodology": "Emphasis on right-hand rule and the vector nature of magnetic forces",
+    "core_formula": "F = qv × B, F = IL × B, r = mv/qB",
+    "description": "Lorentz force, motion of charged particles in magnetic fields, and magnetic field sources"
+  },
+  "patterns": [
+    {
+      "id": "charged_particle_motion",
+      "name": "Circular Motion in B-Fields",
+      "recognition_signal": "Charged particle moving perpendicular to uniform magnetic field",
+      "canonical_forms": ["r = mv/qB", "T = 2πm/qB", "F = qvB (when v⊥B)"],
+      "logic": "Magnetic force provides centripetal force for circular motion",
+      "efficiency_trick": {
+        "name": "Period Independence",
+        "trigger": "Comparing different particles or velocities",
+        "steps": ["Remember T = 2πm/qB is independent of velocity"]
+      },
+      "pitfalls": [
+        {"name": "Direction errors", "description": "Use right-hand rule for positive; reverse for negative charges"},
+        {"name": "Velocity dependence confusion", "description": "Radius depends on v, but period does not"}
+      ],
+      "worked_example": {
+        "title": "Proton in Magnetic Field",
+        "problem_latex": "Proton with v = 10⁶ m/s enters B = 0.1 T perpendicular to field. Find radius.",
+        "solution_steps": [
+          {"step": 1, "action": "Equate forces", "reasoning": "qvB = mv²/r", "latex": "r = mv/qB"},
+          {"step": 2, "action": "Calculate", "reasoning": "Substitute values", "latex": "r = (1.67×10⁻²⁷)(10⁶)/(1.6×10⁻¹⁹×0.1) = 0.104 \\text{ m}"}
+        ]
+      }
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "Is velocity perpendicular to B?", "yes": "Circular motion", "no": "Helical motion"},
+      {"step": 2, "question": "Positive or negative charge?", "yes": "RH rule for direction", "no": "Reverse RH rule result"}
+    ],
+    "professor_tips": [
+      "Always use the right-hand rule to check direction before calculating",
+      "Magnetic force does NO work (always perpendicular to velocity)",
+      "Period is independent of velocity - this is crucial for cyclotrons",
+      "For velocity selectors, E and B fields are perpendicular and forces balance"
+    ]
+  },
+  "confidence_checklist": [
+    "I can apply the Lorentz force law",
+    "I can calculate radius of circular motion in uniform B-field",
+    "I understand that magnetic force does no work",
+    "I can apply the right-hand rule correctly",
+    "I understand velocity selectors and mass spectrometers"
+  ]
+}

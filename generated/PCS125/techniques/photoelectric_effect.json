@@ -1,0 +1,203 @@
+{
+  "id": "photoelectric_effect",
+  "displayName": "Photoelectric Effect",
+  "recognition": {
+    "visualSignals": [
+      "Light hitting metal surface",
+      "Electron emission from materials",
+      "Work function and threshold frequency",
+      "Stopping potential graphs"
+    ],
+    "verbalTriggers": [
+      "Photoelectric effect",
+      "Work function",
+      "Threshold frequency",
+      "Stopping potential",
+      "Maximum kinetic energy of photoelectrons",
+      "Photon energy"
+    ],
+    "nonExamples": [
+      "Compton scattering (different energy regime)",
+      "Atomic energy level transitions",
+      "Classical wave theory of light",
+      "Blackbody radiation"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Is photon energy greater than work function?",
+        "ifYes": "Electrons are emitted with K_max = hf - φ",
+        "ifNo": "No photoemission occurs regardless of intensity"
+      },
+      {
+        "question": "Need to find stopping potential?",
+        "ifYes": "Use eV₀ = K_max = hf - φ",
+        "ifNo": "May just need kinetic energy or velocity"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Calculate photon energy: E = hf = hc/λ",
+        "pitfall": "Units: h = 6.626×10⁻³⁴ J·s = 4.136×10⁻¹⁵ eV·s",
+        "check": "E in Joules or eV; 1 eV = 1.6×10⁻¹⁹ J"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Identify work function φ (material property)",
+        "pitfall": "φ is different for each material",
+        "check": "Common values: Na ~2.3 eV, Cu ~4.7 eV"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Apply Einstein equation: K_max = hf - φ (if hf > φ)",
+        "pitfall": "If hf < φ, no electrons emitted",
+        "check": "K_max is maximum kinetic energy of emitted electrons"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "For stopping potential: eV₀ = K_max, so V₀ = (hf - φ)/e",
+        "pitfall": "V₀ is in volts; if K_max in eV, V₀ = K_max (numerically)",
+        "check": "Stopping potential is the voltage needed to stop most energetic electrons"
+      }
+    ],
+    "timeEstimate": "5-8 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Thinking intensity affects electron energy",
+      "diagnosis": "Classical intuition applied to quantum phenomenon",
+      "fix": "Intensity affects number of photons (number of electrons), not energy per electron. Each photon-electron interaction is independent.",
+      "example": "Doubling intensity doubles number of photoelectrons, but K_max stays the same for same frequency"
+    },
+    {
+      "symptom": "Unit confusion between eV and Joules",
+      "diagnosis": "Mixed units in calculation",
+      "fix": "Be consistent: use h = 4.136×10⁻¹⁵ eV·s for eV calculations, or h = 6.626×10⁻³⁴ J·s for Joule calculations.",
+      "example": "Work function in eV → use h in eV·s → get K_max in eV"
+    },
+    {
+      "symptom": "Wrong threshold frequency calculation",
+      "diagnosis": "Confused which frequency is threshold",
+      "fix": "f₀ = φ/h is the minimum frequency for photoemission. Below f₀, no electrons emitted regardless of intensity.",
+      "example": "If φ = 2.0 eV, f₀ = 2.0/(4.136×10⁻¹⁵) = 4.84×10¹⁴ Hz"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "Light of wavelength 300 nm strikes a metal with work function 2.5 eV. Find the maximum kinetic energy of emitted electrons.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "λ = 300 nm = 3.0×10⁻⁷ m, φ = 2.5 eV",
+          "explanation": "Given values"
+        },
+        {
+          "step": 2,
+          "math": "E_photon = hc/λ = (4.136×10⁻¹⁵ eV·s)(3×10⁸ m/s)/(3.0×10⁻⁷ m)",
+          "explanation": "Using convenient constants for eV calculation"
+        },
+        {
+          "step": 3,
+          "math": "E_photon = 4.14 eV",
+          "explanation": "Photon energy in eV"
+        },
+        {
+          "step": 4,
+          "math": "K_max = hf - φ = 4.14 - 2.5 = 1.64 eV",
+          "explanation": "Apply Einstein photoelectric equation"
+        }
+      ],
+      "keyInsight": "Photon energy must exceed work function for emission to occur",
+      "timeEstimate": "4 minutes"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "The stopping potential for photoelectrons from a metal is 2.0 V when illuminated with light of wavelength 250 nm. Find the work function of the metal.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "eV₀ = K_max = 2.0 eV, λ = 250 nm",
+          "explanation": "Stopping potential directly gives K_max in eV"
+        },
+        {
+          "step": 2,
+          "math": "E_photon = hc/λ = (4.136×10⁻¹⁵)(3×10⁸)/(2.5×10⁻⁷) = 4.96 eV",
+          "explanation": "Calculate photon energy"
+        },
+        {
+          "step": 3,
+          "math": "K_max = hf - φ → φ = hf - K_max",
+          "explanation": "Rearrange Einstein equation"
+        },
+        {
+          "step": 4,
+          "math": "φ = 4.96 - 2.0 = 2.96 eV",
+          "explanation": "Work function of the metal"
+        }
+      ],
+      "keyInsight": "Stopping potential measures maximum kinetic energy directly",
+      "timeEstimate": "5 minutes"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Photoelectric Recognition",
+      "questions": [
+        {
+          "integral": "In the photoelectric effect, increasing light intensity while keeping frequency constant will:",
+          "options": ["Increase maximum electron kinetic energy", "Increase number of electrons emitted", "Decrease work function", "Both A and B"],
+          "correctAnswer": 1,
+          "explanation": "Intensity affects number of photons (electrons), not energy per photon/electron"
+        },
+        {
+          "integral": "The threshold frequency is the frequency at which:",
+          "options": ["Maximum electrons are emitted", "Electron energy is maximum", "Photoemission just begins", "Intensity is maximum"],
+          "correctAnswer": 2,
+          "explanation": "Threshold frequency: minimum frequency for any photoemission"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Photoelectric Calculations",
+      "problems": [
+        {
+          "problem": "Find the threshold wavelength for a metal with work function 3.0 eV.",
+          "answer": "λ₀ = hc/φ = (4.136×10⁻¹⁵)(3×10⁸)/3.0 = 414 nm",
+          "hint": "Use λ₀ = hc/φ; longer wavelengths won't cause photoemission",
+          "difficulty": "Easy"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Quantum Physics Applications",
+      "problems": [
+        {
+          "problem": "A graph of stopping potential vs frequency shows threshold at 4.0×10¹⁴ Hz and slope of 4.14×10⁻¹⁵ V·s. Verify this matches Planck's constant.",
+          "context": "Graph analysis in photoelectric effect",
+          "primaryTechnique": "photoelectric_effect",
+          "secondaryTechniques": ["graph_analysis"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "K_max = hf - φ = eV₀; f₀ = φ/h; λ₀ = hc/φ",
+    "whenToUse": ["Photoemission problems", "Threshold calculations", "Stopping potential analysis"],
+    "formula": "$K_{max} = hf - \\varphi = \\frac{hc}{\\lambda} - \\varphi$, $eV_0 = K_{max}$",
+    "quickCheck": "hf must exceed φ for emission; intensity affects number of electrons, not their energy"
+  },
+  "patternConnections": ["compton_scattering", "bohr_model"],
+  "masteryCriteria": {
+    "recognitionSpeed": "Identify photoelectric problems immediately",
+    "executionSpeed": "Calculate K_max or φ in under 3 minutes",
+    "accuracyTarget": "90% accuracy including unit conversions",
+    "selfCheckQuestions": [
+      "Do I understand the difference between classical and quantum predictions?",
+      "Can I work in both eV and Joules?",
+      "Do I understand what stopping potential measures?"
+    ]
+  }
+}

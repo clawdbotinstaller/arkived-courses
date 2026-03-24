@@ -1,0 +1,56 @@
+{
+  "topic_id": "geometric_optics_topic",
+  "meta": {
+    "display_name": "Geometric Optics",
+    "course_context": "PCS125 - Light as rays",
+    "professor_methodology": "Emphasis on sign conventions and ray tracing",
+    "core_formula": "1/f = 1/d_o + 1/d_i, m = -d_i/d_o",
+    "description": "Reflection, refraction, mirrors, and thin lenses using ray approximation"
+  },
+  "patterns": [
+    {
+      "id": "parallel_plate_capacitor",
+      "name": "Thin Lens Equation Applications",
+      "recognition_signal": "Image formation by lenses or mirrors with object distance given",
+      "canonical_forms": ["1/f = 1/d_o + 1/d_i", "m = -d_i/d_o = h_i/h_o"],
+      "logic": "Lens equation relates object distance, image distance, and focal length",
+      "efficiency_trick": {
+        "name": "Image Type Quick Check",
+        "trigger": "Determining real vs virtual, upright vs inverted",
+        "steps": ["d_i > 0: real; d_i < 0: virtual", "m > 0: upright; m < 0: inverted"]
+      },
+      "pitfalls": [
+        {"name": "Sign convention errors", "description": "Real is positive for d_i, virtual is negative"},
+        {"name": "Converging vs diverging", "description": "Converging: f > 0; Diverging: f < 0"}
+      ],
+      "worked_example": {
+        "title": "Converging Lens Image",
+        "problem_latex": "Object at 30 cm from converging lens with f = 10 cm. Find image.",
+        "solution_steps": [
+          {"step": 1, "action": "Apply lens equation", "reasoning": "1/f = 1/d_o + 1/d_i", "latex": "1/10 = 1/30 + 1/d_i → 1/d_i = 1/10 - 1/30 = 2/30"},
+          {"step": 2, "action": "Find image distance", "reasoning": "Solve for d_i", "latex": "d_i = 15 \\text{ cm (real, positive)}"},
+          {"step": 3, "action": "Find magnification", "reasoning": "m = -d_i/d_o", "latex": "m = -15/30 = -0.5 \\text{ (inverted, reduced)}"}
+        ]
+      }
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "Lens or mirror?", "yes": "Use lens equation (same form)", "no": "Mirror: same equation, check sign conventions"},
+      {"step": 2, "question": "Converging or diverging?", "yes": "Converging: f > 0", "no": "Diverging: f < 0, always virtual image"}
+    ],
+    "professor_tips": [
+      "Always draw a ray diagram even if not required - it helps check your answer",
+      "Memorize the sign conventions: real image = positive d_i",
+      "Diverging lenses ALWAYS produce virtual, upright, reduced images",
+      "Magnification sign tells you if image is upright (positive) or inverted (negative)"
+    ]
+  },
+  "confidence_checklist": [
+    "I can apply the thin lens equation",
+    "I understand sign conventions for lenses and mirrors",
+    "I can calculate magnification",
+    "I can determine if an image is real or virtual",
+    "I can trace principal rays for lens diagrams"
+  ]
+}

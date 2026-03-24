@@ -1,0 +1,55 @@
+{
+  "topic_id": "electric_fields_topic",
+  "meta": {
+    "display_name": "Electric Fields and Forces",
+    "course_context": "PCS125 - Electrostatics foundation",
+    "professor_methodology": "Emphasis on superposition principle and vector nature of electric fields",
+    "core_formula": "F = kq₁q₂/r², E = kQ/r²",
+    "description": "Coulomb's law, electric field calculations, and superposition for point charges and continuous distributions"
+  },
+  "patterns": [
+    {
+      "id": "point_charge_field",
+      "name": "Electric Field from Point Charges",
+      "recognition_signal": "E-field at a point due to one or more point charges",
+      "canonical_forms": ["E = kQ/r²", "F = qE", "E_net = ΣE_i (vector sum)"],
+      "logic": "Each point charge creates radial E-field; total field is vector sum",
+      "efficiency_trick": {
+        "name": "Symmetry Cancellation",
+        "trigger": "Symmetric charge arrangements",
+        "steps": ["Identify components that cancel by symmetry", "Only calculate non-canceling components"]
+      },
+      "pitfalls": [
+        {"name": "Source vs test charge confusion", "description": "E-field formula uses SOURCE charge Q, not test charge q"},
+        {"name": "Direction errors", "description": "E points away from positive, toward negative charges"}
+      ],
+      "worked_example": {
+        "title": "Two Charge E-Field",
+        "problem_latex": "Find E at midpoint between +q and -q separated by distance d",
+        "solution_steps": [
+          {"step": 1, "action": "Calculate individual fields", "reasoning": "Each charge contributes at midpoint", "latex": "E_+ = E_- = kq/(d/2)² = 4kq/d²"},
+          {"step": 2, "action": "Add vectors", "reasoning": "Both fields point from + to -", "latex": "E_net = 8kq/d² toward negative charge"}
+        ]
+      }
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "Is this about force or field?", "yes": "F = qE for force, E = kQ/r² for field", "no": "May be potential energy"},
+      {"step": 2, "question": "Multiple charges?", "yes": "Use superposition - add as vectors", "no": "Single point charge formula"}
+    ],
+    "professor_tips": [
+      "Always draw the E-field vector at the point of interest before calculating",
+      "Superposition means calculate each contribution separately, then add vectors",
+      "Remember: E-field exists whether or not there's a test charge to feel it",
+      "For continuous distributions, set up the integral and look for symmetry"
+    ]
+  },
+  "confidence_checklist": [
+    "I can apply Coulomb's law to find force between point charges",
+    "I understand that E-field is force per unit charge",
+    "I can calculate E-field from multiple point charges using superposition",
+    "I know the direction conventions for E-field",
+    "I can set up integrals for continuous charge distributions"
+  ]
+}

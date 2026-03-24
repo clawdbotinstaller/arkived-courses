@@ -1,0 +1,178 @@
+{
+  "id": "kirchhoff_laws",
+  "displayName": "Kirchhoff Circuit Laws",
+  "recognition": {
+    "visualSignals": [
+      "Multi-loop circuits",
+      "Multiple batteries/emf sources",
+      "Circuits where simple series/parallel reduction fails",
+      "Junctions with multiple branches"
+    ],
+    "verbalTriggers": [
+      "Find the current in each branch",
+      "Multi-loop circuit analysis",
+      "Junction rule or loop rule",
+      "Kirchhoff's laws",
+      "Current through specific resistor"
+    ],
+    "nonExamples": [
+      "Simple series circuits (use Ohm's law)",
+      "Simple parallel circuits (use Ohm's law)",
+      "Circuits reducible by series/parallel combinations",
+      "Pure capacitor or inductor circuits"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Can the circuit be reduced by series/parallel combinations?",
+        "ifYes": "Use Ohm's law, not Kirchhoff laws",
+        "ifNo": "Must use Kirchhoff's laws"
+      },
+      {
+        "question": "How many independent loops are there?",
+        "ifYes": "Need one KVL equation per independent loop",
+        "ifNo": "Start with junction rule for currents"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Label all currents in each branch with direction (arbitrary)",
+        "pitfall": "If answer is negative, actual direction is opposite to your guess",
+        "check": "Current entering junction = current leaving (KCL preview)"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Apply Junction Rule (KCL): ΣI_in = ΣI_out at each node",
+        "pitfall": "Don't apply at every node - some equations are dependent",
+        "check": "For n nodes, only n-1 independent junction equations"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Apply Loop Rule (KVL): ΣΔV = 0 around each independent loop",
+        "pitfall": "Sign convention: +emf when traversing - to +; -IR when traversing with current",
+        "check": "Choose consistent direction (clockwise/counterclockwise)"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Solve the system of equations for unknown currents",
+        "pitfall": "Make sure you have as many equations as unknowns",
+        "check": "Substitute back to verify"
+      }
+    ],
+    "timeEstimate": "12-18 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Sign errors in KVL equations",
+      "diagnosis": "Wrong sign convention for voltage drops/rises",
+      "fix": "Traversing with current: -IR (drop). Traversing against current: +IR (rise). Traversing - to + inside battery: +emf.",
+      "example": "Going clockwise through resistor with current also going clockwise: voltage drops by IR"
+    },
+    {
+      "symptom": "Too many or too few equations",
+      "diagnosis": "Didn't count independent loops correctly",
+      "fix": "Number of unknown currents = number of independent equations needed. Use (nodes - 1) junction equations, rest from loops.",
+      "example": "2-loop circuit with 3 branches: 1 junction equation + 2 loop equations = 3 equations for 3 unknowns"
+    },
+    {
+      "symptom": "Current values don't satisfy junction rule",
+      "diagnosis": "Algebra error or sign error in solution",
+      "fix": "Always verify: at each junction, inflow should equal outflow",
+      "example": "If I₁ enters and I₂, I₃ leave: check that I₁ = I₂ + I₃ with your answers"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Medium",
+      "problem": "In a circuit with two batteries (ε₁=12V, ε₂=6V) and three resistors (R₁=4Ω, R₂=2Ω, R₃=6Ω) arranged in two loops, find all branch currents.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "Label currents: I₁ in left branch (through ε₁, R₁), I₂ in right branch (through ε₂, R₂), I₃ in middle (through R₃)",
+          "explanation": "Assign arbitrary directions, will correct if negative"
+        },
+        {
+          "step": 2,
+          "math": "Junction rule at top node: I₁ + I₂ = I₃",
+          "explanation": "Current entering = current leaving"
+        },
+        {
+          "step": 3,
+          "math": "Left loop (clockwise): +ε₁ - I₁R₁ - I₃R₃ = 0 → 12 - 4I₁ - 6I₃ = 0",
+          "explanation": "KVL: +12 for battery (going - to +), -4I₁ (with current through R₁), -6I₃ (with current through R₃)"
+        },
+        {
+          "step": 4,
+          "math": "Right loop (counter-clockwise): +ε₂ - I₂R₂ - I₃R₃ = 0 → 6 - 2I₂ - 6I₃ = 0",
+          "explanation": "KVL for right loop"
+        },
+        {
+          "step": 5,
+          "math": "Substitute I₃ = I₁ + I₂ into loop equations and solve system",
+          "explanation": "Three equations, three unknowns"
+        },
+        {
+          "step": 6,
+          "math": "Solution: I₁ = 1.5 A, I₂ = -0.75 A, I₃ = 0.75 A",
+          "explanation": "Negative I₂ means actual direction opposite to assumption; I₃ is positive as assumed"
+        }
+      ],
+      "keyInsight": "Negative current means opposite direction to your initial guess; algebra is correct",
+      "timeEstimate": "12 minutes"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Kirchhoff Recognition",
+      "questions": [
+        {
+          "integral": "When must you use Kirchhoff's laws instead of simple series/parallel reduction?",
+          "options": ["Always", "For single-loop circuits", "When circuit has multiple loops that cannot be reduced", "Never"],
+          "correctAnswer": 2,
+          "explanation": "Kirchhoff laws are needed for complex multi-loop circuits not reducible by combination rules"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Kirchhoff Applications",
+      "problems": [
+        {
+          "problem": "Two parallel branches: one with 6V battery and 2Ω resistor, another with 3V battery and 1Ω resistor. Find the current through each branch.",
+          "answer": "Apply KVL to each branch: I₁ = (6-3)/2 = 1.5A, I₂ = 3/1 = 3A",
+          "hint": "Treat as separate loops sharing common nodes",
+          "difficulty": "Medium"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Multi-loop Circuits",
+      "problems": [
+        {
+          "problem": "Wheatstone bridge configuration with known resistances and applied voltage. Find the current through the bridge resistor.",
+          "context": "Advanced circuit analysis",
+          "primaryTechnique": "kirchhoff_laws",
+          "secondaryTechniques": ["ohms_law"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "KCL: ΣI_in = ΣI_out; KVL: ΣΔV = 0 around loop",
+    "whenToUse": ["Multi-loop circuits", "Non-reducible networks", "Multiple EMF sources"],
+    "formula": "Junction: $\\sum I_{in} = \\sum I_{out}$; Loop: $\\sum \\Delta V = 0$",
+    "quickCheck": "Number of equations must equal number of unknown currents"
+  },
+  "patternConnections": ["resistor_network", "rl_circuit_time_constant"],
+  "masteryCriteria": {
+    "recognitionSpeed": "Identify when Kirchhoff laws are needed vs Ohm's law",
+    "executionSpeed": "Solve 2-loop circuit in under 15 minutes",
+    "accuracyTarget": "80% accuracy on multi-loop problems",
+    "selfCheckQuestions": [
+      "Can I apply the sign conventions consistently?",
+      "Do I get the correct number of independent equations?",
+      "Can I interpret negative current values?"
+    ]
+  }
+}

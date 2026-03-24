@@ -1,0 +1,190 @@
+{
+  "id": "shm_energy",
+  "displayName": "SHM Energy Analysis",
+  "recognition": {
+    "visualSignals": [
+      "Questions about energy in oscillating systems",
+      "Finding maximum kinetic or potential energy",
+      "Energy distribution graphs in SHM",
+      "Velocity at specific positions in oscillation"
+    ],
+    "verbalTriggers": [
+      "Total energy of the oscillator",
+      "Kinetic energy at position x",
+      "Potential energy at maximum displacement",
+      "Speed when displacement is...",
+      "Energy transforms from kinetic to potential"
+    ],
+    "nonExamples": [
+      "Damped systems where energy is not conserved",
+      "Forced oscillations with external work input",
+      "Questions only about kinematics without energy"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Is the system conservative (no damping)?",
+        "ifYes": "Total mechanical energy is constant",
+        "ifNo": "Energy is being lost to friction/damping"
+      },
+      {
+        "question": "Do you need energy at a specific position?",
+        "ifYes": "Use U = ½kx² and K = E - U",
+        "ifNo": "Calculate maximum values using amplitude"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Calculate total energy from amplitude: E = ½kA²",
+        "pitfall": "Don't forget the ½ factor",
+        "check": "E should be positive and constant"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "At any position x, potential energy is U = ½kx²",
+        "pitfall": "U is maximum at extremes (x = ±A), zero at equilibrium",
+        "check": "U(x=A) = ½kA² = E (total energy)"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Kinetic energy is K = E - U = ½k(A² - x²)",
+        "pitfall": "K is maximum at equilibrium (x=0), zero at extremes",
+        "check": "K + U = E at all times"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Find speed from K = ½mv²: v = √(2K/m)",
+        "pitfall": "Speed is magnitude; velocity has direction",
+        "check": "v ≤ v_max = A√(k/m) = Aω"
+      }
+    ],
+    "timeEstimate": "5-8 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Potential energy not zero at equilibrium",
+      "diagnosis": "Confusing gravitational PE with spring PE, or wrong reference point",
+      "fix": "For spring PE, U = 0 at equilibrium (x = 0); gravitational PE depends on height reference",
+      "example": "If a vertical spring, gravitational PE changes but spring PE still zero at equilibrium position"
+    },
+    {
+      "symptom": "Energy not conserved in calculation",
+      "diagnosis": "Missing that E = ½kA² is constant for all time",
+      "fix": "Total energy depends ONLY on amplitude, not on position or time",
+      "example": "At any point in oscillation: K + U = ½kA² = constant"
+    },
+    {
+      "symptom": "Wrong answer for velocity at given position",
+      "diagnosis": "Using kinematics instead of energy, or algebra error",
+      "fix": "Use energy method: ½mv² = ½k(A² - x²), so v = ω√(A² - x²)",
+      "example": "At x = A/2: v = ω√(A² - A²/4) = ωA√(3/4) = (√3/2)v_max"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "A mass-spring system has k = 100 N/m and amplitude 0.20 m. Find (a) total energy, (b) maximum kinetic energy.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "E = ½kA² = ½(100 N/m)(0.20 m)² = 2.0 J",
+          "explanation": "Total energy depends only on amplitude and spring constant"
+        },
+        {
+          "step": 2,
+          "math": "K_max = E = 2.0 J (occurs at x = 0 where U = 0)",
+          "explanation": "At equilibrium, all energy is kinetic; at extremes, all is potential"
+        }
+      ],
+      "keyInsight": "Total energy equals maximum potential energy equals maximum kinetic energy",
+      "timeEstimate": "3 minutes"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "A 0.50 kg mass on a spring (k = 200 N/m) oscillates with amplitude 0.30 m. Find its speed when the displacement is 0.20 m.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "ω = √(k/m) = √(200/0.5) = 20 rad/s",
+          "explanation": "First find angular frequency"
+        },
+        {
+          "step": 2,
+          "math": "E = ½kA² = ½(200)(0.30)² = 9.0 J",
+          "explanation": "Total energy from amplitude"
+        },
+        {
+          "step": 3,
+          "math": "U = ½kx² = ½(200)(0.20)² = 4.0 J",
+          "explanation": "Potential energy at x = 0.20 m"
+        },
+        {
+          "step": 4,
+          "math": "K = E - U = 9.0 - 4.0 = 5.0 J",
+          "explanation": "Kinetic energy from energy conservation"
+        },
+        {
+          "step": 5,
+          "math": "K = ½mv² → v = √(2K/m) = √(2×5.0/0.5) = √20 = 4.47 m/s",
+          "explanation": "Solve for speed from kinetic energy"
+        }
+      ],
+      "keyInsight": "Energy conservation provides a direct way to find velocity at any position",
+      "timeEstimate": "6 minutes"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Recognize Energy Problems",
+      "questions": [
+        {
+          "integral": "At what point in SHM is kinetic energy maximum?",
+          "options": ["At maximum displacement", "At equilibrium", "At half amplitude", "It is constant"],
+          "correctAnswer": 1,
+          "explanation": "At equilibrium (x=0), U=0, so all energy is kinetic"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Energy Calculations",
+      "problems": [
+        {
+          "problem": "Find the kinetic energy of a harmonic oscillator with k=50 N/m, m=0.2 kg, A=0.1 m when x=0.06 m.",
+          "answer": "E = ½kA² = 0.25 J; U = ½kx² = 0.09 J; K = E - U = 0.16 J",
+          "hint": "Use energy conservation: K = E - U",
+          "difficulty": "Medium"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Energy in SHM",
+      "problems": [
+        {
+          "problem": "What fraction of the total energy is kinetic when the displacement is half the amplitude?",
+          "context": "Energy distribution in oscillation",
+          "primaryTechnique": "shm_energy",
+          "secondaryTechniques": ["shm_kinematics"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "E = ½kA² = constant; U = ½kx²; K = E - U = ½k(A² - x²)",
+    "whenToUse": ["Energy questions in oscillation", "Finding speed at position", "Maximum energy values"],
+    "formula": "$E = \\frac{1}{2}kA^2$, $U = \\frac{1}{2}kx^2$, $K = \\frac{1}{2}k(A^2 - x^2)$, $v = \\omega\\sqrt{A^2 - x^2}$",
+    "quickCheck": "At x=0: K=E, U=0; at x=A: K=0, U=E"
+  },
+  "patternConnections": ["spring_constant_energy", "shm_period_frequency"],
+  "masteryCriteria": {
+    "recognitionSpeed": "Recognize energy conservation problems in SHM instantly",
+    "executionSpeed": "Complete energy analysis in under 4 minutes",
+    "accuracyTarget": "95% accuracy on energy calculations",
+    "selfCheckQuestions": [
+      "Can I write the energy expressions for any position in SHM?",
+      "Do I understand when KE is max and when PE is max?",
+      "Can I solve for velocity using energy conservation?"
+    ]
+  }
+}

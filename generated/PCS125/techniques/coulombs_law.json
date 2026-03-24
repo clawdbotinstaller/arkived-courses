@@ -1,0 +1,207 @@
+{
+  "id": "coulombs_law",
+  "displayName": "Coulombs Law",
+  "recognition": {
+    "visualSignals": [
+      "Point charges arranged in space",
+      "Questions about force between charges",
+      "Vector diagrams showing repulsion or attraction",
+      "Multiple charges with distances given"
+    ],
+    "verbalTriggers": [
+      "Force between two point charges",
+      "Electrostatic force",
+      "Coulomb force",
+      "Repulsive/attractive force on charge",
+      "Net force on a charge"
+    ],
+    "nonExamples": [
+      "Continuous charge distributions (use integration)",
+      "Electric field calculations (different concept)",
+      "Gauss law problems",
+      "Potential energy questions (related but different)"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "How many charges are involved?",
+        "ifYes": "Use superposition principle for multiple charges",
+        "ifNo": "Direct application of Coulombs law"
+      },
+      {
+        "question": "Are the charges arranged in 2D or 3D?",
+        "ifYes": "Break forces into components",
+        "ifNo": "Forces are along a line - just watch signs"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Convert all charges to Coulombs and distances to meters",
+        "pitfall": "Common prefixes: μC = 10⁻⁶ C, nC = 10⁻⁹ C",
+        "check": "Verify units before calculating"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Calculate magnitude using F = k|q₁q₂|/r²",
+        "pitfall": "Use k = 8.99 × 10⁹ N·m²/C²",
+        "check": "Force should be in Newtons"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Determine direction: like charges repel, opposite attract",
+        "pitfall": "Direction is along line connecting charges",
+        "check": "Force on each charge is equal and opposite (Newton's 3rd law)"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "For multiple charges, add forces vectorially",
+        "pitfall": "Cannot simply add magnitudes - need components",
+        "check": "Use superposition: calculate each force separately, then add vectors"
+      }
+    ],
+    "timeEstimate": "8-12 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Force has wrong sign or direction",
+      "diagnosis": "Confused sign convention for attraction vs repulsion",
+      "fix": "Like charges (+,+ or -,-): repulsive force pushes apart. Opposite: attractive pulls together",
+      "example": "Force on +q due to +Q points away from +Q; force on +q due to -Q points toward -Q"
+    },
+    {
+      "symptom": "Answer off by orders of magnitude",
+      "diagnosis": "Unit conversion error with charge prefixes",
+      "fix": "μC = 10⁻⁶ C, nC = 10⁻⁹ C, pC = 10⁻¹² C",
+      "example": "5 μC = 5 × 10⁻⁶ C, not 5 × 10⁶ or just 5"
+    },
+    {
+      "symptom": "Net force direction incorrect for multiple charges",
+      "diagnosis": "Vector addition error - didn't break into components",
+      "fix": "Resolve each force into x and y components, sum separately, then find resultant",
+      "example": "For 2D arrangements, F_net,x = ΣF_x and F_net,y = ΣF_y"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "Two charges, q₁ = +3.0 μC and q₂ = -5.0 μC, are separated by 0.30 m. Find the magnitude and direction of the force on q₁.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "q₁ = 3.0 × 10⁻⁶ C, q₂ = -5.0 × 10⁻⁶ C, r = 0.30 m",
+          "explanation": "Convert to SI units"
+        },
+        {
+          "step": 2,
+          "math": "F = k|q₁q₂|/r² = (8.99×10⁹)|(3×10⁻⁶)(-5×10⁻⁶)|/(0.30)²",
+          "explanation": "Apply Coulomb's law with absolute value for magnitude"
+        },
+        {
+          "step": 3,
+          "math": "F = (8.99×10⁹)(15×10⁻¹²)/0.09 = 1.50 N",
+          "explanation": "Calculate magnitude"
+        },
+        {
+          "step": 4,
+          "math": "Direction: attractive (opposite charges), so q₁ is pulled toward q₂",
+          "explanation": "Opposite charges attract"
+        }
+      ],
+      "keyInsight": "Opposite charges attract, like charges repel; force magnitude uses absolute values",
+      "timeEstimate": "5 minutes"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Three charges are placed on the x-axis: q₁ = +2.0 μC at x=0, q₂ = -4.0 μC at x=0.50 m, and q₃ = +3.0 μC at x=1.0 m. Find the net force on q₂.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "F₂₁ (force on q₂ due to q₁): q₁ is +, q₂ is -, so attraction toward left (negative x)",
+          "explanation": "Determine directions first by considering charge signs"
+        },
+        {
+          "step": 2,
+          "math": "F₂₃ (force on q₂ due to q₃): q₂ is -, q₃ is +, so attraction toward right (positive x)",
+          "explanation": "Both forces are attractive but in opposite directions"
+        },
+        {
+          "step": 3,
+          "math": "|F₂₁| = k|q₁q₂|/r₁₂² = (8.99×10⁹)|(2×10⁻⁶)(-4×10⁻⁶)|/(0.50)² = 0.288 N",
+          "explanation": "Calculate magnitude of force from q₁ (distance is 0.50 m)"
+        },
+        {
+          "step": 4,
+          "math": "|F₂₃| = k|q₂q₃|/r₂₃² = (8.99×10⁹)|(-4×10⁻⁶)(3×10⁻⁶)|/(0.50)² = 0.431 N",
+          "explanation": "Calculate magnitude of force from q₃ (distance is 0.50 m)"
+        },
+        {
+          "step": 5,
+          "math": "F_net = F₂₃ - F₂₁ = 0.431 - 0.288 = 0.143 N in +x direction",
+          "explanation": "Subtract since forces are in opposite directions; net force is to the right"
+        }
+      ],
+      "keyInsight": "With multiple collinear charges, determine directions first, then calculate magnitudes",
+      "timeEstimate": "8 minutes"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Recognize Coulomb's Law Problems",
+      "questions": [
+        {
+          "integral": "Two positive charges experience what type of force?",
+          "options": ["Attractive", "Repulsive", "Zero", "Depends on distance"],
+          "correctAnswer": 1,
+          "explanation": "Like charges repel each other"
+        },
+        {
+          "integral": "If the distance between two charges doubles, the force becomes:",
+          "options": ["Half", "One quarter", "Double", "Four times"],
+          "correctAnswer": 1,
+          "explanation": "F ∝ 1/r², so if r → 2r, F → F/4"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Coulomb's Law Calculations",
+      "problems": [
+        {
+          "problem": "Find the force between charges of +5 μC and -8 μC separated by 0.20 m.",
+          "answer": "F = (8.99×10⁹)(5×10⁻⁶)(8×10⁻⁶)/(0.20)² = 8.99 N (attractive)",
+          "hint": "Use F = k|q₁q₂|/r²; force is attractive for opposite charges",
+          "difficulty": "Easy"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Coulomb's Law Applications",
+      "problems": [
+        {
+          "problem": "Two identical conducting spheres with charges +Q and -3Q are brought into contact and separated. What is the final force between them compared to the initial force?",
+          "context": "Charge redistribution and Coulomb's law",
+          "primaryTechnique": "coulombs_law",
+          "secondaryTechniques": ["charge_redistribution"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "F = k|q₁q₂|/r² where k = 8.99×10⁹ N·m²/C²; like charges repel, opposite attract",
+    "whenToUse": ["Force between point charges", "Electrostatic force calculations", "Multiple charge systems"],
+    "formula": "$F = k\\frac{|q_1 q_2|}{r^2}$, $k = 8.99 \\times 10^9 \\text{ N·m}^2/\\text{C}^2$",
+    "quickCheck": "Check: like charges → repulsion, opposite → attraction; units in N"
+  },
+  "patternConnections": ["point_charge_field", "electric_field_superposition"],
+  "masteryCriteria": {
+    "recognitionSpeed": "Recognize Coulomb's law problems within 5 seconds",
+    "executionSpeed": "Calculate force between two charges in under 3 minutes",
+    "accuracyTarget": "90% accuracy including vector addition",
+    "selfCheckQuestions": [
+      "Can I determine force direction from charge signs?",
+      "Do I remember to convert μC and nC to Coulombs?",
+      "Can I handle superposition with multiple charges?"
+    ]
+  }
+}

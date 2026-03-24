@@ -1,0 +1,71 @@
+{
+  "id": "parallel_plate_capacitor",
+  "name": "Parallel Plate Capacitor",
+  "description": "Calculate capacitance, charge, energy, and electric field for parallel plate capacitors",
+  "canonical_form_latex": "C = \\frac{\\epsilon_0 A}{d}, \\quad Q = CV, \\quad U = \\frac{1}{2}CV^2 = \\frac{1}{2}QV = \\frac{Q^2}{2C}",
+  "identification_signal": "Two parallel conducting plates separated by distance, often with dielectric material",
+  "frequency": "High",
+  "estimated_time": "5-8 minutes",
+  "strategy": {
+    "step_1": "Calculate capacitance from geometry: C = ε₀A/d",
+    "step_2": "Relate Q, C, and V using Q = CV",
+    "step_3": "Calculate stored energy using U = ½CV²",
+    "step_4": "For dielectrics: multiply C by dielectric constant κ"
+  },
+  "exam_references": [
+    "2008F_PCS125_E_NS_Q5",
+    "2011W_PCS125_E_TS_Q3",
+    "2015W_PCS125_E_NS_Q4"
+  ],
+  "related_techniques": ["capacitance", "dielectrics"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Identify parallel plate capacitor problems",
+      "flashcards": [
+        {
+          "front": {"text": "Two circular plates of radius 5 cm separated by 2 mm"},
+          "back": {"title": "Parallel Plate Capacitor", "explanation": "Use C = ε₀A/d where A = πr². Can also find E = V/d between plates."}
+        }
+      ]
+    },
+    "phase_2_strategy": {
+      "purpose": "Systematic capacitor analysis",
+      "steps": [
+        {
+          "title": "Calculate Capacitance",
+          "instruction": "C = ε₀A/d. Remember ε₀ = 8.85×10⁻¹² F/m.",
+          "how_to": ["Calculate area A", "Use separation d", "Watch units - convert to meters"]
+        },
+        {
+          "title": "Charge and Energy Relations",
+          "instruction": "Q = CV for charge. Three forms for energy: ½CV², ½QV, Q²/2C.",
+          "why": "Use the form with known quantities"
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice capacitor calculations",
+      "problem_cards": [
+        {
+          "id": "ppc_1",
+          "difficulty": "Medium",
+          "task": "Find capacitance and stored energy",
+          "prompt_latex": "A = 0.01 \\text{ m}^2, d = 1 \\text{ mm}, V = 12 \\text{ V}",
+          "solution": {
+            "steps": [
+              "C = ε₀A/d = (8.85×10⁻¹²)(0.01)/(0.001) = 8.85×10⁻¹¹ F = 88.5 pF",
+              "U = ½CV² = ½(8.85×10⁻¹¹)(144) = 6.37×10⁻⁹ J = 6.37 nJ"
+            ],
+            "final_answer_latex": "C = 88.5 \\text{ pF}, U = 6.37 \\text{ nJ}",
+            "verification": "Units check: ε₀ in F/m, A in m², d in m → C in F ✓"
+          }
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "Capacitor Analysis Master", "pattern_id": "parallel_plate_capacitor"},
+      "what_mastery_means": ["Know ε₀ value", "Can handle dielectrics", "Understand energy storage"]
+    }
+  },
+  "source_meta": {"from_db_patterns": false, "from_db_batch2": false, "from_frontend_legacy": false, "duah_mapped": false, "conflicts": []}
+}

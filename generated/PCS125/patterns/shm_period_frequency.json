@@ -1,0 +1,88 @@
+{
+  "id": "shm_period_frequency",
+  "name": "SHM Period and Frequency Calculations",
+  "description": "Calculate period, frequency, and angular frequency for simple harmonic oscillators including springs and pendulums",
+  "canonical_form_latex": "T = 2\\pi\\sqrt{\\frac{m}{k}} \\text{ (spring)}, \\quad T = 2\\pi\\sqrt{\\frac{L}{g}} \\text{ (pendulum)}",
+  "identification_signal": "Questions asking for period, frequency, or angular frequency of an oscillating system",
+  "frequency": "Very High",
+  "estimated_time": "3-5 minutes",
+  "strategy": {
+    "step_1": "Identify whether the system is a spring-mass or pendulum",
+    "step_2": "Write the appropriate period formula",
+    "step_3": "Convert to frequency (f = 1/T) or angular frequency (ω = 2πf) if needed",
+    "step_4": "Check that amplitude does not affect period for ideal SHM"
+  },
+  "exam_references": [
+    "2008W_PCS125_M_TS_Q2",
+    "2012W_PCS125_M_TS_Q4",
+    "2014W_PCS125_M_TS_Q3",
+    "2015W_PCS125_M_TS_Q2"
+  ],
+  "related_techniques": ["shm_kinematics", "shm_energy"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Identify when to use period/frequency formulas",
+      "flashcards": [
+        {
+          "front": {"latex": "T = 2\\pi\\sqrt{L/g}"},
+          "back": {"title": "Simple Pendulum Period", "explanation": "Use for pendulum where θ < 15°. Period depends only on length L and g, not mass."}
+        },
+        {
+          "front": {"latex": "T = 2\\pi\\sqrt{m/k}"},
+          "back": {"title": "Spring-Mass Period", "explanation": "Use for mass on spring. Period depends on mass m and spring constant k, not amplitude."}
+        }
+      ],
+      "spot_it": {
+        "instructions": "Identify which system each problem describes",
+        "items": [
+          {"prompt_latex": "Block on horizontal frictionless surface attached to spring", "is_match": true, "key_cue": "spring-mass", "explanation": "Use T = 2π√(m/k)"},
+          {"prompt_latex": "Mass swinging at end of light rod", "is_match": true, "key_cue": "pendulum", "explanation": "Use T = 2π√(L/g)"}
+        ]
+      }
+    },
+    "phase_2_strategy": {
+      "purpose": "Step-by-step solution method",
+      "steps": [
+        {
+          "title": "Identify System Type",
+          "instruction": "Look for keywords: spring, pendulum, bob, cord",
+          "why": "Different formulas apply to different systems",
+          "how_to": ["Spring: mentions k (spring constant), coils", "Pendulum: mentions length, gravity, swinging"]
+        },
+        {
+          "title": "Write Period Formula",
+          "instruction": "Spring: T = 2π√(m/k). Pendulum: T = 2π√(L/g)",
+          "why": "Period is fundamental property of oscillator",
+          "checkpoint": {"question": "Does your formula match the system?", "answer": "Should have m/k for spring, L/g for pendulum"}
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Build fluency with calculations",
+      "problem_cards": [
+        {
+          "id": "shm_p_1",
+          "difficulty": "Easy",
+          "task": "Calculate period",
+          "prompt_latex": "m = 0.5 \\text{ kg}, k = 200 \\text{ N/m}",
+          "solution": {"steps": ["T = 2π√(m/k) = 2π√(0.5/200) = 2π√(0.0025) = 2π(0.05) = 0.314 s"], "final_answer_latex": "T = 0.314 \\text{ s}", "verification": "Check units: √(kg/(N/m)) = √(kg·m/N) = √(s²) = s ✓"}
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "SHM Period Master", "pattern_id": "shm_period_frequency"},
+      "what_mastery_means": ["Can instantly identify system type", "Know both formulas by heart", "Can convert between T, f, and ω fluently"]
+    }
+  },
+  "variant_drills": [
+    {
+      "id": "mass_change",
+      "type": "parameter_change",
+      "question_variant_1": "How does period change if mass is doubled?",
+      "question_variant_2": "What mass is needed for period of 1 second?",
+      "significance": "Understanding how parameters affect period",
+      "workbench_drill_plan": {"use_in_phase_2_strategy": "Discuss how T ∝ √m for springs"}
+    }
+  ],
+  "source_meta": {"from_db_patterns": false, "from_db_batch2": false, "from_frontend_legacy": false, "duah_mapped": false, "conflicts": []}
+}

@@ -1,0 +1,197 @@
+{
+  "id": "lorentz_force",
+  "displayName": "Lorentz Force",
+  "recognition": {
+    "visualSignals": [
+      "Charged particle moving in magnetic field",
+      "Cross product notation (v × B)",
+      "Circular or helical motion paths",
+      "Right-hand rule applications"
+    ],
+    "verbalTriggers": [
+      "Force on moving charge in magnetic field",
+      "Magnetic force on current-carrying wire",
+      "Cyclotron motion",
+      "Velocity selector",
+      "Mass spectrometer"
+    ],
+    "nonExamples": [
+      "Electric force F = qE (no magnetic field)",
+      "Gravitational force",
+      "Motion purely in electric field",
+      "Uncharged particles in magnetic field"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Is the velocity perpendicular to B?",
+        "ifYes": "Circular motion with F = qvB providing centripetal force",
+        "ifNo": "Helical motion; use F = qvBsin(θ)"
+      },
+      {
+        "question": "Is there also an electric field?",
+        "ifYes": "Total F = q(E + v × B)",
+        "ifNo": "Pure magnetic force F = qv × B"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Identify q, v, B and angle between v and B",
+        "pitfall": "Sign of charge matters for direction",
+        "check": "Units: q in C, v in m/s, B in T (Tesla)"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Calculate magnitude: F = |q|vBsin(θ)",
+        "pitfall": "If v ⊥ B, sin(90°) = 1, so F = |q|vB",
+        "check": "Force in Newtons"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Find direction using right-hand rule: thumb = v, fingers = B, palm = F (positive q)",
+        "pitfall": "For negative q, force is opposite to right-hand rule result",
+        "check": "F is perpendicular to both v and B"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "For circular motion: equate magnetic force to centripetal force qvB = mv²/r",
+        "pitfall": "Don't forget radius depends on mass and velocity",
+        "check": "r = mv/(|q|B)"
+      }
+    ],
+    "timeEstimate": "8-12 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Force direction wrong for negative charge",
+      "diagnosis": "Applied right-hand rule but didn't reverse for negative charge",
+      "fix": "Right-hand rule gives direction for positive q; for negative q, force is opposite",
+      "example": "Electron moving right in B field pointing up: RH gives force out of palm, but electron feels force opposite"
+    },
+    {
+      "symptom": "Wrong radius for circular motion",
+      "diagnosis": "Didn't equate magnetic force to centripetal force correctly",
+      "fix": "qvB = mv²/r → r = mv/(qB). Larger mass or velocity → larger radius; larger B or q → smaller radius",
+      "example": "Proton and electron with same v in same B: r_proton > r_electron because m_p >> m_e"
+    },
+    {
+      "symptom": "Magnetic field does work on particle",
+      "diagnosis": "Fundamental misunderstanding - magnetic force is always perpendicular to velocity",
+      "fix": "F ⊥ v means F · v = 0, so magnetic force never does work (doesn't change kinetic energy)",
+      "example": "Magnetic field only changes direction of motion, not speed"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "A proton (q = +e = 1.6×10⁻¹⁹ C) moves at 5.0×10⁶ m/s perpendicular to a 0.20 T magnetic field. Find the force magnitude and direction.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "q = 1.6×10⁻¹⁹ C, v = 5.0×10⁶ m/s, B = 0.20 T, θ = 90°",
+          "explanation": "Given values; perpendicular means sin(90°) = 1"
+        },
+        {
+          "step": 2,
+          "math": "F = qvB = (1.6×10⁻¹⁹)(5.0×10⁶)(0.20) = 1.6×10⁻¹³ N",
+          "explanation": "Calculate force magnitude"
+        },
+        {
+          "step": 3,
+          "math": "Direction: perpendicular to both v and B (use right-hand rule)",
+          "explanation": "Force direction depends on orientation of v and B"
+        }
+      ],
+      "keyInsight": "Magnetic force magnitude is simply qvB when v ⊥ B",
+      "timeEstimate": "4 minutes"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "An electron moving at 2.0×10⁷ m/s enters a 0.10 T magnetic field perpendicular to its velocity. Find the radius of its circular path.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "Magnetic force provides centripetal force: evB = mv²/r",
+          "explanation": "For circular motion, net force = centripetal force"
+        },
+        {
+          "step": 2,
+          "math": "r = mv/(eB)",
+          "explanation": "Solve for radius"
+        },
+        {
+          "step": 3,
+          "math": "r = (9.11×10⁻³¹ kg)(2.0×10⁷ m/s)/[(1.6×10⁻¹⁹ C)(0.10 T)]",
+          "explanation": "Substitute values: m_e = 9.11×10⁻³¹ kg"
+        },
+        {
+          "step": 4,
+          "math": "r = 1.14×10⁻³ m = 1.14 mm",
+          "explanation": "Calculate radius"
+        }
+      ],
+      "keyInsight": "Radius proportional to momentum (mv), inversely proportional to field strength and charge",
+      "timeEstimate": "6 minutes"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Lorentz Force Recognition",
+      "questions": [
+        {
+          "integral": "The magnetic force on a moving charge is always:",
+          "options": ["Parallel to velocity", "Perpendicular to velocity", "Parallel to B field", "In the direction of motion"],
+          "correctAnswer": 1,
+          "explanation": "F = qv × B, so force is perpendicular to both v and B"
+        },
+        {
+          "integral": "An electron and proton with the same velocity enter the same magnetic field perpendicularly. Which has larger orbit radius?",
+          "options": ["Electron (smaller mass)", "Proton (larger mass)", "Same radius", "Cannot determine"],
+          "correctAnswer": 1,
+          "explanation": "r = mv/(qB); proton has ~1836× larger mass, same q and v, so much larger r"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Magnetic Force Calculations",
+      "problems": [
+        {
+          "problem": "A charge of 2 μC moves at 1000 m/s at 30° to a 0.5 T field. Find the force.",
+          "answer": "F = qvBsin(θ) = (2×10⁻⁶)(1000)(0.5)(0.5) = 5×10⁻⁴ N",
+          "hint": "Use F = qvBsin(θ) when v is not perpendicular to B",
+          "difficulty": "Easy"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Charged Particle Motion",
+      "problems": [
+        {
+          "problem": "In a mass spectrometer, ions with charge +e and different masses are accelerated through potential V then enter magnetic field B. Find the relationship between mass and radius of curvature.",
+          "context": "Mass spectrometry application",
+          "primaryTechnique": "lorentz_force",
+          "secondaryTechniques": ["energy_conservation"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "F = qv × B, magnitude F = |q|vBsin(θ); direction: right-hand rule (reverse for negative q)",
+    "whenToUse": ["Moving charges in B field", "Circular motion in magnetic fields", "Velocity selectors"],
+    "formula": "$\\vec{F} = q\\vec{v} \\times \\vec{B}$, $F = |q|vB\\sin\\theta$, $r = \\frac{mv}{|q|B}$",
+    "quickCheck": "F ⊥ v, so magnetic force does no work (doesn't change speed)"
+  },
+  "patternConnections": ["charged_particle_motion", "cyclotron_motion"],
+  "masteryCriteria": {
+    "recognitionSpeed": "Identify Lorentz force problems immediately",
+    "executionSpeed": "Calculate force and radius in under 5 minutes",
+    "accuracyTarget": "85% accuracy including direction",
+    "selfCheckQuestions": [
+      "Can I apply the right-hand rule correctly?",
+      "Do I reverse direction for negative charges?",
+      "Can I derive the cyclotron radius formula?"
+    ]
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "topic_id": "circuits_topic",
+  "meta": {
+    "display_name": "DC Circuit Analysis",
+    "course_context": "PCS125 - Foundation for AC circuits",
+    "professor_methodology": "Emphasis on systematic analysis using Ohm's law and Kirchhoff's laws",
+    "core_formula": "V = IR, P = IV, ΣI_in = ΣI_out, ΣΔV = 0",
+    "description": "Resistor circuits, Kirchhoff's laws, power calculations, and equivalent resistance"
+  },
+  "patterns": [
+    {
+      "id": "resistor_network",
+      "name": "Series and Parallel Combinations",
+      "recognition_signal": "Circuit with multiple resistors that can be simplified",
+      "canonical_forms": ["R_series = R₁ + R₂ + ...", "1/R_parallel = 1/R₁ + 1/R₂ + ..."],
+      "logic": "Series: same current, resistances add. Parallel: same voltage, reciprocals add",
+      "efficiency_trick": {
+        "name": "Two Resistor Parallel",
+        "trigger": "Only two resistors in parallel",
+        "steps": ["Use product over sum: R_eq = R₁R₂/(R₁ + R₂)"]
+      },
+      "pitfalls": [
+        {"name": "Adding parallel resistances", "description": "Never add parallel resistances directly - add reciprocals"},
+        {"name": "Current/voltage confusion", "description": "Current same in series, voltage same in parallel"}
+      ],
+      "worked_example": {
+        "title": "Equivalent Resistance",
+        "problem_latex": "Find R_eq for 6Ω and 3Ω in parallel, then series with 2Ω",
+        "solution_steps": [
+          {"step": 1, "action": "Parallel combination", "reasoning": "1/R_p = 1/6 + 1/3 = 1/2", "latex": "R_p = 2\\Omega"},
+          {"step": 2, "action": "Series combination", "reasoning": "Series resistances add", "latex": "R_eq = 2 + 2 = 4\\Omega"}
+        ]
+      }
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "Can circuit be reduced by series/parallel?", "yes": "Simplify step by step", "no": "Use Kirchhoff's laws"},
+      {"step": 2, "question": "Need current, voltage, or resistance?", "yes": "Use Ohm's law appropriately", "no": "May be power calculation"}
+    ],
+    "professor_tips": [
+      "Redraw the circuit after each simplification",
+      "Label all currents with directions (can be arbitrary; negative means opposite)",
+      "For power: P = IV = I²R = V²/R - pick the form with known quantities",
+      "Always verify your answer makes physical sense"
+    ]
+  },
+  "confidence_checklist": [
+    "I can simplify series and parallel resistor combinations",
+    "I know when to use Kirchhoff's laws",
+    "I can apply Ohm's law correctly",
+    "I understand power dissipation in resistors",
+    "I can analyze multi-loop circuits"
+  ]
+}

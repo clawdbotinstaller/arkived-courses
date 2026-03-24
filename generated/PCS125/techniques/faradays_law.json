@@ -1,0 +1,193 @@
+{
+  "id": "faradays_law",
+  "displayName": "Faradays Law of Induction",
+  "recognition": {
+    "visualSignals": [
+      "Changing magnetic flux through a loop",
+      "Moving conductor in magnetic field",
+      "Time-varying magnetic field",
+      "Rotating loops in B field"
+    ],
+    "verbalTriggers": [
+      "Induced EMF",
+      "Changing magnetic flux",
+      "Faraday's law",
+      "Lenz's law",
+      "Motional EMF",
+      "Induced current"
+    ],
+    "nonExamples": [
+      "Static magnetic fields (no change, no induction)",
+      "Circuits with only resistors and batteries",
+      "Electrostatic problems",
+      "Constant current circuits"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Is the flux changing due to motion or changing B field?",
+        "ifYes": "Motional EMF: ε = Blv or flux change: ε = -dΦ/dt",
+        "ifNo": "No induced EMF if flux is constant"
+      },
+      {
+        "question": "Need direction of induced current?",
+        "ifYes": "Use Lenz's law: induced current opposes the change",
+        "ifNo": "Calculate magnitude only"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Calculate magnetic flux: Φ_B = BAcos(θ) = ∫B·dA",
+        "pitfall": "Flux is scalar, units of Weber (Wb) = T·m²",
+        "check": "Maximum flux when B ⊥ area; zero when B || area"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Find rate of change of flux: dΦ/dt",
+        "pitfall": "Identify what is changing: B, A, or angle θ",
+        "check": "Units: Wb/s = V (volts)"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Apply Faraday's law: ε = -N(dΦ/dt) for N turns",
+        "pitfall": "Negative sign indicates direction (Lenz's law)",
+        "check": "EMF in volts"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "For motional EMF: ε = Blv (when v ⊥ B and l ⊥ both)",
+        "pitfall": "All three (B, l, v) must be mutually perpendicular for maximum EMF",
+        "check": "For angled motion: ε = Blvsin(θ)"
+      }
+    ],
+    "timeEstimate": "10-15 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Wrong sign on induced EMF",
+      "diagnosis": "Didn't apply Lenz's law correctly",
+      "fix": "Induced current creates B-field opposing the change in flux. Increasing flux → induced B opposite; decreasing flux → induced B same direction.",
+      "example": "If external B into page increases, induced current creates B out of page (counterclockwise)"
+    },
+    {
+      "symptom": "Missed factor of N for coil",
+      "diagnosis": "Forgot about multiple turns",
+      "fix": "For N-turn coil: ε = -N(dΦ/dt). Each turn contributes to total EMF.",
+      "example": "Solenoid with 100 turns has 100× the EMF of single loop"
+    },
+    {
+      "symptom": "Calculated EMF for constant flux",
+      "diagnosis": "Didn't recognize that flux must change for induction",
+      "fix": "No changing flux means no induced EMF. Check if B, A, or θ is changing with time.",
+      "example": "Loop moving parallel to B field lines has constant flux (no EMF)"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "A circular loop of radius 0.10 m is perpendicular to a magnetic field that increases from 0.20 T to 0.50 T in 2.0 s. Find the induced EMF.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "A = πr² = π(0.10)² = 0.0314 m²",
+          "explanation": "Calculate loop area"
+        },
+        {
+          "step": 2,
+          "math": "ΔΦ = ΔB × A = (0.50 - 0.20) × 0.0314 = 0.00942 Wb",
+          "explanation": "Change in flux (A constant, B changing)"
+        },
+        {
+          "step": 3,
+          "math": "ε = -ΔΦ/Δt = -0.00942/2.0 = -4.71×10⁻³ V = -4.71 mV",
+          "explanation": "Apply Faraday's law (negative indicates direction)"
+        }
+      ],
+      "keyInsight": "EMF depends on rate of change of flux, not the flux itself",
+      "timeEstimate": "5 minutes"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "A 0.50 m metal rod moves at 4.0 m/s perpendicular to a 0.30 T magnetic field. Find the motional EMF between the ends of the rod.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "B = 0.30 T, l = 0.50 m, v = 4.0 m/s",
+          "explanation": "Given values for motional EMF"
+        },
+        {
+          "step": 2,
+          "math": "ε = Blv = (0.30)(0.50)(4.0) = 0.60 V",
+          "explanation": "Motional EMF formula when v ⊥ B and l ⊥ v"
+        },
+        {
+          "step": 3,
+          "math": "Direction: use right-hand rule (F = qv × B on positive charges)",
+          "explanation": "Positive charges accumulate at one end, creating EMF"
+        }
+      ],
+      "keyInsight": "Motional EMF is a special case of Faraday's law for moving conductors",
+      "timeEstimate": "4 minutes"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Induction Recognition",
+      "questions": [
+        {
+          "integral": "For electromagnetic induction to occur, there must be:",
+          "options": ["A magnetic field", "A changing magnetic flux", "A conductor", "All of the above"],
+          "correctAnswer": 1,
+          "explanation": "Changing magnetic flux is the essential requirement for induction"
+        },
+        {
+          "integral": "Lenz's law states that induced current will:",
+          "options": ["Aid the change in flux", "Oppose the change in flux", "Be perpendicular to the flux", "Be zero"],
+          "correctAnswer": 1,
+          "explanation": "Lenz's law: induced effects oppose the change causing them"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Faraday's Law Calculations",
+      "problems": [
+        {
+          "problem": "A 100-turn coil with area 0.01 m² has B field changing at 0.5 T/s. Find the induced EMF.",
+          "answer": "ε = -NA(dB/dt) = -(100)(0.01)(0.5) = -0.5 V",
+          "hint": "Don't forget the N factor for multiple turns",
+          "difficulty": "Easy"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "EM Induction Applications",
+      "problems": [
+        {
+          "problem": "A rectangular loop enters a region of uniform magnetic field. Sketch the induced current as a function of time.",
+          "context": "Flux change analysis",
+          "primaryTechnique": "faradays_law",
+          "secondaryTechniques": ["lenz_law"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "ε = -N(dΦ/dt); motional EMF: ε = Blv; Lenz's law: induced effects oppose change",
+    "whenToUse": ["Changing magnetic flux", "Moving conductors in B fields", "Induced currents"],
+    "formula": "$\\varepsilon = -N\\frac{d\\Phi_B}{dt}$, $\\Phi_B = BA\\cos\\theta$, $\\varepsilon = Blv$",
+    "quickCheck": "No flux change → no EMF; flux change rate gives EMF magnitude"
+  },
+  "patternConnections": ["transformer_equation", "motional_emf"],
+  "masteryCriteria": {
+    "recognitionSpeed": "Identify induction problems from 'changing flux' language",
+    "executionSpeed": "Calculate induced EMF in under 5 minutes",
+    "accuracyTarget": "85% accuracy including Lenz's law direction",
+    "selfCheckQuestions": [
+      "Can I calculate magnetic flux in different configurations?",
+      "Do I understand when flux is changing?",
+      "Can I apply Lenz's law to find current direction?"
+    ]
+  }
+}

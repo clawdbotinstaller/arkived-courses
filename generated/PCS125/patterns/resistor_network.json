@@ -1,0 +1,73 @@
+{
+  "id": "resistor_network",
+  "name": "Series and Parallel Resistor Combinations",
+  "description": "Simplify resistor networks by identifying series and parallel combinations and calculating equivalent resistance",
+  "canonical_form_latex": "R_{eq} = R_1 + R_2 + ... \\text{ (series)}, \\quad \\frac{1}{R_{eq}} = \\frac{1}{R_1} + \\frac{1}{R_2} + ... \\text{ (parallel)}",
+  "identification_signal": "Circuit diagrams with multiple resistors that can be simplified step by step",
+  "frequency": "High",
+  "estimated_time": "5-8 minutes",
+  "strategy": {
+    "step_1": "Identify resistors in series (same current) or parallel (same voltage)",
+    "step_2": "Apply combination formula to simplify",
+    "step_3": "Redraw circuit with equivalent resistance",
+    "step_4": "Repeat until single equivalent resistance remains"
+  },
+  "exam_references": [
+    "2009W_PCS125_M_S_Q4",
+    "2012S_PCS125_M_TS_Q3",
+    "2015W_PCS125_M_TS_Q5",
+    "2024S_PCS125_M_Q3"
+  ],
+  "related_techniques": ["ohms_law", "kirchhoff_laws"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Identify series vs parallel connections",
+      "flashcards": [
+        {
+          "front": {"text": "Resistors connected end-to-end with single path"},
+          "back": {"title": "Series Connection", "explanation": "Same current through all. R_eq = R₁ + R₂ + ..."}
+        },
+        {
+          "front": {"text": "Resistors connected across same two points"},
+          "back": {"title": "Parallel Connection", "explanation": "Same voltage across all. 1/R_eq = 1/R₁ + 1/R₂ + ..."}
+        }
+      ]
+    },
+    "phase_2_strategy": {
+      "purpose": "Systematic simplification approach",
+      "steps": [
+        {
+          "title": "Identify Combination Type",
+          "instruction": "Series: one path, current must flow through all. Parallel: multiple paths, same endpoints.",
+          "how_to": ["Trace current paths", "Look for junctions"]
+        },
+        {
+          "title": "Calculate Equivalent",
+          "instruction": "Series: add resistances. Parallel: add reciprocals, then invert.",
+          "checkpoint": {"question": "Does parallel R_eq make sense?", "answer": "Should be less than smallest resistor"}
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Build simplification skills",
+      "problem_cards": [
+        {
+          "id": "rn_1",
+          "difficulty": "Easy",
+          "task": "Find equivalent resistance",
+          "prompt_latex": "R_1 = 6\\Omega, R_2 = 3\\Omega \\text{ in parallel}",
+          "solution": {
+            "steps": ["1/R_eq = 1/6 + 1/3 = 1/6 + 2/6 = 3/6 = 1/2", "R_eq = 2Ω"],
+            "final_answer_latex": "R_{eq} = 2\\Omega",
+            "verification": "Less than 3Ω ✓"
+          }
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "Resistor Network Master", "pattern_id": "resistor_network"},
+      "what_mastery_means": ["Can simplify complex networks", "Never adds parallel resistances directly", "Understands current/voltage behavior"]
+    }
+  },
+  "source_meta": {"from_db_patterns": false, "from_db_batch2": false, "from_frontend_legacy": false, "duah_mapped": false, "conflicts": []}
+}

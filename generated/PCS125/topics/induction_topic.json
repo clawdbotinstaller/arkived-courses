@@ -1,0 +1,54 @@
+{
+  "topic_id": "induction_topic",
+  "meta": {
+    "display_name": "Electromagnetic Induction",
+    "course_context": "PCS125 - Faraday's law and applications",
+    "professor_methodology": "Emphasis on Lenz's law and the direction of induced currents",
+    "core_formula": "ε = -N(dΦ/dt), Φ = BAcos(θ), ε = Blv",
+    "description": "Faraday's law, Lenz's law, motional EMF, and induced electric fields"
+  },
+  "patterns": [
+    {
+      "id": "transformer_equation",
+      "name": "Transformer Relations",
+      "recognition_signal": "Two coils sharing magnetic flux, questions about voltage/current transformation",
+      "canonical_forms": ["V_s/V_p = N_s/N_p", "I_p/I_s = N_s/N_p", "P_p = P_s (ideal)"],
+      "logic": "Changing flux in primary induces voltage in secondary; power conserved in ideal transformer",
+      "efficiency_trick": {
+        "name": "Quick Ratio Check",
+        "trigger": "Step-up or step-down identification",
+        "steps": ["More turns means higher voltage", "Higher voltage means lower current"]
+      },
+      "pitfalls": [
+        {"name": "Power confusion", "description": "Ideal transformers conserve power (V_pI_p = V_sI_s)"},
+        {"name": "DC transformer myth", "description": "Transformers only work with AC (changing flux)"}
+      ],
+      "worked_example": {
+        "title": "Step-Down Transformer",
+        "problem_latex": "Transformer has N_p = 1000, N_s = 100. Primary voltage is 120 V. Find secondary.",
+        "solution_steps": [
+          {"step": 1, "action": "Apply turns ratio", "reasoning": "V_s/V_p = N_s/N_p", "latex": "V_s = 120 × (100/1000) = 12 \\text{ V}"}
+        ]
+      }
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "Is flux changing?", "yes": "EMF is induced", "no": "No induction"},
+      {"step": 2, "question": "Need direction of induced current?", "yes": "Apply Lenz's law", "no": "Calculate magnitude from Faraday's law"}
+    ],
+    "professor_tips": [
+      "Lenz's law: induced effects oppose the change causing them",
+      "Three ways flux changes: changing B, changing A, changing angle",
+      "Motional EMF is just a special case of Faraday's law",
+      "Transformers require AC - they don't work with DC"
+    ]
+  },
+  "confidence_checklist": [
+    "I can calculate magnetic flux through a loop",
+    "I can apply Faraday's law to find induced EMF",
+    "I can use Lenz's law to find direction of induced current",
+    "I understand motional EMF",
+    "I can analyze ideal transformers"
+  ]
+}

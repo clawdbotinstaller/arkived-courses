@@ -1,0 +1,212 @@
+{
+  "id": "thin_lenses",
+  "displayName": "Thin Lens Equation",
+  "recognition": {
+    "visualSignals": [
+      "Lens diagrams with object and image",
+      "Ray tracing through lenses",
+      "Converging or diverging lens problems",
+      "Image formation questions"
+    ],
+    "verbalTriggers": [
+      "Image distance from lens",
+      "Focal length of lens",
+      "Magnification",
+      "Real or virtual image",
+      "Object placed at..."
+    ],
+    "nonExamples": [
+      "Mirror problems (use mirror equation)",
+      "Thick lens calculations",
+      "Lens combinations (unless simplified)",
+      "Aberration analysis"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Is the lens converging or diverging?",
+        "ifYes": "Converging: f > 0; Diverging: f < 0",
+        "ifNo": "Check lens shape or given focal length"
+      },
+      {
+        "question": "Is the image real or virtual?",
+        "ifYes": "Real: d_i > 0 (opposite side from object); Virtual: d_i < 0 (same side)",
+        "ifNo": "Calculate d_i and determine from sign"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Identify given quantities: d_o (object distance), f (focal length), or d_i",
+        "pitfall": "Converging lens: f > 0; Diverging lens: f < 0",
+        "check": "Object distance d_o is always positive for real objects"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Apply thin lens equation: 1/f = 1/d_o + 1/d_i",
+        "pitfall": "Don't forget to take reciprocal at the end for d_i",
+        "check": "Units: all distances in same units (typically cm or m)"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Calculate magnification: m = -d_i/d_o = h_i/h_o",
+        "pitfall": "Sign matters: m > 0 upright, m < 0 inverted; |m| > 1 enlarged, |m| < 1 reduced",
+        "check": "m = -d_i/d_o"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Interpret results: d_i > 0 real image, d_i < 0 virtual image",
+        "pitfall": "Diverging lenses always form virtual images (d_i < 0)",
+        "check": "Converging lens: real image if d_o > f, virtual if d_o < f"
+      }
+    ],
+    "timeEstimate": "6-10 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Wrong sign for image distance",
+      "diagnosis": "Sign convention confusion",
+      "fix": "Real image: d_i > 0 (opposite side from object). Virtual image: d_i < 0 (same side as object).",
+      "example": "Converging lens with object inside focal length: virtual image on same side, d_i < 0"
+    },
+    {
+      "symptom": "Magnification sign wrong",
+      "diagnosis": "Forgot negative sign in formula or misinterpreted",
+      "fix": "m = -d_i/d_o. Negative m means inverted; positive m means upright.",
+      "example": "Real image from converging lens: d_i > 0, so m < 0 (inverted)"
+    },
+    {
+      "symptom": "Diverging lens creates real image",
+      "diagnosis": "Fundamental error - diverging lenses cannot form real images of real objects",
+      "fix": "Diverging lens (f < 0) always forms virtual, upright, reduced images for real objects.",
+      "example": "For diverging lens: d_i is always negative, m is always positive and |m| < 1"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "An object is placed 30 cm from a converging lens with focal length 10 cm. Find the image distance and magnification.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "d_o = 30 cm, f = +10 cm (converging)",
+          "explanation": "Given values; f > 0 for converging"
+        },
+        {
+          "step": 2,
+          "math": "1/f = 1/d_o + 1/d_i → 1/10 = 1/30 + 1/d_i",
+          "explanation": "Thin lens equation"
+        },
+        {
+          "step": 3,
+          "math": "1/d_i = 1/10 - 1/30 = 3/30 - 1/30 = 2/30 = 1/15",
+          "explanation": "Solve for 1/d_i"
+        },
+        {
+          "step": 4,
+          "math": "d_i = 15 cm",
+          "explanation": "Image distance is positive (real image)"
+        },
+        {
+          "step": 5,
+          "math": "m = -d_i/d_o = -15/30 = -0.5",
+          "explanation": "Magnification is negative (inverted) and 0.5× (reduced)"
+        }
+      ],
+      "keyInsight": "Object outside 2f (d_o > 2f) gives real, inverted, reduced image between f and 2f",
+      "timeEstimate": "5 minutes"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "A diverging lens has f = -20 cm. Where is the image of an object placed 30 cm from the lens?",
+      "solution": [
+        {
+          "step": 1,
+          "math": "d_o = 30 cm, f = -20 cm (diverging)",
+          "explanation": "Given values; f < 0 for diverging lens"
+        },
+        {
+          "step": 2,
+          "math": "1/f = 1/d_o + 1/d_i → 1/(-20) = 1/30 + 1/d_i",
+          "explanation": "Thin lens equation"
+        },
+        {
+          "step": 3,
+          "math": "1/d_i = -1/20 - 1/30 = -3/60 - 2/60 = -5/60 = -1/12",
+          "explanation": "Solve for 1/d_i"
+        },
+        {
+          "step": 4,
+          "math": "d_i = -12 cm",
+          "explanation": "Image is virtual (negative d_i) on same side as object"
+        },
+        {
+          "step": 5,
+          "math": "m = -(-12)/30 = +0.4 (upright, reduced)",
+          "explanation": "Virtual image is upright and smaller than object"
+        }
+      ],
+      "keyInsight": "Diverging lenses always produce virtual, upright, reduced images",
+      "timeEstimate": "5 minutes"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Lens Problem Recognition",
+      "questions": [
+        {
+          "integral": "A converging lens with object inside the focal length produces:",
+          "options": ["Real, inverted image", "Virtual, upright image", "Real, upright image", "No image"],
+          "correctAnswer": 1,
+          "explanation": "Object inside f: virtual, upright, enlarged image (magnifying glass)"
+        },
+        {
+          "integral": "The focal length of a diverging lens is:",
+          "options": ["Always positive", "Always negative", "Depends on object distance", "Infinite"],
+          "correctAnswer": 1,
+          "explanation": "By convention, f < 0 for diverging lenses, f > 0 for converging"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Lens Calculations",
+      "problems": [
+        {
+          "problem": "Find image position for object at 15 cm from converging lens with f = 10 cm.",
+          "answer": "1/d_i = 1/10 - 1/15 = 1/30, so d_i = 30 cm",
+          "hint": "Use 1/f = 1/d_o + 1/d_i",
+          "difficulty": "Easy"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Lens Applications",
+      "problems": [
+        {
+          "problem": "A two-lens system: converging lens (f=20cm) followed by diverging lens (f=-15cm) separated by 50cm. Object placed 30cm before first lens. Find final image.",
+          "context": "Multi-lens systems",
+          "primaryTechnique": "thin_lenses",
+          "secondaryTechniques": ["lens_combinations"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "1/f = 1/d_o + 1/d_i; m = -d_i/d_o; converging: f>0, diverging: f<0",
+    "whenToUse": ["Thin lens problems", "Image formation", "Magnification calculations"],
+    "formula": "$\\frac{1}{f} = \\frac{1}{d_o} + \\frac{1}{d_i}$, $m = -\\frac{d_i}{d_o}$",
+    "quickCheck": "Real image: d_i > 0; Virtual: d_i < 0; Inverted: m < 0; Upright: m > 0"
+  },
+  "patternConnections": ["lens_combinations", "mirror_equation"],
+  "masteryCriteria": {
+    "recognitionSpeed": "Identify lens type and expected image characteristics quickly",
+    "executionSpeed": "Solve single lens problem in under 4 minutes",
+    "accuracyTarget": "90% accuracy on lens calculations",
+    "selfCheckQuestions": [
+      "Can I apply the sign conventions correctly?",
+      "Do I know what image type each lens produces?",
+      "Can I interpret magnification sign and magnitude?"
+    ]
+  }
+}

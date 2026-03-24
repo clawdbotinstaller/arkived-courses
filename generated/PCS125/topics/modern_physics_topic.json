@@ -1,0 +1,55 @@
+{
+  "topic_id": "modern_physics_topic",
+  "meta": {
+    "display_name": "Modern Physics",
+    "course_context": "PCS125 - Quantum and atomic physics",
+    "professor_methodology": "Emphasis on energy quantization and the photon concept",
+    "core_formula": "E = hf, K_max = hf - φ, E_n = -13.6/n² eV",
+    "description": "Photoelectric effect, Bohr model, atomic spectra, and wave-particle duality"
+  },
+  "patterns": [
+    {
+      "id": "photoelectric_pattern",
+      "name": "Photoelectric Effect Analysis",
+      "recognition_signal": "Light hitting metal, electron emission, work function mentioned",
+      "canonical_forms": ["K_max = hf - φ", "eV₀ = K_max", "f₀ = φ/h"],
+      "logic": "Photon energy must exceed work function; excess becomes kinetic energy",
+      "efficiency_trick": {
+        "name": "Stopping Potential Conversion",
+        "trigger": "Given stopping potential in volts",
+        "steps": ["K_max in eV equals V₀ in volts numerically"]
+      },
+      "pitfalls": [
+        {"name": "Intensity misconception", "description": "Intensity affects number of electrons, not their energy"},
+        {"name": "Unit confusion", "description": "Use consistent units: h = 4.136×10⁻¹⁵ eV·s for eV calculations"}
+      ],
+      "worked_example": {
+        "title": "Maximum Kinetic Energy",
+        "problem_latex": "Light with λ = 300 nm on metal with φ = 2.0 eV. Find K_max.",
+        "solution_steps": [
+          {"step": 1, "action": "Calculate photon energy", "reasoning": "E = hc/λ", "latex": "E = 1240/300 = 4.13 \\text{ eV}"},
+          {"step": 2, "action": "Apply Einstein equation", "reasoning": "K_max = E - φ", "latex": "K_max = 4.13 - 2.0 = 2.13 \\text{ eV}"}
+        ]
+      }
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "Photoelectric or atomic transition?", "yes": "Use K_max = hf - φ", "no": "May be energy level transition"},
+      {"step": 2, "question": "Energy levels or wavelength?", "yes": "E_photon = |E_i - E_f| = hc/λ", "no": "Calculate transition energies"}
+    ],
+    "professor_tips": [
+      "The photoelectric effect demonstrates the particle nature of light",
+      "Intensity affects number of photoelectrons, frequency affects their energy",
+      "For hydrogen: memorize E_n = -13.6/n² eV",
+      "Lyman series: UV, Balmer: visible, Paschen: IR"
+    ]
+  },
+  "confidence_checklist": [
+    "I can apply the photoelectric equation",
+    "I understand the difference between classical and quantum predictions",
+    "I can calculate hydrogen energy levels",
+    "I can relate photon energy to wavelength",
+    "I understand atomic spectra and series"
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "id": "ohms_law",
+  "displayName": "Ohms Law and Resistance",
+  "recognition": {
+    "visualSignals": [
+      "Circuit diagrams with resistors",
+      "Questions about current, voltage, or resistance",
+      "Series and parallel resistor combinations",
+      "Voltage drops across circuit elements"
+    ],
+    "verbalTriggers": [
+      "Find the current through the resistor",
+      "What is the voltage drop across...",
+      "Equivalent resistance",
+      "Power dissipated in resistor",
+      "Series or parallel combination"
+    ],
+    "nonExamples": [
+      "Kirchhoff law problems with multiple loops",
+      "Capacitor circuit analysis",
+      "AC circuit with impedance",
+      "Semiconductor/non-ohmic devices"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Are resistors in series or parallel?",
+        "ifYes": "Use combination formulas to simplify",
+        "ifNo": "May need Kirchhoff laws for complex networks"
+      },
+      {
+        "question": "Need to find current, voltage, or resistance?",
+        "ifYes": "Use V = IR appropriately",
+        "ifNo": "May be power calculation: P = IV = I²R = V²/R"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Identify what is given and what is needed",
+        "pitfall": "Don't confuse total resistance with individual resistances",
+        "check": "List known values: V, I, R for each element"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "For combinations: series R_eq = R₁ + R₂ + ..., parallel 1/R_eq = 1/R₁ + 1/R₂ + ...",
+        "pitfall": "Parallel: add reciprocals, not resistances directly",
+        "check": "Parallel equivalent is always less than smallest resistor"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Apply Ohm's law: V = IR to find unknowns",
+        "pitfall": "Use total V and total R for total I; individual values for individual elements",
+        "check": "Units: V in volts, I in amps, R in ohms"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "For power: P = IV = I²R = V²/R",
+        "pitfall": "Choose formula based on what quantities are known",
+        "check": "Power in watts (W)"
+      }
+    ],
+    "timeEstimate": "5-8 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Equivalent resistance too large for parallel",
+      "diagnosis": "Added resistances instead of reciprocals",
+      "fix": "For parallel: 1/R_eq = Σ(1/R_i); R_eq is less than smallest resistor",
+      "example": "Two 10Ω in parallel: 1/R = 1/10 + 1/10 = 1/5, so R = 5Ω (not 20Ω)"
+    },
+    {
+      "symptom": "Current calculation wrong in part of circuit",
+      "diagnosis": "Used total current for branch current or vice versa",
+      "fix": "Current is same through series elements; voltage is same across parallel elements",
+      "example": "In series: I_total = I₁ = I₂; in parallel: V_total = V₁ = V₂"
+    },
+    {
+      "symptom": "Power dissipation answer incorrect",
+      "diagnosis": "Used wrong power formula or wrong values",
+      "fix": "P = IV = I²R = V²/R - pick based on known quantities",
+      "example": "If you know I and R: use P = I²R; if you know V and R: use P = V²/R"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "A 12 V battery is connected to a 4 Ω resistor. Find the current and power dissipated.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "V = 12 V, R = 4 Ω",
+          "explanation": "Given values"
+        },
+        {
+          "step": 2,
+          "math": "I = V/R = 12/4 = 3 A",
+          "explanation": "Ohm's law to find current"
+        },
+        {
+          "step": 3,
+          "math": "P = IV = (3)(12) = 36 W, or P = I²R = 9(4) = 36 W",
+          "explanation": "Power using either formula"
+        }
+      ],
+      "keyInsight": "Simple Ohm's law application - V = IR relates all three quantities",
+      "timeEstimate": "3 minutes"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Three resistors (2 Ω, 4 Ω, and 6 Ω) are connected in parallel across a 12 V battery. Find (a) equivalent resistance, (b) total current, (c) current through each resistor.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "1/R_eq = 1/2 + 1/4 + 1/6 = 6/12 + 3/12 + 2/12 = 11/12",
+          "explanation": "Add reciprocals for parallel combination"
+        },
+        {
+          "step": 2,
+          "math": "R_eq = 12/11 = 1.09 Ω",
+          "explanation": "Take reciprocal to find equivalent resistance"
+        },
+        {
+          "step": 3,
+          "math": "I_total = V/R_eq = 12/(12/11) = 11 A",
+          "explanation": "Total current from battery"
+        },
+        {
+          "step": 4,
+          "math": "I₁ = V/R₁ = 12/2 = 6 A; I₂ = 12/4 = 3 A; I₃ = 12/6 = 2 A",
+          "explanation": "Current through each branch - voltage is 12 V across each"
+        },
+        {
+          "step": 5,
+          "math": "Check: I₁ + I₂ + I₃ = 6 + 3 + 2 = 11 A = I_total ✓",
+          "explanation": "Verify using junction rule"
+        }
+      ],
+      "keyInsight": "In parallel: same voltage across each, currents add to total",
+      "timeEstimate": "7 minutes"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Circuit Analysis Recognition",
+      "questions": [
+        {
+          "integral": "Two resistors in series have equivalent resistance that is:",
+          "options": ["Less than either resistor", "Greater than either resistor", "The average of the two", "The product divided by sum"],
+          "correctAnswer": 1,
+          "explanation": "Series: R_eq = R₁ + R₂, so greater than either"
+        },
+        {
+          "integral": "The power dissipated in a resistor can be calculated as:",
+          "options": ["Only P = IV", "Only P = I²R", "P = IV = I²R = V²/R", "None of these"],
+          "correctAnswer": 2,
+          "explanation": "All three formulas are equivalent using Ohm's law"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Ohm's Law Calculations",
+      "problems": [
+        {
+          "problem": "A 9V battery powers two 3Ω resistors in series. Find the current.",
+          "answer": "R_eq = 3+3 = 6Ω, I = V/R = 9/6 = 1.5 A",
+          "hint": "Series resistances add",
+          "difficulty": "Easy"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Circuit Analysis",
+      "problems": [
+        {
+          "problem": "A resistor network has R₁=2Ω and R₂=4Ω in parallel, then in series with R₃=3Ω. Find the equivalent resistance.",
+          "context": "Combined series-parallel circuits",
+          "primaryTechnique": "ohms_law",
+          "secondaryTechniques": ["resistor_combinations"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "V = IR; Series: R_eq = ΣR; Parallel: 1/R_eq = Σ(1/R); P = IV = I²R = V²/R",
+    "whenToUse": ["DC circuit analysis", "Resistor combinations", "Power calculations"],
+    "formula": "$V = IR$, $P = IV = I^2R = \\frac{V^2}{R}$",
+    "quickCheck": "Series: current same; Parallel: voltage same"
+  },
+  "patternConnections": ["resistor_network", "parallel_plate_capacitor"],
+  "masteryCriteria": {
+    "recognitionSpeed": "Identify series vs parallel instantly",
+    "executionSpeed": "Solve basic circuit in under 4 minutes",
+    "accuracyTarget": "90% accuracy on circuit calculations",
+    "selfCheckQuestions": [
+      "Can I simplify series and parallel combinations?",
+      "Do I know which quantities are same in series vs parallel?",
+      "Can I calculate power using different formulas?"
+    ]
+  }
+}

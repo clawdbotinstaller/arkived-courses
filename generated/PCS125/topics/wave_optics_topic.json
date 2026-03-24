@@ -1,0 +1,54 @@
+{
+  "topic_id": "wave_optics_topic",
+  "meta": {
+    "display_name": "Wave Optics",
+    "course_context": "PCS125 - Interference and diffraction",
+    "professor_methodology": "Emphasis on path difference and phase relationships",
+    "core_formula": "dsin(θ) = mλ, Δy = λL/d",
+    "description": "Double-slit interference, thin films, and diffraction patterns"
+  },
+  "patterns": [
+    {
+      "id": "double_slit_pattern",
+      "name": "Double-Slit Interference",
+      "recognition_signal": "Two slits, laser light, bright and dark fringes on screen",
+      "canonical_forms": ["dsin(θ) = mλ (bright)", "dsin(θ) = (m+½)λ (dark)", "y_m = mλL/d (small angle)"],
+      "logic": "Path difference determines constructive or destructive interference",
+      "efficiency_trick": {
+        "name": "Fringe Spacing",
+        "trigger": "Finding distance between fringes",
+        "steps": ["Δy = λL/d gives spacing between adjacent bright fringes"]
+      },
+      "pitfalls": [
+        {"name": "Angle approximation errors", "description": "Small angle: sin(θ) ≈ tan(θ) = y/L"},
+        {"name": "Order confusion", "description": "Central maximum is m=0, first bright is m=1"}
+      ],
+      "worked_example": {
+        "title": "Fringe Spacing",
+        "problem_latex": "Slits separated by 0.2 mm, λ = 600 nm, L = 2 m. Find fringe spacing.",
+        "solution_steps": [
+          {"step": 1, "action": "Use fringe spacing formula", "reasoning": "Δy = λL/d", "latex": "Δy = (600×10⁻⁹)(2)/(0.2×10⁻³) = 6×10⁻³ \\text{ m} = 6 \\text{ mm}"}
+        ]
+      }
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "Double slit or thin film?", "yes": "Use path difference = dsin(θ)", "no": "Consider phase changes in thin film"},
+      {"step": 2, "question": "Constructive or destructive?", "yes": "δ = mλ for bright/constructive", "no": "δ = (m+½)λ for dark/destructive"}
+    ],
+    "professor_tips": [
+      "Always check for phase changes on reflection in thin film problems",
+      "Small angle approximation is usually valid in lab setups",
+      "Fringes are equally spaced for small angles",
+      "Path difference in film is 2nt (down and back up)"
+    ]
+  },
+  "confidence_checklist": [
+    "I can calculate double-slit interference patterns",
+    "I understand constructive and destructive interference conditions",
+    "I can apply the small angle approximation",
+    "I can analyze thin film interference",
+    "I understand phase changes on reflection"
+  ]
+}

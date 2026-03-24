@@ -1,0 +1,203 @@
+{
+  "id": "bohr_model",
+  "displayName": "Bohr Model of Hydrogen",
+  "recognition": {
+    "visualSignals": [
+      "Hydrogen atom energy levels",
+      "Electron transitions between orbits",
+      "Spectral line series (Lyman, Balmer, Paschen)",
+      "Bohr orbit diagrams"
+    ],
+    "verbalTriggers": [
+      "Bohr model",
+      "Hydrogen energy levels",
+      "Electron transition",
+      "Spectral lines",
+      "Ionization energy",
+      "Ground state vs excited state"
+    ],
+    "nonExamples": [
+      "Multi-electron atoms (need quantum mechanics)",
+      "Nuclear physics",
+      "Particle in a box",
+      "Quantum harmonic oscillator"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Is this about energy levels or orbit radii?",
+        "ifYes": "Use E_n = -13.6 eV/n² or r_n = n²a₀",
+        "ifNo": "May be about angular momentum or velocity"
+      },
+      {
+        "question": "Is an electron transitioning between levels?",
+        "ifYes": "Photon energy equals energy difference: ΔE = E_i - E_f",
+        "ifNo": "Stationary state problem"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Energy levels: E_n = -13.6 eV/n² = -13.6/n² eV for hydrogen",
+        "pitfall": "Ground state n=1 (not n=0); energy is negative (bound state)",
+        "check": "n=1: -13.6 eV; n=2: -3.4 eV; n=∞: 0 eV (ionized)"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Orbit radii: r_n = n²a₀ where a₀ = 0.529 Å = 5.29×10⁻¹¹ m",
+        "pitfall": "Radius increases as n²",
+        "check": "Ground state (n=1) radius is Bohr radius a₀"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "For transitions: photon energy E_photon = E_initial - E_final = hc/λ",
+        "pitfall": "E_photon is positive; E_initial > E_final for emission",
+        "check": "Emission: electron drops to lower n; Absorption: electron jumps to higher n"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Rydberg formula: 1/λ = R(1/n_f² - 1/n_i²) where R = 1.097×10⁷ m⁻¹",
+        "pitfall": "n_f < n_i for emission; n_f > n_i for absorption",
+        "check": "Lyman: n_f=1; Balmer: n_f=2; Paschen: n_f=3"
+      }
+    ],
+    "timeEstimate": "6-10 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Wrong energy difference sign",
+      "diagnosis": "Confused initial and final states",
+      "fix": "For emission: E_photon = E_i - E_f (E_i is higher, less negative). For absorption: E_photon = E_f - E_i.",
+      "example": "n=3 to n=2: ΔE = (-1.51) - (-3.4) = 1.89 eV (Balmer series, visible)"
+    },
+    {
+      "symptom": "Energy levels positive or n starts at 0",
+      "diagnosis": "Fundamental misunderstanding of Bohr model",
+      "fix": "Bound state energies are negative. Ground state is n=1. n=0 is not allowed.",
+      "example": "Ground state energy is -13.6 eV; ionization threshold is 13.6 eV"
+    },
+    {
+      "symptom": "Series identification wrong",
+      "diagnosis": "Confused which final n corresponds to which spectral series",
+      "fix": "Lyman: UV (n_f=1); Balmer: visible (n_f=2); Paschen: IR (n_f=3)",
+      "example": "Hα line (red): n=3→2; Hβ (blue-green): n=4→2"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "Find the energy and radius of the first excited state (n=2) of hydrogen.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "E_n = -13.6 eV/n²",
+          "explanation": "Energy level formula"
+        },
+        {
+          "step": 2,
+          "math": "E₂ = -13.6/4 = -3.4 eV",
+          "explanation": "First excited state energy"
+        },
+        {
+          "step": 3,
+          "math": "r_n = n²a₀ = 4 × 0.529 Å = 2.12 Å",
+          "explanation": "Radius is 4 times the Bohr radius"
+        }
+      ],
+      "keyInsight": "Excited states have higher (less negative) energy and larger radius",
+      "timeEstimate": "3 minutes"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "What is the wavelength of light emitted when hydrogen electron transitions from n=4 to n=2? Which spectral series?",
+      "solution": [
+        {
+          "step": 1,
+          "math": "E₄ = -13.6/16 = -0.85 eV; E₂ = -13.6/4 = -3.4 eV",
+          "explanation": "Calculate energy levels"
+        },
+        {
+          "step": 2,
+          "math": "ΔE = E₄ - E₂ = -0.85 - (-3.4) = 2.55 eV",
+          "explanation": "Energy difference (positive for emission)"
+        },
+        {
+          "step": 3,
+          "math": "λ = hc/ΔE = (4.136×10⁻¹⁵ eV·s)(3×10⁸ m/s)/(2.55 eV)",
+          "explanation": "Calculate wavelength from photon energy"
+        },
+        {
+          "step": 4,
+          "math": "λ = 4.86×10⁻⁷ m = 486 nm (blue-green, Hβ line)",
+          "explanation": "Visible light in Balmer series"
+        },
+        {
+          "step": 5,
+          "math": "Series: Balmer (n_f = 2)",
+          "explanation": "Final state n=2 identifies Balmer series"
+        }
+      ],
+      "keyInsight": "Balmer series (n_f=2) provides visible lines; each transition corresponds to specific wavelength",
+      "timeEstimate": "6 minutes"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Bohr Model Recognition",
+      "questions": [
+        {
+          "integral": "The ground state of hydrogen corresponds to:",
+          "options": ["n=0", "n=1", "n=2", "n=∞"],
+          "correctAnswer": 1,
+          "explanation": "Ground state is n=1 with energy -13.6 eV"
+        },
+        {
+          "integral": "The Balmer series corresponds to transitions ending at:",
+          "options": ["n=1", "n=2", "n=3", "n=4"],
+          "correctAnswer": 1,
+          "explanation": "Balmer series: transitions to n=2 (visible light)"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Bohr Model Calculations",
+      "problems": [
+        {
+          "problem": "Find the ionization energy of hydrogen from ground state.",
+          "answer": "E_ion = 0 - (-13.6) = 13.6 eV",
+          "hint": "Ionization: n=1 to n=∞ (E=0)",
+          "difficulty": "Easy"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Atomic Physics",
+      "problems": [
+        {
+          "problem": "How many different photon wavelengths can be emitted when hydrogen atoms in n=4 level decay to ground state?",
+          "context": "Cascading transitions",
+          "primaryTechnique": "bohr_model",
+          "secondaryTechniques": ["combinatorics"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "E_n = -13.6/n² eV; r_n = n²a₀; 1/λ = R(1/n_f² - 1/n_i²)",
+    "whenToUse": ["Hydrogen energy levels", "Spectral lines", "Atomic transitions"],
+    "formula": "$E_n = -\\frac{13.6 \\text{ eV}}{n^2}$, $r_n = n^2 a_0$, $\\frac{1}{\\lambda} = R\\left(\\frac{1}{n_f^2} - \\frac{1}{n_i^2}\\right)$",
+    "quickCheck": "Ground state n=1; ionization at n=∞ (E=0); emission: n_i > n_f"
+  },
+  "patternConnections": ["energy_levels", "spectral_lines"],
+  "masteryCriteria": {
+    "recognitionSpeed": "Identify Bohr model applicability (hydrogen-like atoms)",
+    "executionSpeed": "Calculate transition wavelengths in under 5 minutes",
+    "accuracyTarget": "90% accuracy on energy level problems",
+    "selfCheckQuestions": [
+      "Can I calculate energy levels for any n?",
+      "Do I know which series corresponds to which final n?",
+      "Can I handle emission vs absorption correctly?"
+    ]
+  }
+}

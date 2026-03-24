@@ -1,0 +1,73 @@
+{
+  "id": "charged_particle_motion",
+  "name": "Charged Particle Motion in Magnetic Fields",
+  "description": "Calculate trajectories, radii, and periods for charged particles moving in uniform magnetic fields",
+  "canonical_form_latex": "r = \\frac{mv}{|q|B}, \\quad T = \\frac{2\\pi m}{|q|B}, \\quad \\omega = \\frac{|q|B}{m}",
+  "identification_signal": "Charged particle (electron, proton, ion) moving perpendicular to magnetic field with circular path",
+  "frequency": "High",
+  "estimated_time": "6-10 minutes",
+  "strategy": {
+    "step_1": "Equate magnetic force to centripetal force: qvB = mv²/r",
+    "step_2": "Solve for radius: r = mv/(qB)",
+    "step_3": "Calculate period from T = 2πr/v = 2πm/(qB)",
+    "step_4": "Use right-hand rule for direction (reverse for negative charges)"
+  },
+  "exam_references": [
+    "2006F_PCS125_E_NS_Q7",
+    "2010W_PCS125_E_TS_Q6",
+    "2013W_PCS125_E_TS_Q5",
+    "2022W_PCS125_Midterm_Solutions_Q5"
+  ],
+  "related_techniques": ["lorentz_force", "cyclotron_motion"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Recognize circular motion in B-field problems",
+      "flashcards": [
+        {
+          "front": {"text": "Proton enters uniform B-field perpendicular to velocity"},
+          "back": {"title": "Circular Motion in B-Field", "explanation": "F = qvB provides centripetal force. Path is circular with r = mv/qB."}
+        }
+      ]
+    },
+    "phase_2_strategy": {
+      "purpose": "Analyze charged particle trajectories",
+      "steps": [
+        {
+          "title": "Force Balance",
+          "instruction": "Magnetic force provides centripetal acceleration: qvB = mv²/r",
+          "why": "Force is perpendicular to velocity, causing circular motion"
+        },
+        {
+          "title": "Solve for Parameters",
+          "instruction": "Radius r = mv/qB. Period T = 2πm/qB (independent of v!)",
+          "checkpoint": {"question": "Does period depend on velocity?", "answer": "No! T depends only on m, q, and B"}
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice trajectory calculations",
+      "problem_cards": [
+        {
+          "id": "cpm_1",
+          "difficulty": "Medium",
+          "task": "Find radius and period",
+          "prompt_latex": "\\text{Electron: } v = 10^7 \\text{ m/s}, B = 0.01 \\text{ T}",
+          "solution": {
+            "steps": [
+              "m = 9.11×10⁻³¹ kg, q = 1.6×10⁻¹⁹ C",
+              "r = mv/qB = (9.11×10⁻³¹)(10⁷)/(1.6×10⁻¹⁹×0.01) = 5.7×10⁻³ m = 5.7 mm",
+              "T = 2πm/qB = 2π(9.11×10⁻³¹)/(1.6×10⁻¹⁹×0.01) = 3.6×10⁻⁹ s = 3.6 ns"
+            ],
+            "final_answer_latex": "r = 5.7 \\text{ mm}, T = 3.6 \\text{ ns}",
+            "verification": "Fast electron, small radius in moderate B-field ✓"
+          }
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "Particle Motion Master", "pattern_id": "charged_particle_motion"},
+      "what_mastery_means": ["Know that T is independent of v", "Can handle different particles", "Understand helical motion when v not ⊥ B"]
+    }
+  },
+  "source_meta": {"from_db_patterns": false, "from_db_batch2": false, "from_frontend_legacy": false, "duah_mapped": false, "conflicts": []}
+}

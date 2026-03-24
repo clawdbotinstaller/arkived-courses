@@ -1,0 +1,208 @@
+{
+  "id": "interference",
+  "displayName": "Wave Interference",
+  "recognition": {
+    "visualSignals": [
+      "Double-slit or multiple-slit setups",
+      "Bright and dark fringes",
+      "Path difference diagrams",
+      "Wavefront overlapping patterns"
+    ],
+    "verbalTriggers": [
+      "Constructive interference",
+      "Destructive interference",
+      "Path difference",
+      "Phase difference",
+      "Bright/dark fringes",
+      "Double slit pattern"
+    ],
+    "nonExamples": [
+      "Single-slit diffraction (different pattern)",
+      "Geometric optics ray tracing",
+      "Doppler effect",
+      "Polarization problems"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Is this double-slit interference?",
+        "ifYes": "Use dsin(θ) = mλ for bright, (m+½)λ for dark",
+        "ifNo": "May be thin film or other interference type"
+      },
+      {
+        "question": "Need to consider phase changes on reflection?",
+        "ifYes": "Thin film: check for π phase shifts at interfaces",
+        "ifNo": "Simple path difference analysis"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Identify wavelength λ, slit separation d, and screen distance L",
+        "pitfall": "λ must be in same units as d",
+        "check": "For visible light: λ ≈ 400-700 nm"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "For double slit: path difference δ = dsin(θ)",
+        "pitfall": "Small angle approximation: sin(θ) ≈ tan(θ) = y/L",
+        "check": "Valid when θ < ~10°"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Constructive: δ = mλ (m = 0, ±1, ±2, ...). Destructive: δ = (m+½)λ",
+        "pitfall": "Central maximum is m=0 for constructive",
+        "check": "First dark fringe is at m=0 for destructive formula"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "For thin films: consider both path in film and phase changes",
+        "pitfall": "π phase change (λ/2) when reflecting off higher n medium",
+        "check": "2nt = (m+½)λ for constructive in reflection with one phase change"
+      }
+    ],
+    "timeEstimate": "8-12 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Wrong condition for constructive/destructive",
+      "diagnosis": "Confused the formulas or didn't account for phase changes",
+      "fix": "Double slit (no phase change): constructive at δ = mλ. Thin film: may need +½λ due to phase change on reflection.",
+      "example": "Double slit bright: dsin(θ) = mλ. Thin film constructive in reflection (one phase change): 2nt = (m+½)λ"
+    },
+    {
+      "symptom": "Fringe position calculation off by factor",
+      "diagnosis": "Used wrong formula or forgot small angle approximation",
+      "fix": "Exact: y = Ltan(θ) where sin(θ) = mλ/d. Small angle: y ≈ mλL/d.",
+      "example": "Position of m-th bright fringe: y_m = mλL/d (small angle)"
+    },
+    {
+      "symptom": "Missed phase change in thin film",
+      "diagnosis": "Didn't check for π phase shift at reflection",
+      "fix": "Phase change of π (equivalent to λ/2 path) occurs when reflecting off medium with higher refractive index.",
+      "example": "Air (n=1) to glass (n=1.5): reflection at interface has phase change. Glass to air: no phase change."
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "In a double-slit experiment, slits are separated by 0.20 mm and screen is 1.5 m away. Light of wavelength 600 nm is used. Find the distance between the central maximum and first bright fringe.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "d = 0.20 mm = 2.0×10⁻⁴ m, L = 1.5 m, λ = 600 nm = 6.0×10⁻⁷ m",
+          "explanation": "Convert to SI units"
+        },
+        {
+          "step": 2,
+          "math": "For first bright fringe (m=1): dsin(θ) = λ",
+          "explanation": "Constructive interference condition"
+        },
+        {
+          "step": 3,
+          "math": "sin(θ) = λ/d = (6.0×10⁻⁷)/(2.0×10⁻⁴) = 3.0×10⁻³",
+          "explanation": "Small angle, so approximation valid"
+        },
+        {
+          "step": 4,
+          "math": "y = Lsin(θ) ≈ Lλ/d = (1.5)(6.0×10⁻⁷)/(2.0×10⁻⁴) = 4.5×10⁻³ m = 4.5 mm",
+          "explanation": "Position of first bright fringe"
+        }
+      ],
+      "keyInsight": "Fringe spacing Δy = λL/d; all fringes equally spaced for small angles",
+      "timeEstimate": "5 minutes"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "A thin film of oil (n = 1.4) floats on water (n = 1.33). What minimum thickness produces constructive interference for reflected light of wavelength 560 nm?",
+      "solution": [
+        {
+          "step": 1,
+          "math": "Check phase changes: Air (n=1) → Oil (n=1.4): phase change. Oil (n=1.4) → Water (n=1.33): no phase change.",
+          "explanation": "One phase change at first interface, none at second"
+        },
+        {
+          "step": 2,
+          "math": "Path in film: 2t (down and back up)",
+          "explanation": "Light travels through film twice"
+        },
+        {
+          "step": 3,
+          "math": "Constructive in reflection with one phase change: 2nt = (m+½)λ",
+          "explanation": "Phase change of π equivalent to λ/2 extra path"
+        },
+        {
+          "step": 4,
+          "math": "Minimum thickness: m=0 → 2nt = λ/2",
+          "explanation": "Smallest non-zero thickness"
+        },
+        {
+          "step": 5,
+          "math": "t = λ/(4n) = 560/(4×1.4) = 100 nm",
+          "explanation": "Calculate minimum thickness"
+        }
+      ],
+      "keyInsight": "Thin film interference requires tracking both path length in film and phase changes at reflections",
+      "timeEstimate": "8 minutes"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Interference Recognition",
+      "questions": [
+        {
+          "integral": "Constructive interference occurs when path difference equals:",
+          "options": ["mλ (integer wavelengths)", "(m+½)λ (half-integer)", "Any multiple of λ/2", "Zero"],
+          "correctAnswer": 0,
+          "explanation": "Constructive when waves arrive in phase: path difference = mλ"
+        },
+        {
+          "integral": "A phase change of π occurs when reflecting from a medium with:",
+          "options": ["Lower refractive index", "Higher refractive index", "Same refractive index", "Any index"],
+          "correctAnswer": 1,
+          "explanation": "π phase shift when reflecting off higher n medium"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Interference Calculations",
+      "problems": [
+        {
+          "problem": "Double slit with d=0.1mm, L=2m, λ=500nm. Find fringe spacing.",
+          "answer": "Δy = λL/d = (500×10⁻⁹)(2)/(0.1×10⁻³) = 0.01 m = 1 cm",
+          "hint": "Fringe spacing is distance between adjacent bright fringes",
+          "difficulty": "Easy"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Wave Optics",
+      "problems": [
+        {
+          "problem": "A diffraction grating with 5000 lines/cm produces second-order maximum at 30°. Find the wavelength.",
+          "context": "Diffraction grating interference",
+          "primaryTechnique": "interference",
+          "secondaryTechniques": ["diffraction_grating"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "Constructive: δ = mλ; Destructive: δ = (m+½)λ; Double slit: dsin(θ) = mλ",
+    "whenToUse": ["Double slit problems", "Thin film interference", "Phase difference analysis"],
+    "formula": "$d\\sin\\theta = m\\lambda$ (bright), $\\Delta y = \\frac{\\lambda L}{d}$",
+    "quickCheck": "Check for phase changes in reflection; path difference determines interference"
+  },
+  "patternConnections": ["double_slit_pattern", "thin_film_interference"],
+  "masteryCriteria": {
+    "recognitionSpeed": "Identify interference type (double slit vs thin film) quickly",
+    "executionSpeed": "Calculate fringe positions in under 5 minutes",
+    "accuracyTarget": "85% accuracy on interference problems",
+    "selfCheckQuestions": [
+      "Can I distinguish constructive from destructive conditions?",
+      "Do I check for phase changes in thin films?",
+      "Can I apply the small angle approximation correctly?"
+    ]
+  }
+}

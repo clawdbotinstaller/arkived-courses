@@ -1,0 +1,63 @@
+{
+  "id": "spring_constant_energy",
+  "name": "Spring Constant from Energy or Oscillation",
+  "description": "Determine spring constant k from oscillation period, frequency, or energy considerations",
+  "canonical_form_latex": "k = \\frac{4\\pi^2 m}{T^2} = m\\omega^2, \\quad U = \\frac{1}{2}kx^2",
+  "identification_signal": "Finding spring constant from period measurements or energy stored",
+  "frequency": "Medium",
+  "estimated_time": "4-6 minutes",
+  "strategy": {
+    "step_1": "From oscillation: use ω = √(k/m) to get k = mω² = 4π²m/T²",
+    "step_2": "From energy: if U and x known, k = 2U/x²",
+    "step_3": "From force: k = F/x (Hooke's law)",
+    "step_4": "Units: k in N/m = kg/s²"
+  },
+  "exam_references": [
+    "2007F_PCS125_M_NS_Q2",
+    "2010W_PCS125_M_TS_Q3",
+    "2012W_PCS125_M_TS_Q2"
+  ],
+  "related_techniques": ["shm_kinematics", "shm_energy"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Identify spring constant determination problems",
+      "flashcards": [
+        {
+          "front": {"text": "Mass oscillates with period 2s on unknown spring"},
+          "back": {"title": "Find k from Period", "explanation": "Use T = 2π√(m/k) → k = 4π²m/T²"}
+        }
+      ]
+    },
+    "phase_2_strategy": {
+      "purpose": "Choose appropriate method",
+      "steps": [
+        {
+          "title": "Method Selection",
+          "instruction": "Given period/frequency: k = mω². Given energy and displacement: k = 2U/x². Given force and displacement: k = F/x.",
+          "how_to": ["Identify what quantities are given", "Rearrange appropriate formula"]
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice k calculations",
+      "problem_cards": [
+        {
+          "id": "k_1",
+          "difficulty": "Easy",
+          "task": "Find spring constant",
+          "prompt_latex": "m = 0.5 \\text{ kg}, T = 1.0 \\text{ s}",
+          "solution": {
+            "steps": ["k = 4π²m/T² = 4π²(0.5)/(1)² = 2π² = 19.7 N/m"],
+            "final_answer_latex": "k = 19.7 \\text{ N/m}",
+            "verification": "Units: kg/s² = N/m ✓"
+          }
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "Spring Constant Master", "pattern_id": "spring_constant_energy"},
+      "what_mastery_means": ["Can derive k from various measurements", "Know all three methods", "Check units consistently"]
+    }
+  },
+  "source_meta": {"from_db_patterns": false, "from_db_batch2": false, "from_frontend_legacy": false, "duah_mapped": false, "conflicts": []}
+}

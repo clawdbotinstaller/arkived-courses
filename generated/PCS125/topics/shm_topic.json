@@ -1,0 +1,55 @@
+{
+  "topic_id": "shm_topic",
+  "meta": {
+    "display_name": "Simple Harmonic Motion",
+    "course_context": "PCS125 - First major topic covering oscillating systems",
+    "professor_methodology": "Focus on energy analysis and the relationship between position, velocity, and acceleration",
+    "core_formula": "x(t) = A cos(ωt + φ), ω = √(k/m)",
+    "description": "Oscillating systems including springs and pendulums, with emphasis on kinematics, dynamics, and energy conservation"
+  },
+  "patterns": [
+    {
+      "id": "shm_period_frequency",
+      "name": "Period and Frequency Calculations",
+      "recognition_signal": "Questions asking for T, f, or ω of oscillators",
+      "canonical_forms": ["T = 2π√(m/k)", "T = 2π√(L/g)", "f = 1/T", "ω = 2πf"],
+      "logic": "Period depends on system parameters (mass and spring constant for springs; length and g for pendulums) but not on amplitude",
+      "efficiency_trick": {
+        "name": "Quick Period Ratio",
+        "trigger": "Comparing periods of two similar systems",
+        "steps": ["Period ratio depends only on ratio of m/k or L"]
+      },
+      "pitfalls": [
+        {"name": "Amplitude dependence myth", "description": "Period does NOT depend on amplitude for ideal SHM"},
+        {"name": "Small angle approximation", "description": "Pendulum formula only valid for θ < 15°"}
+      ],
+      "worked_example": {
+        "title": "Spring Period Change",
+        "problem_latex": "A 2 kg mass oscillates with T = 3 s. What is T if mass becomes 8 kg?",
+        "solution_steps": [
+          {"step": 1, "action": "T ∝ √m", "reasoning": "Period proportional to square root of mass", "latex": "T_2/T_1 = √(m_2/m_1) = √(8/2) = √4 = 2"},
+          {"step": 2, "action": "Calculate new period", "reasoning": "T doubles when mass quadruples", "latex": "T_2 = 2 × 3 = 6 \\text{ s}"}
+        ]
+      }
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "Is the system a spring or pendulum?", "yes": "Use appropriate ω formula", "no": "Identify restoring force"},
+      {"step": 2, "question": "Need position, velocity, or acceleration vs time?", "yes": "Use kinematic equations with phase", "no": "Calculate period or energy"}
+    ],
+    "professor_tips": [
+      "Always draw the free body diagram to identify the restoring force",
+      "Energy methods are often easier than force analysis for finding velocities",
+      "At equilibrium: maximum velocity, zero acceleration",
+      "At turning points: zero velocity, maximum acceleration"
+    ]
+  },
+  "confidence_checklist": [
+    "I can write x(t), v(t), and a(t) for SHM",
+    "I know the difference between frequency f and angular frequency ω",
+    "I can calculate period for both springs and pendulums",
+    "I understand energy conservation in oscillating systems",
+    "I can solve for phase constant from initial conditions"
+  ]
+}

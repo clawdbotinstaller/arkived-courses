@@ -1,0 +1,72 @@
+{
+  "id": "double_slit_pattern",
+  "name": "Double-Slit Interference Pattern",
+  "description": "Calculate positions of bright and dark fringes in double-slit interference patterns",
+  "canonical_form_latex": "d\\sin\\theta = m\\lambda \\text{ (bright)}, \\quad y_m = \\frac{m\\lambda L}{d} \\text{ (small angle)}",
+  "identification_signal": "Two slits, interference pattern, bright/dark fringes on screen",
+  "frequency": "High",
+  "estimated_time": "5-8 minutes",
+  "strategy": {
+    "step_1": "Identify d (slit separation), λ (wavelength), L (screen distance)",
+    "step_2": "Use constructive condition for bright fringes: dsin(θ) = mλ",
+    "step_3": "For small angles: y_m = mλL/d gives fringe position",
+    "step_4": "Fringe spacing Δy = λL/d (distance between adjacent bright fringes)"
+  },
+  "exam_references": [
+    "2000F_PCS125_E_NS_Q8",
+    "2011W_PCS125_E_TS_Q7",
+    "2015W_PCS125_E_TS_Q6",
+    "2018W_PCS125_Final_Exam_Q6"
+  ],
+  "related_techniques": ["interference", "diffraction_grating"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Identify double-slit interference",
+      "flashcards": [
+        {
+          "front": {"text": "Two slits separated by distance d, laser light creates pattern on distant screen"},
+          "back": {"title": "Double-Slit Interference", "explanation": "Use dsin(θ) = mλ for bright fringes. Central maximum at m=0."}
+        }
+      ]
+    },
+    "phase_2_strategy": {
+      "purpose": "Calculate fringe positions",
+      "steps": [
+        {
+          "title": "Path Difference Analysis",
+          "instruction": "Constructive when path difference δ = mλ. Destructive when δ = (m+½)λ.",
+          "how_to": ["δ = dsin(θ)", "For small θ: sin(θ) ≈ tan(θ) = y/L"]
+        },
+        {
+          "title": "Fringe Spacing",
+          "instruction": "Distance between adjacent bright fringes: Δy = λL/d",
+          "why": "Fringes are equally spaced for small angles"
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice interference calculations",
+      "problem_cards": [
+        {
+          "id": "ds_1",
+          "difficulty": "Medium",
+          "task": "Find fringe spacing",
+          "prompt_latex": "d = 0.1 \\text{ mm}, \\lambda = 600 \\text{ nm}, L = 2 \\text{ m}",
+          "solution": {
+            "steps": [
+              "d = 1×10⁻⁴ m, λ = 6×10⁻⁷ m",
+              "Δy = λL/d = (6×10⁻⁷)(2)/(1×10⁻⁴) = 1.2×10⁻² m = 12 mm"
+            ],
+            "final_answer_latex": "\\Delta y = 12 \\text{ mm}",
+            "verification": "Convert all to meters, result in meters ✓"
+          }
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "Interference Pattern Master", "pattern_id": "double_slit_pattern"},
+      "what_mastery_means": ["Know constructive/destructive conditions", "Can apply small angle approximation", "Understand fringe spacing formula"]
+    }
+  },
+  "source_meta": {"from_db_patterns": false, "from_db_batch2": false, "from_frontend_legacy": false, "duah_mapped": false, "conflicts": []}
+}

@@ -1,0 +1,231 @@
+{
+  "id": "shm_kinematics",
+  "displayName": "SHM Kinematics",
+  "recognition": {
+    "visualSignals": [
+      "Mass oscillating on a spring",
+      "Pendulum swinging back and forth",
+      "Sinusoidal position vs time graph",
+      "System with restoring force proportional to displacement"
+    ],
+    "verbalTriggers": [
+      "Find the period of oscillation",
+      "Simple harmonic motion",
+      "Spring-mass system",
+      "Position as function of time",
+      "Maximum velocity/acceleration"
+    ],
+    "nonExamples": [
+      "Damped oscillations with decreasing amplitude",
+      "Forced oscillations with driving frequency",
+      "Projectile motion (parabolic, not sinusoidal)",
+      "Circular motion (constant speed, not oscillating)"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Is the problem about a spring-mass system or pendulum?",
+        "ifYes": "Use appropriate angular frequency formula",
+        "ifNo": "Identify the restoring force and use F = -kx relation"
+      },
+      {
+        "question": "Do you need position, velocity, or acceleration?",
+        "ifYes": "Use kinematic equations with phase",
+        "ifNo": "Calculate period or frequency directly"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Identify the system type and find ω (angular frequency)",
+        "pitfall": "Don't confuse ω with f - ω = 2πf",
+        "check": "Units of ω are rad/s"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Identify amplitude A from initial conditions",
+        "pitfall": "Amplitude is maximum displacement, not peak-to-peak",
+        "check": "A should be positive and in meters"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Write the appropriate equation: x(t) = A cos(ωt + φ)",
+        "pitfall": "Check if you need sin or cos based on initial position",
+        "check": "At t=0, x(0) = A cos(φ) matches initial condition"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Differentiate to find v(t) and a(t) if needed",
+        "pitfall": "v leads x by π/2, a is opposite phase to x",
+        "check": "v_max = Aω, a_max = Aω²"
+      }
+    ],
+    "timeEstimate": "5-8 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Phase angle gives wrong initial position",
+      "diagnosis": "Wrong choice of sin vs cos or wrong sign on phase",
+      "fix": "Use x(t) = A cos(ωt + φ) for release from rest at x=A; use sin for release from x=0",
+      "example": "If released from x=A at t=0, use cos with φ=0; if from x=0, use sin"
+    },
+    {
+      "symptom": "Velocity calculation gives wrong sign",
+      "diagnosis": "Confused derivative signs or phase relationship",
+      "fix": "v(t) = -Aω sin(ωt + φ); maximum speed when passing equilibrium",
+      "example": "At x=A (maximum displacement), v=0; at x=0, v=±Aω"
+    },
+    {
+      "symptom": "Period depends on amplitude in calculation",
+      "diagnosis": "Incorrectly included amplitude in period formula",
+      "fix": "For spring: T = 2π√(m/k); for pendulum: T = 2π√(L/g) - neither depends on A",
+      "example": "Doubling amplitude does NOT change period for ideal SHM"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "A 0.5 kg mass on a spring with k = 200 N/m is displaced 0.1 m from equilibrium and released. Find (a) the period, (b) the maximum velocity.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "ω = √(k/m) = √(200/0.5) = √400 = 20 rad/s",
+          "explanation": "Calculate angular frequency from spring constant and mass"
+        },
+        {
+          "step": 2,
+          "math": "T = 2π/ω = 2π/20 = 0.314 s",
+          "explanation": "Period is 2π divided by angular frequency"
+        },
+        {
+          "step": 3,
+          "math": "v_max = Aω = (0.1 m)(20 rad/s) = 2.0 m/s",
+          "explanation": "Maximum velocity occurs at equilibrium, equals amplitude times ω"
+        }
+      ],
+      "keyInsight": "Amplitude only affects maximum velocity and acceleration, not period",
+      "timeEstimate": "4 minutes"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "A pendulum of length 2.0 m is released from rest at an angle of 10°. Find its position (as angle) 2.5 seconds after release.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "ω = √(g/L) = √(9.8/2.0) = 2.21 rad/s",
+          "explanation": "Angular frequency for simple pendulum depends only on length and g"
+        },
+        {
+          "step": 2,
+          "math": "θ(t) = θ_max cos(ωt) = 10° cos(2.21 × 2.5)",
+          "explanation": "Use cosine since released from maximum angle; convert to radians: 10° = 0.175 rad"
+        },
+        {
+          "step": 3,
+          "math": "θ(2.5) = 0.175 cos(5.53 rad) = 0.175 × 0.726 = 0.127 rad = 7.3°",
+          "explanation": "Calculate position at given time; answer remains positive so still on same side"
+        }
+      ],
+      "keyInsight": "For small angles, pendulum motion is approximately simple harmonic",
+      "timeEstimate": "7 minutes"
+    },
+    {
+      "difficulty": "Hard",
+      "problem": "A mass-spring system has position x(t) = (0.20 m)cos(4.0t + π/3). Find (a) the first time it passes through x = 0.10 m moving in the negative direction, (b) its velocity at that instant.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "0.10 = 0.20 cos(4.0t + π/3)",
+          "explanation": "Set position equal to desired value"
+        },
+        {
+          "step": 2,
+          "math": "cos(4.0t + π/3) = 0.5, so 4.0t + π/3 = π/3 or 5π/3 or ...",
+          "explanation": "Solve for the phase angle; multiple solutions exist"
+        },
+        {
+          "step": 3,
+          "math": "v(t) = -Aω sin(ωt + φ) = -0.20(4.0)sin(4.0t + π/3) = -0.8 sin(4.0t + π/3)",
+          "explanation": "Velocity is negative when sine is positive"
+        },
+        {
+          "step": 4,
+          "math": "For 4.0t + π/3 = π/3: v = -0.8 sin(π/3) = -0.69 m/s (negative, valid)",
+          "explanation": "Check which solution gives negative velocity"
+        },
+        {
+          "step": 5,
+          "math": "4.0t + π/3 = 5π/3: t = (5π/3 - π/3)/4.0 = π/3 = 1.05 s",
+          "explanation": "First time is when phase equals 5π/3 (first crossing after release)"
+        }
+      ],
+      "keyInsight": "Must check both position and velocity direction to find correct time",
+      "timeEstimate": "12 minutes"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Recognize SHM Problems",
+      "questions": [
+        {
+          "integral": "A block attached to a spring oscillates with amplitude 0.15 m. What technique finds the maximum speed?",
+          "options": ["Use v_max = Aω", "Use conservation of energy only", "Use F = ma", "Cannot be determined"],
+          "correctAnswer": 0,
+          "explanation": "Maximum speed in SHM is always v_max = Aω"
+        },
+        {
+          "integral": "A pendulum clock runs slow. What should you do to fix it?",
+          "options": ["Increase the amplitude", "Decrease the length", "Increase the mass", "Decrease the amplitude"],
+          "correctAnswer": 1,
+          "explanation": "T = 2π√(L/g), so decreasing L decreases period, making clock run faster"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "SHM Calculations",
+      "problems": [
+        {
+          "problem": "A 0.8 kg mass on a spring (k = 320 N/m) oscillates with amplitude 0.12 m. Find the period.",
+          "answer": "T = 2π√(m/k) = 2π√(0.8/320) = 0.314 s",
+          "hint": "Use T = 2π√(m/k) for spring-mass system",
+          "difficulty": "Easy"
+        },
+        {
+          "problem": "A simple pendulum has period 2.0 s on Earth. What is its length?",
+          "answer": "L = gT²/(4π²) = 9.8(4)/(4π²) = 0.99 m ≈ 1.0 m",
+          "hint": "Rearrange T = 2π√(L/g) to solve for L",
+          "difficulty": "Medium"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Exam-Style SHM Problems",
+      "problems": [
+        {
+          "problem": "A particle undergoes SHM with amplitude 0.25 m and total energy 5.0 J. At what displacement is the kinetic energy equal to the potential energy?",
+          "context": "Energy analysis in oscillating systems",
+          "primaryTechnique": "shm_energy",
+          "secondaryTechniques": ["shm_kinematics"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "x(t) = A cos(ωt + φ), where ω = √(k/m) for springs, ω = √(g/L) for pendulums",
+    "whenToUse": ["Oscillating systems", "Spring-mass problems", "Pendulum motion", "Sinusoidal motion analysis"],
+    "formula": "$x(t) = A \\cos(\\omega t + \\phi)$, $v(t) = -A\\omega \\sin(\\omega t + \\phi)$, $a(t) = -A\\omega^2 \\cos(\\omega t + \\phi)$",
+    "quickCheck": "v_max = Aω, a_max = Aω², T = 2π/ω"
+  },
+  "patternConnections": ["shm_period_frequency", "spring_constant_energy", "pendulum_small_angles"],
+  "masteryCriteria": {
+    "recognitionSpeed": "Identify SHM within 10 seconds of reading problem",
+    "executionSpeed": "Complete standard SHM calculation in under 5 minutes",
+    "accuracyTarget": "90% accuracy on drill sets",
+    "selfCheckQuestions": [
+      "Can I identify whether a system exhibits SHM?",
+      "Do I know the angular frequency formulas for spring and pendulum?",
+      "Can I relate position, velocity, and acceleration in SHM?"
+    ]
+  }
+}

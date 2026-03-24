@@ -1,0 +1,72 @@
+{
+  "id": "rl_circuit_time_constant",
+  "name": "RL Circuit Time Constants",
+  "description": "Analyze RL circuits with exponential current growth or decay using time constant τ = L/R",
+  "canonical_form_latex": "\\tau = \\frac{L}{R}, \\quad I(t) = I_{max}(1 - e^{-t/\\tau}) \\text{ (growth)}, \\quad I(t) = I_0e^{-t/\\tau} \\text{ (decay)}",
+  "identification_signal": "Circuits with inductors and resistors, questions about current over time during switching",
+  "frequency": "Medium",
+  "estimated_time": "6-10 minutes",
+  "strategy": {
+    "step_1": "Calculate time constant: τ = L/R",
+    "step_2": "Identify whether current is growing or decaying",
+    "step_3": "Use appropriate exponential formula",
+    "step_4": "Find maximum current from I_max = ε/R (growth) or initial current (decay)"
+  },
+  "exam_references": [
+    "2012W_PCS125_E_TS_Q6",
+    "2014W_PCS125_E_TS_Q5",
+    "2016W_PCS125_M_TS_Q4"
+  ],
+  "related_techniques": ["inductors", "lr_circuits"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Recognize RL circuit problems",
+      "flashcards": [
+        {
+          "front": {"text": "Inductor in series with resistor, switch closed at t=0"},
+          "back": {"title": "RL Circuit Growth", "explanation": "Current grows exponentially with time constant τ = L/R"}
+        }
+      ]
+    },
+    "phase_2_strategy": {
+      "purpose": "Analyze RL transients",
+      "steps": [
+        {
+          "title": "Find Time Constant",
+          "instruction": "τ = L/R. Units: Henry/Ohm = seconds.",
+          "checkpoint": {"question": "What are the units of τ?", "answer": "Seconds"}
+        },
+        {
+          "title": "Initial and Final Conditions",
+          "instruction": "Inductor opposes change: I(0⁺) = I(0⁻). At steady state: inductor acts as wire.",
+          "why": "Inductor current cannot change instantaneously"
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice RL transient analysis",
+      "problem_cards": [
+        {
+          "id": "rl_1",
+          "difficulty": "Medium",
+          "task": "Find current at time t",
+          "prompt_latex": "L = 2 \\text{ H}, R = 4 \\Omega, \\mathcal{E} = 12 \\text{ V}, t = 0.5 \\text{ s}",
+          "solution": {
+            "steps": [
+              "τ = L/R = 2/4 = 0.5 s",
+              "I_max = ε/R = 12/4 = 3 A",
+              "I(t) = I_max(1 - e^(-t/τ)) = 3(1 - e^(-0.5/0.5)) = 3(1 - e⁻¹) = 3(0.632) = 1.90 A"
+            ],
+            "final_answer_latex": "I = 1.90 \\text{ A}",
+            "verification": "At t=0, I=0. At t→∞, I→3 A. At t=τ, I ≈ 0.63×I_max ✓"
+          }
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "RL Circuits Master", "pattern_id": "rl_circuit_time_constant"},
+      "what_mastery_means": ["Understand inductor behavior at t=0 and t=∞", "Can derive time constant", "Know exponential forms"]
+    }
+  },
+  "source_meta": {"from_db_patterns": false, "from_db_batch2": false, "from_frontend_legacy": false, "duah_mapped": false, "conflicts": []}
+}

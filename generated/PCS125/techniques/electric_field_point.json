@@ -1,0 +1,206 @@
+{
+  "id": "electric_field_point",
+  "displayName": "Electric Field from Point Charges",
+  "recognition": {
+    "visualSignals": [
+      "Electric field at a point in space",
+      "Vector arrows representing E-field",
+      "Point charges creating field patterns",
+      "Questions asking for field strength and direction"
+    ],
+    "verbalTriggers": [
+      "Electric field at point P",
+      "Electric field due to point charge",
+      "Net electric field",
+      "Field direction and magnitude",
+      "Where is the electric field zero?"
+    ],
+    "nonExamples": [
+      "Force on a charge (that's F = qE, not E-field calculation)",
+      "Gauss law problems with symmetry",
+      "Electric potential calculations",
+      "Continuous charge distributions"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Is this about finding E-field from point charges?",
+        "ifYes": "Use E = kQ/r² for each charge",
+        "ifNo": "May need integration for continuous distributions"
+      },
+      {
+        "question": "Multiple charges creating field?",
+        "ifYes": "Calculate each contribution, add as vectors",
+        "ifNo": "Single point charge - straightforward calculation"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Identify the source charge(s) Q creating the field",
+        "pitfall": "E-field is created by source charges, felt at observation point",
+        "check": "Source charge Q, not test charge q"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Calculate magnitude: E = k|Q|/r² where r is distance from Q to point",
+        "pitfall": "Distance from source charge, not from origin",
+        "check": "Units: E in N/C or V/m"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Determine direction: away from +Q, toward -Q",
+        "pitfall": "Direction is radial from point charge",
+        "check": "Positive charges create outward field, negative inward"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "For multiple charges, add fields vectorially",
+        "pitfall": "E-field is a vector - cannot simply add magnitudes",
+        "check": "Break into components if not collinear"
+      }
+    ],
+    "timeEstimate": "8-12 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Using test charge instead of source charge",
+      "diagnosis": "Confusing F = qE with E = kQ/r²",
+      "fix": "E-field depends on SOURCE charge Q, not test charge q",
+      "example": "To find E at point P due to charge Q: E = kQ/r², regardless of any test charge at P"
+    },
+    {
+      "symptom": "Wrong direction for E-field",
+      "diagnosis": "Confused about field direction convention",
+      "fix": "E-field points away from positive source charges, toward negative source charges",
+      "example": "Field from +Q points radially outward; field from -Q points radially inward"
+    },
+    {
+      "symptom": "Net field calculation incorrect",
+      "diagnosis": "Added magnitudes instead of vectors",
+      "fix": "Break each E-field into x and y components, sum components separately",
+      "example": "For two charges not on same axis: E_net,x = E₁x + E₂x, E_net,y = E₁y + E₂y"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "Find the electric field 0.30 m from a point charge Q = +4.0 μC.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "Q = 4.0 × 10⁻⁶ C, r = 0.30 m",
+          "explanation": "Given values in SI units"
+        },
+        {
+          "step": 2,
+          "math": "E = kQ/r² = (8.99×10⁹)(4.0×10⁻⁶)/(0.30)²",
+          "explanation": "Apply point charge field formula"
+        },
+        {
+          "step": 3,
+          "math": "E = (8.99×10⁹)(4.0×10⁻⁶)/0.09 = 3.996×10⁵ N/C",
+          "explanation": "Calculate magnitude"
+        },
+        {
+          "step": 4,
+          "math": "Direction: radially outward (away from positive charge)",
+          "explanation": "Positive source charge creates outward field"
+        }
+      ],
+      "keyInsight": "E-field from positive charge points away; magnitude falls as 1/r²",
+      "timeEstimate": "4 minutes"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Two charges, q₁ = +5.0 nC at x=0 and q₂ = -8.0 nC at x=0.40 m. Find the electric field at x=0.60 m.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "Distance from q₁: r₁ = 0.60 m. Distance from q₂: r₂ = 0.20 m.",
+          "explanation": "Find distances from each charge to the point"
+        },
+        {
+          "step": 2,
+          "math": "E₁ (from +q₁): points in +x direction (away from positive)",
+          "explanation": "Positive charge creates field pointing away"
+        },
+        {
+          "step": 3,
+          "math": "E₂ (from -q₂): points in +x direction (toward negative)",
+          "explanation": "Negative charge creates field pointing toward it; q₂ is at x=0.40, so field at x=0.60 points left, wait - toward negative means toward x=0.40, so from x=0.60 that's -x direction"
+        },
+        {
+          "step": 4,
+          "math": "E₁ = k|q₁|/r₁² = (8.99×10⁹)(5.0×10⁻⁹)/(0.60)² = 124.9 N/C (+x)",
+          "explanation": "Calculate field from q₁"
+        },
+        {
+          "step": 5,
+          "math": "E₂ = k|q₂|/r₂² = (8.99×10⁹)(8.0×10⁻⁹)/(0.20)² = 1798 N/C (-x, toward q₂)",
+          "explanation": "Calculate field from q₂, direction is toward negative charge"
+        },
+        {
+          "step": 6,
+          "math": "E_net = E₁ - E₂ = 124.9 - 1798 = -1673 N/C, so 1673 N/C in -x direction",
+          "explanation": "Since both are on x-axis, subtract; net field points toward negative charge"
+        }
+      ],
+      "keyInsight": "With multiple charges, calculate each field separately with proper direction, then vectorially sum",
+      "timeEstimate": "8 minutes"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "E-Field Recognition",
+      "questions": [
+        {
+          "integral": "The electric field created by a negative point charge points:",
+          "options": ["Away from the charge", "Toward the charge", "Perpendicular to the charge", "Nowhere - negative charges don't create fields"],
+          "correctAnswer": 1,
+          "explanation": "Electric field points toward negative source charges, away from positive"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "E-Field Calculations",
+      "problems": [
+        {
+          "problem": "Find the electric field 0.50 m from a -6 μC charge.",
+          "answer": "E = k|Q|/r² = (8.99×10⁹)(6×10⁻⁶)/(0.50)² = 2.16×10⁵ N/C toward the charge",
+          "hint": "Magnitude uses |Q|; direction is toward negative charge",
+          "difficulty": "Easy"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "E-Field Applications",
+      "problems": [
+        {
+          "problem": "At what point along the line connecting a +q and +4q separated by distance d is the electric field zero?",
+          "context": "Finding null points in electric fields",
+          "primaryTechnique": "electric_field_point",
+          "secondaryTechniques": ["coulombs_law"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "E = kQ/r²; direction away from +Q, toward -Q; E is a vector field",
+    "whenToUse": ["Point charge field calculations", "Superposition of fields", "Finding null points"],
+    "formula": "$E = k\\frac{|Q|}{r^2}$, direction: away from +, toward -",
+    "quickCheck": "Units: N/C; E-field exists independent of test charge"
+  },
+  "patternConnections": ["point_charge_field", "electric_field_superposition"],
+  "masteryCriteria": {
+    "recognitionSpeed": "Distinguish E-field from force problems immediately",
+    "executionSpeed": "Calculate single point charge field in 2 minutes",
+    "accuracyTarget": "85% accuracy with vector addition",
+    "selfCheckQuestions": [
+      "Do I know the direction convention for E-field?",
+      "Can I distinguish source charge from test charge?",
+      "Do I handle vector addition correctly?"
+    ]
+  }
+}
