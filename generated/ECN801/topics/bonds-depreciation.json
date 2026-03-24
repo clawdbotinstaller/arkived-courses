@@ -1,0 +1,44 @@
+{
+  "topic_id": "bonds_depreciation",
+  "meta": {
+    "display_name": "Bonds and Depreciation",
+    "course_context": "ECN801 - Engineering Economics",
+    "professor_methodology": "Bond pricing as PV of coupons plus face value",
+    "core_formula": "P_bond = C(P/A,i,n) + F(P/F,i,n)",
+    "description": "Bond valuation principles and basic depreciation concepts"
+  },
+  "patterns": [
+    {
+      "id": "bond_valuation_pattern",
+      "name": "Bond Pricing",
+      "recognition_signal": "Face value, coupon rate, yield rate, maturity given",
+      "canonical_forms": ["P = C(P/A,i,n) + F(P/F,i,n)"],
+      "logic": "Present value of coupon annuity plus present value of face value",
+      "efficiency_trick": {
+        "name": "Premium vs Discount",
+        "trigger": "Quick check of bond price",
+        "steps": ["Yield > Coupon: Discount (P < F)", "Yield < Coupon: Premium (P > F)"]
+      },
+      "pitfalls": [
+        {"name": "Semi-annual error", "description": "Forgetting to double periods and halve rates"},
+        {"name": "Rate confusion", "description": "Confusing coupon rate with yield rate"}
+      ]
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "Semi-annual coupons?", "yes": "Double n, halve rates", "no": "Use annual"},
+      {"step": 2, "question": "Which rate for discounting?", "yes": "Use yield (market) rate", "no": ""}
+    ],
+    "professor_tips": [
+      "Bond price and yield are inversely related",
+      "Most corporate bonds are semi-annual",
+      "Coupon rate determines payment, yield determines price"
+    ]
+  },
+  "confidence_checklist": [
+    "I can price any bond correctly",
+    "I understand premium vs discount bonds",
+    "I handle semi-annual bonds properly"
+  ]
+}

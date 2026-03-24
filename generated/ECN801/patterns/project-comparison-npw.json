@@ -1,0 +1,77 @@
+{
+  "id": "project_comparison_npw",
+  "name": "Project Comparison Using NPW",
+  "description": "Compare mutually exclusive alternatives using net present worth at MARR",
+  "canonical_form_latex": "\\text{Choose project with max NPW} \\geq 0",
+  "identification_signal": "Mutually exclusive projects, select best using present worth at MARR",
+  "frequency": "Very Common - appears in 80% of exams",
+  "estimated_time": "10-15 minutes",
+  "strategy": {
+    "step_1": "Verify alternatives are mutually exclusive (choose one)",
+    "step_2": "Calculate NPW for each alternative at given MARR",
+    "step_3": "For unequal lives: use common multiple or annual worth",
+    "step_4": "Select alternative with highest NPW ≥ 0"
+  },
+  "exam_references": [
+    "2009F Q6",
+    "2009F Q7",
+    "2013W M2"
+  ],
+  "related_techniques": ["npw_calculation", "aw_calculation"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Identify project comparison",
+      "flashcards": [
+        {
+          "front": {"text": "Mutually exclusive alternatives"},
+          "back": {"title": "NPW Comparison", "explanation": "Choose highest NPW ≥ 0"}
+        }
+      ],
+      "spot_it": {
+        "instructions": "Spot comparison problems",
+        "items": [
+          {
+            "prompt_latex": "Select among Project A, B, or C using MARR = 12%",
+            "is_match": true,
+            "key_cue": "Select among alternatives",
+            "explanation": "NPW comparison required"
+          }
+        ]
+      }
+    },
+    "phase_2_strategy": {
+      "purpose": "Comparison strategy",
+      "steps": [
+        {
+          "title": "Equal Lives Check",
+          "instruction": "Compare project lifespans",
+          "why": "Unequal lives need special handling"
+        },
+        {
+          "title": "Calculate All NPWs",
+          "instruction": "Find NPW for each alternative",
+          "why": "Need values to compare"
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice comparisons",
+      "problem_cards": [
+        {
+          "id": "comp-1",
+          "difficulty": "hard",
+          "task": "Select best project",
+          "prompt_latex": "A: -\\$10000, +\\$3000/yr, 4yr; B: -\\$15000, +\\$4000/yr, 6yr; MARR=10\\%",
+          "solution": {
+            "steps": ["Unequal lives - use AW", "AW_A = -10000(A/P,10%,4) + 3000 = \\$146", "AW_B = -15000(A/P,10%,6) + 4000 = \\$556", "Choose B (higher AW)"],
+            "final_answer_latex": "\\text{Select Project B}"
+          }
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "Project Analyst", "pattern_id": "project_comparison_npw"},
+      "what_mastery_means": ["Correctly compare any set of alternatives", "Handle unequal lives properly"]
+    }
+  }
+}

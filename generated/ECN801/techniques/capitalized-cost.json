@@ -1,0 +1,199 @@
+{
+  "id": "capitalized_cost",
+  "displayName": "Capitalized Cost",
+  "recognition": {
+    "visualSignals": [
+      "Perpetual service or infinite life project",
+      "Forever or perpetual in problem statement",
+      "Endowment or permanent maintenance",
+      "Replacement cycles repeating forever"
+    ],
+    "verbalTriggers": [
+      "Capitalized cost",
+      "Perpetual service",
+      "Infinite horizon",
+      "Forever",
+      "Permanent endowment",
+      "CEA (capitalized equivalent amount)"
+    ],
+    "nonExamples": [
+      "Finite life projects (use NPW)",
+      "Simple annual worth",
+      "One-time investments"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Is there a replacement cycle?",
+        "ifYes": "Convert to annual equivalent first",
+        "ifNo": "Direct perpetual formula"
+      },
+      {
+        "question": "Are there perpetual maintenance costs?",
+        "ifYes": "P = A/i for perpetual series",
+        "ifNo": "Just initial cost component"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Identify initial cost and all perpetual costs",
+        "pitfall": "Missing periodic replacement costs",
+        "check": "List first cost, annual maintenance, periodic replacements"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "For replacement cycles: calculate AW over cycle life",
+        "pitfall": "Forgetting salvage in capital recovery",
+        "check": "AW = P(A/P,i,n) - S(A/F,i,n) + annual costs"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Convert perpetual annual costs: P_perpetual = A/i",
+        "pitfall": "Using P/A factor instead of dividing by i",
+        "check": "As n→∞, A/P → i, so P = A/i"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Sum all components: CC = Initial Cost + PW(perpetual costs)",
+        "pitfall": "Double counting costs",
+        "check": "Each cost component included once"
+      }
+    ],
+    "timeEstimate": "10-15 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Using finite-life formula for perpetual costs",
+      "diagnosis": "Using (P/A) instead of dividing by i",
+      "fix": "For perpetual series: P = A/i",
+      "example": "$1000/year forever at 10%: P = 1000/0.10 = $10,000"
+    },
+    {
+      "symptom": "Wrong answer for replacement cycles",
+      "diagnosis": "Not converting cycle to annual equivalent first",
+      "fix": "Find AW of one cycle, then CC = AW/i",
+      "example": "Asset replaced every 10 years: find 10-year AW first"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Medium",
+      "problem": "Find capitalized cost of a permanent endowment to provide $10,000/year forever at 5% interest.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "A = $10,000/year, i = 5%",
+          "explanation": "Perpetual annual payment"
+        },
+        {
+          "step": 2,
+          "math": "CC = A/i = 10,000/0.05 = $200,000",
+          "explanation": "Perpetuity formula"
+        }
+      ],
+      "keyInsight": "Need $200K principal to generate $10K/year at 5% forever",
+      "timeEstimate": "5 min"
+    },
+    {
+      "difficulty": "Hard",
+      "problem": "A system costs $800,000 initially, needs rework every 15 years at $50,000, and has $25,000/year operating costs (first 12 years) then $40,000/year forever. Find CC at 12%.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "Initial CC1 = $800,000",
+          "explanation": "First cost"
+        },
+        {
+          "step": 2,
+          "math": "Rework AW = 50,000(A/F,12%,15) = 50,000(0.0268) = $1,340/year",
+          "explanation": "Convert rework to annual equivalent"
+        },
+        {
+          "step": 3,
+          "math": "Operating: First 12 years = $25,000; After = $40,000",
+          "explanation": "Split operating costs"
+        },
+        {
+          "step": 4,
+          "math": "Perpetual operating at year 12: P_12 = 40,000/0.12 = $333,333",
+          "explanation": "Perpetual cost at year 12"
+        },
+        {
+          "step": 5,
+          "math": "P_0(operating) = 333,333(P/F,12%,12) + 25,000(P/A,12%,12) = 333,333(0.2567) + 25,000(6.1944) = 85,566 + 154,860 = $240,426",
+          "explanation": "Convert to present"
+        },
+        {
+          "step": 6,
+          "math": "Perpetual rework: 1,340/0.12 = $11,167",
+          "explanation": "Rework as perpetual"
+        },
+        {
+          "step": 7,
+          "math": "Total CC = 800,000 + 240,426 + 11,167 = $1,051,593",
+          "explanation": "Sum all components"
+        }
+      ],
+      "keyInsight": "Break into components, convert each to present worth",
+      "timeEstimate": "15 min"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Capitalized Cost Recognition",
+      "questions": [
+        {
+          "integral": "Endowment to fund $5000/year scholarships forever",
+          "options": ["Capitalized cost", "NPW", "IRR", "Payback"],
+          "correctAnswer": 0,
+          "explanation": "Perpetual funding requires capitalized cost"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Capitalized Cost Calculations",
+      "problems": [
+        {
+          "problem": "Find CC to provide $8000/year forever at 8% interest",
+          "answer": "$100,000",
+          "hint": "CC = A/i",
+          "difficulty": "Easy"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Exam Capitalized Cost Problems",
+      "problems": [
+        {
+          "problem": "Bridge costs $2M initially, repainted every 10 years at $200K, annual maintenance $30K. Find CC at 6%.",
+          "context": "Perpetual infrastructure project",
+          "primaryTechnique": "capitalized_cost",
+          "secondaryTechniques": ["aw_calculation"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "CC = Initial Cost + A/i for perpetual costs",
+    "whenToUse": [
+      "Perpetual service projects",
+      "Endowment calculations",
+      "Infrastructure with indefinite life"
+    ],
+    "formula": "CC = P + A/i (for simple case)",
+    "quickCheck": "CC converts perpetual annual to lump sum equivalent"
+  },
+  "patternConnections": ["capitalized_cost_pattern"],
+  "masteryCriteria": {
+    "recognitionSpeed": "Identify CC problem in < 10 seconds",
+    "executionSpeed": "Solve CC in < 12 minutes",
+    "accuracyTarget": "85% accuracy",
+    "selfCheckQuestions": [
+      "Is this a perpetual/infinite horizon problem?",
+      "Did I convert all costs to present worth?",
+      "For replacement cycles, did I find AW first?"
+    ]
+  }
+}

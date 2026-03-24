@@ -1,0 +1,165 @@
+{
+  "id": "bond_pricing",
+  "displayName": "Bond Pricing",
+  "recognition": {
+    "visualSignals": [
+      "Face value, coupon rate, and yield rate given",
+      "Bond valuation or pricing question",
+      "Semi-annual or annual coupon payments",
+      "Time to maturity specified"
+    ],
+    "verbalTriggers": [
+      "Price of a bond",
+      "Bond valuation",
+      "What should an investor pay for this bond",
+      "Current market value of bond",
+      "Yield to maturity"
+    ],
+    "nonExamples": [
+      "Stock valuation",
+      "Simple loan calculations",
+      "IRR of arbitrary cash flows"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Are coupons paid semi-annually?",
+        "ifYes": "Double periods, halve rates",
+        "ifNo": "Use annual periods and rates"
+      },
+      {
+        "question": "Are you finding price given yield?",
+        "ifYes": "Discount coupons and face value",
+        "ifNo": "For yield given price: trial and error"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Identify face value (F), coupon rate (c), yield rate (i), years to maturity (n)",
+        "pitfall": "Confusing coupon rate with yield rate",
+        "check": "Coupon rate determines payments; yield rate is discount rate"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Calculate coupon payment: Coupon = F × c / payments_per_year",
+        "pitfall": "Not adjusting for semi-annual coupons",
+        "check": "Semi-annual: divide annual coupon rate by 2"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Set up bond price formula: P = Coupon(P/A,i,n) + Face(P/F,i,n)",
+        "pitfall": "Wrong number of periods",
+        "check": "n = years × payments_per_year"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Calculate using appropriate factors",
+        "pitfall": "Using nominal annual rate instead of periodic rate",
+        "check": "i should be rate per coupon period"
+      }
+    ],
+    "timeEstimate": "8-12 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Bond price > face value when yield > coupon rate",
+      "diagnosis": "Using wrong rates - price and yield are inversely related",
+      "fix": "If yield > coupon, bond sells at discount (price < face)",
+      "example": "Face = 1000, coupon = 8%, yield = 10% → Price < 1000"
+    },
+    {
+      "symptom": "Wrong answer by factor of 2",
+      "diagnosis": "Semi-annual adjustment errors",
+      "fix": "For semi-annual: n×2 periods, i/2 per period, coupon/2 per payment",
+      "example": "10-year semi-annual bond: n = 20 periods"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Medium",
+      "problem": "A 10-year bond with $10,000 face value has 8% coupon paid quarterly. Find price for 12% nominal yield.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "F = 10,000, c = 8%/4 = 2% per quarter, i = 12%/4 = 3% per quarter, n = 10×4 = 40",
+          "explanation": "Adjust for quarterly payments"
+        },
+        {
+          "step": 2,
+          "math": "Coupon = 10,000 × 0.02 = $200 per quarter",
+          "explanation": "Quarterly coupon payment"
+        },
+        {
+          "step": 3,
+          "math": "P = 200(P/A,3%,40) + 10,000(P/F,3%,40)",
+          "explanation": "Bond price formula"
+        },
+        {
+          "step": 4,
+          "math": "P = 200(23.1148) + 10,000(0.3066) = 4,622.96 + 3,066 = $7,688.96",
+          "explanation": "Bond sells at discount since yield > coupon"
+        }
+      ],
+      "keyInsight": "Yield > Coupon → Price < Face Value (discount bond)",
+      "timeEstimate": "10 min"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Bond Pricing Recognition",
+      "questions": [
+        {
+          "integral": "Face value, coupon rate, yield rate, time to maturity",
+          "options": ["Bond pricing", "NPW", "IRR", "AW"],
+          "correctAnswer": 0,
+          "explanation": "These are the key bond pricing parameters"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Bond Calculations",
+      "problems": [
+        {
+          "problem": "$1000 face, 6% coupon paid semi-annually, 5 years, yield 8% nominal. Find price.",
+          "answer": "$918.89",
+          "hint": "Semi-annual: n=10, i=4%, coupon=$30",
+          "difficulty": "Medium"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Exam Bond Problems",
+      "problems": [
+        {
+          "problem": "5-year bond, $1000 face, 10% coupon semi-annual, investor wants 12% return. Maximum price?",
+          "context": "Bond valuation with required yield",
+          "primaryTechnique": "bond_pricing",
+          "secondaryTechniques": ["pa_factor", "pf_factor"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "Bond Price = PV(coupons) + PV(face value)",
+    "whenToUse": [
+      "Bond valuation",
+      "Finding fair price given yield",
+      "Comparing bond investments"
+    ],
+    "formula": "P = C(P/A,i,n) + F(P/F,i,n)",
+    "quickCheck": "Yield = Coupon → Price = Face (par bond)"
+  },
+  "patternConnections": ["bond_valuation_pattern"],
+  "masteryCriteria": {
+    "recognitionSpeed": "Identify bond problem in < 10 seconds",
+    "executionSpeed": "Solve bond pricing in < 8 minutes",
+    "accuracyTarget": "90% accuracy",
+    "selfCheckQuestions": [
+      "Did I adjust for semi-annual coupons?",
+      "Is yield rate different from coupon rate?",
+      "Does the price make sense (discount/premium)?"
+    ]
+  }
+}

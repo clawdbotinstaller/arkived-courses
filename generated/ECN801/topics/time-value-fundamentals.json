@@ -1,0 +1,55 @@
+{
+  "topic_id": "time_value_fundamentals",
+  "meta": {
+    "display_name": "Time Value of Money Fundamentals",
+    "course_context": "ECN801 - Engineering Economics",
+    "professor_methodology": "Focus on cash flow diagrams and equivalence concepts",
+    "core_formula": "F = P(1+i)^n",
+    "description": "Foundation of engineering economics - understanding that money has time value and equivalent values at different times"
+  },
+  "patterns": [
+    {
+      "id": "future_worth_lump_sum",
+      "name": "Future Worth of Lump Sum",
+      "recognition_signal": "Single amount growing to future date",
+      "canonical_forms": ["F = P(1+i)^n", "F = P(F/P,i,n)"],
+      "logic": "Compound interest grows present amount forward in time",
+      "efficiency_trick": {
+        "name": "Rule of 72",
+        "trigger": "Quick estimate of doubling time",
+        "steps": ["Doubling time ≈ 72 / interest rate %"]
+      },
+      "pitfalls": [
+        {"name": "Wrong direction", "description": "Using P/F instead of F/P"},
+        {"name": "Rate error", "description": "Not converting percentage to decimal"}
+      ]
+    },
+    {
+      "id": "present_worth_lump_sum",
+      "name": "Present Worth of Lump Sum",
+      "recognition_signal": "Future amount discounted to today",
+      "canonical_forms": ["P = F/(1+i)^n", "P = F(P/F,i,n)"],
+      "logic": "Discount future amount back to present value",
+      "pitfalls": [
+        {"name": "Multiplying instead of dividing", "description": "P/F requires division by (1+i)^n"}
+      ]
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "Are you moving forward or backward in time?", "yes": "Forward=F/P, no=P/F"},
+      {"step": 2, "question": "Is it a single amount or series?", "yes": "Use lump sum factors", "no": "Use series factors"}
+    ],
+    "professor_tips": [
+      "Always draw cash flow diagram first",
+      "Verify your answer makes sense (F > P for positive i)",
+      "Pay attention to compounding periods"
+    ]
+  },
+  "confidence_checklist": [
+    "I can draw cash flow diagrams correctly",
+    "I know when to use F/P vs P/F",
+    "I can convert between nominal and effective rates",
+    "I understand the time value concept intuitively"
+  ]
+}

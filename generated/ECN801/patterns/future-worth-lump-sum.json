@@ -1,0 +1,79 @@
+{
+  "id": "future_worth_lump_sum",
+  "name": "Future Worth of Lump Sum",
+  "description": "Calculate the future value of a single present amount using compound interest",
+  "canonical_form_latex": "F = P(1+i)^n",
+  "identification_signal": "Single amount invested today, asking what it grows to in the future",
+  "frequency": "Very Common - appears in 85% of exams",
+  "estimated_time": "3-5 minutes",
+  "strategy": {
+    "step_1": "Identify P (present amount), i (interest rate per period), and n (number of periods)",
+    "step_2": "Use formula F = P(1+i)^n or factor notation F = P(F/P,i,n)",
+    "step_3": "Calculate - ensure i is in decimal form (8% = 0.08)",
+    "step_4": "Verify: F should be greater than P for positive interest rates"
+  },
+  "exam_references": [
+    "2011W Q1",
+    "2012W M1",
+    "2013W M1"
+  ],
+  "related_techniques": ["fp_factor", "pf_factor"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Learn to identify future worth problems",
+      "flashcards": [
+        {
+          "front": {"text": "What grows a present amount to the future?"},
+          "back": {"title": "F/P Factor", "explanation": "Moves money forward in time"}
+        }
+      ],
+      "spot_it": {
+        "instructions": "Identify which problems require F/P factor",
+        "items": [
+          {
+            "prompt_latex": "$1000 invested for 5 years at 8%",
+            "is_match": true,
+            "key_cue": "Present to future",
+            "explanation": "Use F/P to find future worth"
+          }
+        ]
+      }
+    },
+    "phase_2_strategy": {
+      "purpose": "Master the calculation steps",
+      "steps": [
+        {
+          "title": "Identify Variables",
+          "instruction": "Find P, i, and n from problem statement",
+          "why": "These are the three required inputs",
+          "how_to": ["P = initial investment", "i = interest rate per period", "n = number of periods"]
+        },
+        {
+          "title": "Apply Formula",
+          "instruction": "Calculate (1+i)^n then multiply by P",
+          "why": "Compound interest formula",
+          "checkpoint": {"question": "Is i in decimal form?", "answer": "Yes, 8% = 0.08"}
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice calculations",
+      "problem_cards": [
+        {
+          "id": "fw-1",
+          "difficulty": "easy",
+          "task": "Find future worth",
+          "prompt_latex": "P = \\$2000, i = 6\\%, n = 4\\text{ years}",
+          "solution": {
+            "steps": ["F = 2000(1.06)^4", "F = 2000 × 1.2625", "F = \\$2,525"],
+            "final_answer_latex": "\\$2,525"
+          }
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "Future Worth Master", "pattern_id": "future_worth_lump_sum"},
+      "what_mastery_means": ["Can solve F/P problems in under 3 minutes", "100% accuracy on standard problems"]
+    }
+  }
+}

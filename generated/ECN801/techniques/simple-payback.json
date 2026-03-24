@@ -1,0 +1,178 @@
+{
+  "id": "simple_payback",
+  "displayName": "Simple Payback Period",
+  "recognition": {
+    "visualSignals": [
+      "Question asks for payback period or payback time",
+      "No discount rate mentioned",
+      "Simple recovery time calculation",
+      "Screening criterion for projects"
+    ],
+    "verbalTriggers": [
+      "Payback period",
+      "Simple payback",
+      "How long to recover investment",
+      "Years to break even",
+      "Recovery time"
+    ],
+    "nonExamples": [
+      "Discounted payback (uses MARR)",
+      "NPW analysis",
+      "Rate of return calculation"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Is discounting mentioned or MARR provided?",
+        "ifYes": "Use discounted payback",
+        "ifNo": "Simple payback applies"
+      },
+      {
+        "question": "Are cash flows uniform?",
+        "ifYes": "Payback = Initial Investment / Annual Cash Flow",
+        "ifNo": "Accumulate cash flows year by year"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Identify initial investment and all cash inflows",
+        "pitfall": "Using net cash flow (outflows) instead of inflows",
+        "check": "Payback looks at recovery of investment"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "For uniform inflows: PB = Initial Cost / Annual Inflow",
+        "pitfall": "Not verifying uniformity of inflows",
+        "check": "Same amount every year?"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "For non-uniform: accumulate until cumulative = initial investment",
+        "pitfall": "Stopping at wrong year",
+        "check": "Cumulative CF at year n should equal or exceed initial cost"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "For fractional year: interpolate",
+        "pitfall": "Interpolation errors",
+        "check": "Fraction = (amount needed) / (cash flow in that year)"
+      }
+    ],
+    "timeEstimate": "5-8 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Payback period too short",
+      "diagnosis": "Using net cash flow instead of gross inflow",
+      "fix": "Payback considers gross cash inflows to recover investment",
+      "example": "Initial $10,000, inflows $3000, costs $1000: PB = 10000/3000 not 10000/2000"
+    },
+    {
+      "symptom": "Wrong decision on good project",
+      "diagnosis": "Using payback as only criterion",
+      "fix": "Payback is screening tool only - use NPW for decisions",
+      "example": "Project with payback > cutoff may still have positive NPW"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "Initial investment $10,000 generates $2,500/year for 6 years. Find simple payback.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "Initial = $10,000, Annual inflow = $2,500",
+          "explanation": "Uniform cash flows"
+        },
+        {
+          "step": 2,
+          "math": "PB = 10,000 / 2,500 = 4 years",
+          "explanation": "Simple division for uniform flows"
+        }
+      ],
+      "keyInsight": "Uniform flows allow simple division",
+      "timeEstimate": "3 min"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Investment $5000, cash inflows: Year 1=$1500, Year 2=$2000, Year 3=$2000, Year 4=$1500. Find payback.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "Cumulative: Y1=$1500, Y2=$3500, Y3=$5500",
+          "explanation": "Accumulate until exceed $5000"
+        },
+        {
+          "step": 2,
+          "math": "Payback between year 2 and 3. Fraction = (5000-3500)/2000 = 0.75",
+          "explanation": "Interpolate for partial year"
+        },
+        {
+          "step": 3,
+          "math": "PB = 2 + 0.75 = 2.75 years or 2 years 9 months",
+          "explanation": "Final payback period"
+        }
+      ],
+      "keyInsight": "Non-uniform flows require accumulation and interpolation",
+      "timeEstimate": "6 min"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Payback Recognition",
+      "questions": [
+        {
+          "integral": "How long to recover initial investment with no discounting",
+          "options": ["Simple payback", "Discounted payback", "NPW", "IRR"],
+          "correctAnswer": 0,
+          "explanation": "Simple payback ignores time value of money"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Payback Calculations",
+      "problems": [
+        {
+          "problem": "$8000 investment, $2000/year for 5 years. Simple payback?",
+          "answer": "4 years",
+          "hint": "PB = Initial / Annual",
+          "difficulty": "Easy"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Exam Payback Problems",
+      "problems": [
+        {
+          "problem": "Project costs $12,000 and returns $3000, $4000, $4000, $3000 in years 1-4. Find simple payback.",
+          "context": "Non-uniform cash flows",
+          "primaryTechnique": "simple_payback",
+          "secondaryTechniques": []
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "Payback = Time to recover initial investment (no discounting)",
+    "whenToUse": [
+      "Quick screening of projects",
+      "Liquidity assessment",
+      "Risk evaluation (shorter = less risky)"
+    ],
+    "formula": "Uniform: PB = Initial/A; Non-uniform: accumulate until recovered",
+    "quickCheck": "Payback ignores cash flows after recovery and time value"
+  },
+  "patternConnections": [],
+  "masteryCriteria": {
+    "recognitionSpeed": "Identify payback in < 10 seconds",
+    "executionSpeed": "Solve in < 5 minutes",
+    "accuracyTarget": "95% accuracy",
+    "selfCheckQuestions": [
+      "Is this simple or discounted payback?",
+      "Are cash flows uniform or non-uniform?",
+      "Am I using this for screening or final decision?"
+    ]
+  }
+}

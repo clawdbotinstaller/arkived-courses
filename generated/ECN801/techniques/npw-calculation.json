@@ -1,0 +1,207 @@
+{
+  "id": "npw_calculation",
+  "displayName": "Net Present Worth (NPW)",
+  "recognition": {
+    "visualSignals": [
+      "Project evaluation question with cash inflows and outflows",
+      "Given MARR (Minimum Acceptable Rate of Return)",
+      "Asking whether to accept or reject an investment",
+      "Comparing multiple project alternatives"
+    ],
+    "verbalTriggers": [
+      "Calculate NPW",
+      "Net present worth",
+      "Present worth analysis",
+      "Should the project be accepted",
+      "Evaluate this investment at MARR",
+      "Compare alternatives using present worth"
+    ],
+    "nonExamples": [
+      "Future worth analysis (use NFW)",
+      "Annual worth analysis (use AW)",
+      "Rate of return calculation (use IRR)",
+      "Payback period only"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Is this a single project or mutually exclusive alternatives?",
+        "ifYes": "For mutually exclusive: choose highest NPW ≥ 0",
+        "ifNo": "Single project: accept if NPW ≥ 0"
+      },
+      {
+        "question": "Do projects have equal lives?",
+        "ifYes": "Direct NPW comparison",
+        "ifNo": "Use common multiple or AW method"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Identify MARR and verify all cash flows",
+        "pitfall": "Using wrong discount rate - must use MARR",
+        "check": "MARR is given as annual or periodic rate"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Draw cash flow diagram showing all inflows and outflows",
+        "pitfall": "Missing hidden cash flows like salvage value",
+        "check": "Include initial cost, operating costs, revenues, salvage"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Convert all cash flows to present worth at time 0 using MARR",
+        "pitfall": "Wrong signs - costs negative, revenues positive",
+        "check": "Be consistent with point of view (typically owner/investor)"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Calculate NPW = PW(benefits) - PW(costs)",
+        "pitfall": "Algebra errors when summing multiple PWs",
+        "check": "NPW = Σ[CF_t × (P/F,i,t)] for all periods t"
+      },
+      {
+        "stepNumber": 5,
+        "instruction": "Apply decision rule",
+        "pitfall": "Accepting negative NPW projects",
+        "check": "NPW ≥ 0: Accept; NPW < 0: Reject"
+      }
+    ],
+    "timeEstimate": "8-12 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "NPW magnitude seems wrong",
+      "diagnosis": "Using wrong discount rate (not MARR)",
+      "fix": "Always use MARR for NPW calculations",
+      "example": "If MARR = 10%, use i = 0.10, not the IRR or other rate"
+    },
+    {
+      "symptom": "Missing cash flows in calculation",
+      "diagnosis": "Forgetting salvage value or working capital recovery",
+      "fix": "Create checklist: initial investment, annual costs, annual revenues, salvage, working capital",
+      "example": "Salvage value at end of project life is a positive cash flow"
+    },
+    {
+      "symptom": "Wrong decision for mutually exclusive projects",
+      "diagnosis": "Selecting highest IRR instead of highest NPW",
+      "fix": "For mutually exclusive alternatives, always choose highest NPW ≥ 0",
+      "example": "Project A: NPW = $500, Project B: NPW = $700 → Choose B"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "A project requires $10,000 initial investment and generates $3,000 annual benefit for 5 years. Salvage value is $2,000. MARR is 10%. Find NPW.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "MARR = 10%, Initial cost = -10,000",
+          "explanation": "Identify given data"
+        },
+        {
+          "step": 2,
+          "math": "PW(benefits) = 3000(P/A,10%,5) + 2000(P/F,10%,5)",
+          "explanation": "Convert benefits to present"
+        },
+        {
+          "step": 3,
+          "math": "PW(benefits) = 3000(3.7908) + 2000(0.6209) = 11,372.40 + 1,241.80 = 12,614.20",
+          "explanation": "Calculate present worth of benefits"
+        },
+        {
+          "step": 4,
+          "math": "NPW = 12,614.20 - 10,000 = $2,614.20",
+          "explanation": "Calculate net present worth"
+        }
+      ],
+      "keyInsight": "Positive NPW means project earns more than MARR",
+      "timeEstimate": "8 min"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "Compare two machines at MARR = 12%: Machine A costs $50,000, lasts 4 years, annual benefit $18,000, no salvage. Machine B costs $75,000, lasts 6 years, annual benefit $20,000, salvage $10,000.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "Unequal lives - use 12-year common multiple or AW",
+          "explanation": "Recognize unequal lives issue"
+        },
+        {
+          "step": 2,
+          "math": "Using AW approach: AW_A = -50,000(A/P,12%,4) + 18,000 = -50,000(0.3292) + 18,000 = $1,540",
+          "explanation": "Calculate AW of Machine A"
+        },
+        {
+          "step": 3,
+          "math": "AW_B = -75,000(A/P,12%,6) + 20,000 + 10,000(A/F,12%,6) = -75,000(0.2432) + 20,000 + 10,000(0.1232) = $2,892",
+          "explanation": "Calculate AW of Machine B"
+        },
+        {
+          "step": 4,
+          "math": "AW_B > AW_A > 0, choose Machine B",
+          "explanation": "Machine B has higher annual worth"
+        }
+      ],
+      "keyInsight": "For unequal lives, use AW or common multiple, not direct NPW",
+      "timeEstimate": "12 min"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Recognizing NPW Problems",
+      "questions": [
+        {
+          "integral": "Given MARR and project cash flows, should you accept the project?",
+          "options": ["Calculate NPW", "Calculate IRR only", "Calculate payback", "Calculate AW only"],
+          "correctAnswer": 0,
+          "explanation": "NPW at MARR is the standard acceptance criterion"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "NPW Calculations",
+      "problems": [
+        {
+          "problem": "Initial cost $5000, annual benefit $1500 for 6 years, MARR = 8%, find NPW",
+          "answer": "$1,932.15",
+          "hint": "NPW = -5000 + 1500(P/A,8%,6)",
+          "difficulty": "Medium"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Exam NPW Problems",
+      "problems": [
+        {
+          "problem": "A warehouse costs $100,000, generates $25,000 annual receipts, has $6000 annual costs and $8000 taxes, 25-year life, $50,000 salvage. Find NPW at 8%.",
+          "context": "Complete project evaluation",
+          "primaryTechnique": "npw_calculation",
+          "secondaryTechniques": ["pa_factor", "pf_factor"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "NPW = PW(benefits) - PW(costs) at MARR",
+    "whenToUse": [
+      "Project accept/reject decisions",
+      "Comparing mutually exclusive alternatives",
+      "Investment evaluation"
+    ],
+    "formula": "NPW = Σ CF_t(1+i)^(-t) where i = MARR",
+    "quickCheck": "NPW ≥ 0 means accept (earns at least MARR)"
+  },
+  "patternConnections": ["project_comparison_npw"],
+  "masteryCriteria": {
+    "recognitionSpeed": "Identify NPW analysis in < 10 seconds",
+    "executionSpeed": "Complete NPW calculation in < 10 minutes",
+    "accuracyTarget": "90% accuracy on comprehensive problems",
+    "selfCheckQuestions": [
+      "Am I using MARR as the discount rate?",
+      "Have I included all cash flows including salvage?",
+      "For mutually exclusive, am I choosing highest NPW?"
+    ]
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "id": "irr_calculation",
+  "displayName": "Internal Rate of Return (IRR)",
+  "recognition": {
+    "visualSignals": [
+      "Question asks for rate of return or interest rate",
+      "Given cash flows, find rate where NPW = 0",
+      "Comparing project profitability against MARR",
+      "Incremental analysis for mutually exclusive alternatives"
+    ],
+    "verbalTriggers": [
+      "Find the rate of return",
+      "Calculate IRR",
+      "What interest rate makes this break even",
+      "Internal rate of return",
+      "Return on investment",
+      "Yield rate"
+    ],
+    "nonExamples": [
+      "NPW calculation (IRR is the rate, NPW is the value)",
+      "MARR (given, not calculated)",
+      "External rate of return (ERR)",
+      "Composite rate (uses reinvestment rate)"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Is the cash flow pattern conventional (one sign change)?",
+        "ifYes": "Single unique IRR exists",
+        "ifNo": "May have multiple IRRs - use NPW or external rate"
+      },
+      {
+        "question": "Are you comparing mutually exclusive alternatives?",
+        "ifYes": "Use incremental IRR analysis",
+        "ifNo": "Compare project IRR to MARR"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Set up NPW equation with unknown rate i",
+        "pitfall": "Sign errors in cash flows",
+        "check": "NPW = 0 = Σ CF_t(1+i)^(-t)"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Try two interest rates that give NPW near zero (one positive, one negative)",
+        "pitfall": "Rates too far apart for accurate interpolation",
+        "check": "Choose rates where NPW changes sign"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Calculate NPW at each trial rate",
+        "pitfall": "Calculation errors - work carefully",
+        "check": "NPW should bracket zero"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Use linear interpolation: i* = i1 + (i2-i1) × NPW1/(NPW1-NPW2)",
+        "pitfall": "Algebra errors in interpolation formula",
+        "check": "Verify i* is between i1 and i2"
+      },
+      {
+        "stepNumber": 5,
+        "instruction": "Compare IRR to MARR for decision",
+        "pitfall": "Accepting project with IRR < MARR",
+        "check": "Accept if IRR ≥ MARR"
+      }
+    ],
+    "timeEstimate": "10-15 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Calculated IRR doesn't make sense (e.g., >100% or negative for good project)",
+      "diagnosis": "Multiple IRRs exist - sign changes in cash flow",
+      "fix": "Use NPW method or external rate of return",
+      "example": "Cash flows: -1000, +3000, -2200 has two IRRs (0% and 100%)"
+    },
+    {
+      "symptom": "Wrong project selected for mutually exclusive alternatives",
+      "diagnosis": "Comparing IRRs directly instead of incremental IRR",
+      "fix": "Use incremental analysis: ΔIRR ≥ MARR means higher-cost alternative is justified",
+      "example": "Project A: IRR=15%, Project B: IRR=12% - but B may be better if ΔIRR(B-A) > MARR"
+    },
+    {
+      "symptom": "Large interpolation error",
+      "diagnosis": "Trial rates too far apart",
+      "fix": "Keep trial rates within 2-5% of each other",
+      "example": "If true IRR is 12%, use 10% and 15% not 5% and 20%"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "An investment of $1000 returns $500, $400, and $300 at the end of years 1, 2, and 3. Find the IRR.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "NPW = -1000 + 500(P/F,i,1) + 400(P/F,i,2) + 300(P/F,i,3) = 0",
+          "explanation": "Set up equation"
+        },
+        {
+          "step": 2,
+          "math": "Try i = 10%: NPW = -1000 + 500(0.9091) + 400(0.8264) + 300(0.7513) = +$21.95",
+          "explanation": "First trial rate"
+        },
+        {
+          "step": 3,
+          "math": "Try i = 12%: NPW = -1000 + 500(0.8929) + 400(0.7972) + 300(0.7118) = -$11.37",
+          "explanation": "Second trial rate"
+        },
+        {
+          "step": 4,
+          "math": "IRR ≈ 10% + (12%-10%) × 21.95/(21.95+11.37) = 10% + 2%(0.659) = 11.32%",
+          "explanation": "Linear interpolation"
+        }
+      ],
+      "keyInsight": "IRR is approximately 11.3%",
+      "timeEstimate": "12 min"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Recognizing IRR Problems",
+      "questions": [
+        {
+          "integral": "Find the interest rate where present worth equals zero",
+          "options": ["IRR", "NPW", "AW", "MARR"],
+          "correctAnswer": 0,
+          "explanation": "IRR is the rate where NPW = 0"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "IRR Calculations",
+      "problems": [
+        {
+          "problem": "Investment $2000, returns $1200 and $1100 in years 1 and 2. Estimate IRR.",
+          "answer": "Approximately 8-9%",
+          "hint": "Try 8% and 10%, then interpolate",
+          "difficulty": "Medium"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Exam IRR Problems",
+      "problems": [
+        {
+          "problem": "Find the IRR for a project with initial cost $5000 and annual returns of $1500 for 5 years.",
+          "context": "Simple IRR calculation",
+          "primaryTechnique": "irr_calculation",
+          "secondaryTechniques": ["finding_unknowns"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "IRR is the rate where NPW = 0 - use trial and error with interpolation",
+    "whenToUse": [
+      "Finding break-even interest rate",
+      "Comparing to MARR for decisions",
+      "When percentage return is more intuitive than dollar value"
+    ],
+    "formula": "0 = Σ CF_t(1+IRR)^(-t)",
+    "quickCheck": "IRR ≥ MARR means accept (single project)"
+  },
+  "patternConnections": ["irr_by_interpolation"],
+  "masteryCriteria": {
+    "recognitionSpeed": "Identify IRR problem in < 10 seconds",
+    "executionSpeed": "Complete IRR calculation in < 12 minutes",
+    "accuracyTarget": "85% accuracy (interpolation introduces error)",
+    "selfCheckQuestions": [
+      "Is the cash flow conventional (one sign change)?",
+      "For mutually exclusive, did I do incremental analysis?",
+      "Are my trial rates close enough together?"
+    ]
+  }
+}

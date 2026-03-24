@@ -1,0 +1,165 @@
+{
+  "id": "linear_gradient",
+  "displayName": "Linear Gradient (P/G Factor)",
+  "recognition": {
+    "visualSignals": [
+      "Cash flows increase or decrease by constant amount each period",
+      "Arithmetic progression pattern",
+      "Terms like 'increases by $1000 each year'",
+      "Series: A, A+G, A+2G, A+3G..."
+    ],
+    "verbalTriggers": [
+      "Linear gradient",
+      "Arithmetic gradient",
+      "Increases by constant amount",
+      "Decreases by $X each period",
+      "Maintenance costs increasing annually"
+    ],
+    "nonExamples": [
+      "Constant payments (use P/A)",
+      "Percentage increases (use geometric gradient)",
+      "Random cash flow variations"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Does the series change by constant AMOUNT each period?",
+        "ifYes": "Linear gradient applies",
+        "ifNo": "Check for geometric gradient or treat individually"
+      },
+      {
+        "question": "Is there a base amount A?",
+        "ifYes": "P = A(P/A) + G(P/G)",
+        "ifNo": "P = G(P/G) only"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Identify base amount A, gradient G, interest i, periods n",
+        "pitfall": "First gradient payment at period 2, not period 1",
+        "check": "Cash flow at t=1 is A, at t=2 is A±G, at t=3 is A±2G"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Calculate P/A component for base amount: P_A = A(P/A,i,n)",
+        "pitfall": "Forgetting that base continues through all periods",
+        "check": "A is present at every period 1 through n"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Calculate P/G component for gradient: P_G = G(P/G,i,n)",
+        "pitfall": "First G occurs at period 2",
+        "check": "P/G factor value is always less than n-1"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Total P = P_A + P_G (or P_A - P_G for decreasing gradient)",
+        "pitfall": "Sign error for decreasing gradient",
+        "check": "Decreasing gradient: P = A(P/A) - G(P/G)"
+      }
+    ],
+    "timeEstimate": "8-12 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Wrong present worth value",
+      "diagnosis": "Not recognizing gradient starts at period 2",
+      "fix": "First gradient amount G is at period 2",
+      "example": "For G=100: t1=0, t2=100, t3=200, not t1=100, t2=200"
+    },
+    {
+      "symptom": "Answer seems too small",
+      "diagnosis": "Confusing P/G with gradient amount itself",
+      "fix": "P/G converts gradient series to present worth",
+      "example": "(P/G,10%,5) = 6.862, not 4 (which would be sum of gradients)"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "Find present worth of cash flows: $500 at year 1, $600 at year 2, $700 at year 3, $800 at year 4, at i=10%.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "A = 500, G = 100, n = 4, i = 10%",
+          "explanation": "Identify: base=500, gradient=100"
+        },
+        {
+          "step": 2,
+          "math": "P_A = 500(P/A,10%,4) = 500(3.1699) = 1,584.95",
+          "explanation": "Present worth of base amount"
+        },
+        {
+          "step": 3,
+          "math": "P_G = 100(P/G,10%,4) = 100(4.3781) = 437.81",
+          "explanation": "Present worth of gradient"
+        },
+        {
+          "step": 4,
+          "math": "P = 1,584.95 + 437.81 = $2,022.76",
+          "explanation": "Total present worth"
+        }
+      ],
+      "keyInsight": "Split into base + gradient components",
+      "timeEstimate": "8 min"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Linear Gradient Recognition",
+      "questions": [
+        {
+          "integral": "Payments: $100, $150, $200, $250, $300",
+          "options": ["Linear gradient G=50", "Geometric gradient", "Uniform series", "No pattern"],
+          "correctAnswer": 0,
+          "explanation": "Constant increase of $50 each period"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "Linear Gradient Calculations",
+      "problems": [
+        {
+          "problem": "A=$200, G=$50, n=6, i=8%. Find present worth.",
+          "answer": "$1,328.47",
+          "hint": "P = 200(P/A,8%,6) + 50(P/G,8%,6)",
+          "difficulty": "Medium"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Exam Gradient Problems",
+      "problems": [
+        {
+          "problem": "Maintenance costs start at $2000 and increase by $300 each year for 8 years. Find PW at 12%.",
+          "context": "Gradient series application",
+          "primaryTechnique": "linear_gradient",
+          "secondaryTechniques": ["pa_factor"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "P = A(P/A) + G(P/G) for linear gradient series",
+    "whenToUse": [
+      "Cash flows changing by constant amount",
+      "Maintenance cost increases",
+      "Arithmetic progression pattern"
+    ],
+    "formula": "P = A(P/A,i,n) + G(P/G,i,n)",
+    "quickCheck": "First gradient G occurs at period 2"
+  },
+  "patternConnections": ["gradient_series_pw"],
+  "masteryCriteria": {
+    "recognitionSpeed": "Identify gradient pattern in < 10 seconds",
+    "executionSpeed": "Solve gradient problem in < 10 minutes",
+    "accuracyTarget": "90% accuracy",
+    "selfCheckQuestions": [
+      "Is the change constant (linear) or percentage (geometric)?",
+      "Does gradient start at period 2?",
+      "Is it increasing or decreasing gradient?"
+    ]
+  }
+}

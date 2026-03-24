@@ -1,0 +1,79 @@
+{
+  "id": "annuity_present_worth",
+  "name": "Annuity Present Worth",
+  "description": "Convert a series of equal payments to an equivalent present lump sum",
+  "canonical_form_latex": "P = A\\frac{(1+i)^n - 1}{i(1+i)^n}",
+  "identification_signal": "Equal payments at regular intervals, find equivalent amount today",
+  "frequency": "Very Common - appears in 90% of exams",
+  "estimated_time": "5-8 minutes",
+  "strategy": {
+    "step_1": "Identify A (payment amount), i (rate per period), n (number of payments)",
+    "step_2": "Locate P one period before first A (period 0 for ordinary annuity)",
+    "step_3": "Use P/A factor or formula to convert series to present worth",
+    "step_4": "For annuity due (payments at beginning), multiply result by (1+i)"
+  },
+  "exam_references": [
+    "2011W Q2",
+    "2012W M1",
+    "2013W M1",
+    "2013W M2"
+  ],
+  "related_techniques": ["pa_factor", "ap_factor"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Identify annuity problems",
+      "flashcards": [
+        {
+          "front": {"text": "Series of equal payments converted to present worth"},
+          "back": {"title": "P/A Factor", "explanation": "Present worth of uniform series"}
+        }
+      ],
+      "spot_it": {
+        "instructions": "Spot the P/A pattern",
+        "items": [
+          {
+            "prompt_latex": "\\$500\\text{/month for 3 years, find loan amount}",
+            "is_match": true,
+            "key_cue": "Equal payments to present",
+            "explanation": "Classic P/A application"
+          }
+        ]
+      }
+    },
+    "phase_2_strategy": {
+      "purpose": "Learn calculation steps",
+      "steps": [
+        {
+          "title": "Check Timing",
+          "instruction": "Verify payments start at period 1 (ordinary) or period 0 (due)",
+          "why": "Affects the calculation",
+          "common_errors": ["Assuming all annuities are ordinary"]
+        },
+        {
+          "title": "Match Periods",
+          "instruction": "Ensure interest period matches payment period",
+          "why": "Monthly payments need monthly rate"
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice problems",
+      "problem_cards": [
+        {
+          "id": "pa-1",
+          "difficulty": "medium",
+          "task": "Find present worth",
+          "prompt_latex": "A = \\$1000, i = 8\\%, n = 5\\text{ years}",
+          "solution": {
+            "steps": ["P/A = 3.9927", "P = 1000 × 3.9927 = \\$3,993"],
+            "final_answer_latex": "\\$3,993"
+          }
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "Annuity Expert", "pattern_id": "annuity_present_worth"},
+      "what_mastery_means": ["Handle ordinary and annuity due correctly", "Match payment and interest periods"]
+    }
+  }
+}

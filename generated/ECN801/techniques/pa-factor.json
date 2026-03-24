@@ -1,0 +1,223 @@
+{
+  "id": "pa_factor",
+  "displayName": "P/A Factor (Present Worth of Annuity)",
+  "recognition": {
+    "visualSignals": [
+      "Series of equal payments (A) at regular intervals",
+      "Question asks for equivalent present amount",
+      "Cash flow diagram with equal arrows starting at period 1",
+      "Loan amount calculation from payment schedule"
+    ],
+    "verbalTriggers": [
+      "Find the present worth of a uniform series",
+      "What is the equivalent lump sum today",
+      "How much can be borrowed given payments",
+      "Present value of an annuity",
+      "Series of equal payments"
+    ],
+    "nonExamples": [
+      "Single payment (use P/F)",
+      "Future worth of series (use F/A)",
+      "Payments that increase/decrease each period (use gradient)",
+      "Finding payment amount (use A/P)"
+    ]
+  },
+  "algorithm": {
+    "decisionTree": [
+      {
+        "question": "Are payments equal in amount and at regular intervals?",
+        "ifYes": "This is a uniform series - proceed",
+        "ifNo": "Use gradient factors or analyze each cash flow separately"
+      },
+      {
+        "question": "Do payments start at period 1 (ordinary annuity)?",
+        "ifYes": "Standard P/A applies",
+        "ifNo": "May need adjustment for annuity due or deferred annuity"
+      },
+      {
+        "question": "Are you finding present worth from payments?",
+        "ifYes": "Use P/A",
+        "ifNo": "If finding payments from present worth, use A/P"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Identify A (uniform payment amount), i (interest rate per period), and n (number of payments)",
+        "pitfall": "Confusing n as the last period number instead of count of payments",
+        "check": "n = number of A payments in the series"
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Determine location of P - one period BEFORE first A",
+        "pitfall": "Placing P at same time as first A",
+        "check": "For payments at periods 1,2,3,...,n: P is at period 0"
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Write formula: P = A[(1+i)^n - 1]/[i(1+i)^n] or P = A(P/A,i,n)",
+        "pitfall": "Algebra errors in formula - write it out carefully",
+        "check": "Verify factor is always < n (for positive i)"
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Calculate using tables or calculator",
+        "pitfall": "Rounding errors - keep at least 4 decimal places",
+        "check": "P should be < n×A (discounting reduces total)"
+      }
+    ],
+    "timeEstimate": "5-8 min"
+  },
+  "commonErrors": [
+    {
+      "symptom": "Present worth at wrong time period",
+      "diagnosis": "Not placing P one period before first A",
+      "fix": "P is always one period before first payment for standard annuity",
+      "example": "For A at periods 1-5, P is at period 0, not period 1"
+    },
+    {
+      "symptom": "P value seems too high",
+      "diagnosis": "Confusing P/A with F/A or other factor",
+      "fix": "P/A converts to present; F/A converts to future",
+      "example": "At i=10%, n=5: (P/A) = 3.791, (F/A) = 6.105"
+    },
+    {
+      "symptom": "Wrong answer for annuity due (payments at beginning)",
+      "diagnosis": "Not adjusting for beginning-of-period payments",
+      "fix": "Multiply ordinary annuity result by (1+i)",
+      "example": "Annuity due P/A = Ordinary P/A × (1+i)"
+    }
+  ],
+  "workedExamples": [
+    {
+      "difficulty": "Easy",
+      "problem": "Find the present worth of $1000 payments at the end of each year for 5 years at 8% interest.",
+      "solution": [
+        {
+          "step": 1,
+          "math": "A = 1000, i = 0.08, n = 5",
+          "explanation": "Identify given values"
+        },
+        {
+          "step": 2,
+          "math": "P/A factor = [(1.08)^5 - 1]/[0.08(1.08)^5] = 3.9927",
+          "explanation": "Calculate or look up factor"
+        },
+        {
+          "step": 3,
+          "math": "P = 1000 × 3.9927 = $3,992.70",
+          "explanation": "Calculate present worth"
+        }
+      ],
+      "keyInsight": "$5000 total payments has PW of $3993 due to discounting",
+      "timeEstimate": "4 min"
+    },
+    {
+      "difficulty": "Medium",
+      "problem": "What lump sum today is equivalent to $500 payments at the end of each quarter for 3 years at 12% compounded quarterly?",
+      "solution": [
+        {
+          "step": 1,
+          "math": "A = 500, i = 0.12/4 = 0.03, n = 3×4 = 12",
+          "explanation": "Convert to quarterly periods"
+        },
+        {
+          "step": 2,
+          "math": "(P/A,3%,12) = 9.9540",
+          "explanation": "Look up factor"
+        },
+        {
+          "step": 3,
+          "math": "P = 500 × 9.9540 = $4,977",
+          "explanation": "Calculate present worth"
+        }
+      ],
+      "keyInsight": "Always match payment period with interest period",
+      "timeEstimate": "6 min"
+    },
+    {
+      "difficulty": "Hard",
+      "problem": "A loan requires payments of $2000 at the beginning of each year for 10 years at 9%. What is the loan amount?",
+      "solution": [
+        {
+          "step": 1,
+          "math": "A = 2000, i = 0.09, n = 10, annuity due",
+          "explanation": "Recognize beginning-of-period payments"
+        },
+        {
+          "step": 2,
+          "math": "Ordinary P/A = [(1.09)^10 - 1]/[0.09(1.09)^10] = 6.4177",
+          "explanation": "Calculate ordinary annuity factor"
+        },
+        {
+          "step": 3,
+          "math": "Annuity due adjustment: 6.4177 × 1.09 = 6.9953",
+          "explanation": "Multiply by (1+i)"
+        },
+        {
+          "step": 4,
+          "math": "P = 2000 × 6.9953 = $13,990.60",
+          "explanation": "Loan amount (P at time 0)"
+        }
+      ],
+      "keyInsight": "Annuity due = Ordinary × (1+i) - payments start now, not later",
+      "timeEstimate": "10 min"
+    }
+  ],
+  "drillSets": {
+    "recognitionDrill": {
+      "title": "Recognizing P/A Problems",
+      "questions": [
+        {
+          "integral": "Find present worth of $100/month for 24 months at 12% compounded monthly",
+          "options": ["P/A", "F/A", "A/P", "A/F"],
+          "correctAnswer": 0,
+          "explanation": "Converting uniform series to present worth - use P/A"
+        }
+      ]
+    },
+    "executionDrill": {
+      "title": "P/A Calculations",
+      "problems": [
+        {
+          "problem": "Find P given A = $800, i = 10%, n = 6 years",
+          "answer": "$3,482.96",
+          "hint": "P/A = 4.3553",
+          "difficulty": "Easy"
+        }
+      ]
+    },
+    "examStyleDrill": {
+      "title": "Exam P/A Problems",
+      "problems": [
+        {
+          "problem": "How much can you borrow if you can afford $400 monthly payments for 5 years at 9% compounded monthly?",
+          "context": "Loan amount from payment capacity",
+          "primaryTechnique": "pa_factor",
+          "secondaryTechniques": ["interest_rate_conversions"]
+        }
+      ]
+    }
+  },
+  "cheatSheet": {
+    "oneLiner": "P = A(P/A,i,n) converts uniform payments to present worth",
+    "whenToUse": [
+      "Finding equivalent lump sum of payment series",
+      "Loan amount calculations",
+      "Present value of annuities"
+    ],
+    "formula": "P = A[(1+i)^n-1]/[i(1+i)^n]",
+    "quickCheck": "P is located one period BEFORE first A"
+  },
+  "patternConnections": ["annuity_present_worth"],
+  "masteryCriteria": {
+    "recognitionSpeed": "Identify P/A problem in < 10 seconds",
+    "executionSpeed": "Solve standard P/A in < 5 minutes",
+    "accuracyTarget": "95% accuracy on drill problems",
+    "selfCheckQuestions": [
+      "Is P located one period before first A?",
+      "Have I matched interest period with payment period?",
+      "Is this annuity due or ordinary annuity?"
+    ]
+  }
+}

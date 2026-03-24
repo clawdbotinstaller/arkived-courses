@@ -1,0 +1,76 @@
+{
+  "id": "capital_recovery_cost",
+  "name": "Capital Recovery Cost",
+  "description": "Calculate annual cost of owning and operating an asset",
+  "canonical_form_latex": "CR = P(A/P,i,n) - S(A/F,i,n)",
+  "identification_signal": "Annual cost of ownership, capital recovery, equipment economic analysis",
+  "frequency": "Common - appears in 55% of exams",
+  "estimated_time": "8-12 minutes",
+  "strategy": {
+    "step_1": "Identify first cost P, salvage S, life n, MARR i",
+    "step_2": "Calculate capital recovery: P(A/P,i,n) - S(A/F,i,n)",
+    "step_3": "Add annual operating costs",
+    "step_4": "Total annual cost = CR + Operating Costs"
+  },
+  "exam_references": [
+    "2012W M2",
+    "2013W M2"
+  ],
+  "related_techniques": ["ap_factor", "af_factor", "aw_calculation"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Identify capital recovery",
+      "flashcards": [
+        {
+          "front": {"text": "Annual cost to own and operate equipment"},
+          "back": {"title": "Capital Recovery", "explanation": "CR + operating costs"}
+        }
+      ],
+      "spot_it": {
+        "instructions": "Spot CR problems",
+        "items": [
+          {
+            "prompt_latex": "Annual cost of machine including depreciation recovery",
+            "is_match": true,
+            "key_cue": "Annual ownership cost",
+            "explanation": "Capital recovery analysis"
+          }
+        ]
+      }
+    },
+    "phase_2_strategy": {
+      "purpose": "CR calculation",
+      "steps": [
+        {
+          "title": "Components",
+          "instruction": "First cost, salvage, life, operating costs",
+          "why": "All needed for complete analysis"
+        },
+        {
+          "title": "Formula",
+          "instruction": "CR = P(A/P) - S(A/F) = (P-S)(A/P) + Si",
+          "why": "Equivalent annual cost of ownership"
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice CR",
+      "problem_cards": [
+        {
+          "id": "cr-1",
+          "difficulty": "medium",
+          "task": "Find capital recovery",
+          "prompt_latex": "P=\\$10000, S=\\$2000, n=5, i=10\\%",
+          "solution": {
+            "steps": ["CR = 10000(A/P,10%,5) - 2000(A/F,10%,5)", "CR = 10000(0.2638) - 2000(0.1638) = \\$2,310.40"],
+            "final_answer_latex": "\\$2,310.40"
+          }
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "Cost Analyst", "pattern_id": "capital_recovery_cost"},
+      "what_mastery_means": ["Calculate any capital recovery", "Compare equipment alternatives"]
+    }
+  }
+}

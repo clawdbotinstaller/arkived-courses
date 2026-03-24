@@ -1,0 +1,77 @@
+{
+  "id": "bond_valuation_pattern",
+  "name": "Bond Valuation",
+  "description": "Calculate bond price from coupon payments, face value, and yield rate",
+  "canonical_form_latex": "P_{bond} = C(P/A,i,n) + F(P/F,i,n)",
+  "identification_signal": "Face value, coupon rate, yield rate, and maturity given",
+  "frequency": "Common - appears in 60% of exams",
+  "estimated_time": "8-12 minutes",
+  "strategy": {
+    "step_1": "Identify: Face F, Coupon rate c, Yield i, Maturity n, Periods per year",
+    "step_2": "Adjust for semi-annual: divide annual rates by 2, double years",
+    "step_3": "Calculate periodic coupon: C = F × (coupon rate per period)",
+    "step_4": "Bond price = PV(coupons) + PV(face value)"
+  },
+  "exam_references": [
+    "2009F Q4",
+    "2012W M2",
+    "2013W M2"
+  ],
+  "related_techniques": ["bond_pricing", "pa_factor", "pf_factor"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Identify bond problems",
+      "flashcards": [
+        {
+          "front": {"text": "Face value, coupon rate, yield, time to maturity"},
+          "back": {"title": "Bond Pricing", "explanation": "PV of coupons + PV of face"}
+        }
+      ],
+      "spot_it": {
+        "instructions": "Spot bond valuation problems",
+        "items": [
+          {
+            "prompt_latex": "\\$1000\\text{ face, 8\\% coupon, 10\\% yield, 5 years}",
+            "is_match": true,
+            "key_cue": "Bond parameters",
+            "explanation": "Bond pricing problem"
+          }
+        ]
+      }
+    },
+    "phase_2_strategy": {
+      "purpose": "Bond pricing strategy",
+      "steps": [
+        {
+          "title": "Semi-annual Check",
+          "instruction": "Double periods, halve rates for semi-annual coupons",
+          "why": "Most bonds pay semi-annually"
+        },
+        {
+          "title": "Calculate Components",
+          "instruction": "Coupon annuity + Face lump sum",
+          "why": "Two components of bond value"
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice bond pricing",
+      "problem_cards": [
+        {
+          "id": "bond-1",
+          "difficulty": "medium",
+          "task": "Find bond price",
+          "prompt_latex": "F = \\$1000, c = 8\\%, i = 10\\%, n = 5\\text{ years, semi-annual}",
+          "solution": {
+            "steps": ["Semi-annual: n=10, i=5%, C=$40", "P = 40(P/A,5%,10) + 1000(P/F,5%,10)", "P = 40(7.7217) + 1000(0.6139) = \\$922.77"],
+            "final_answer_latex": "\\$922.77"
+          }
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "Bond Expert", "pattern_id": "bond_valuation_pattern"},
+      "what_mastery_means": ["Price any bond correctly", "Understand premium/discount concepts"]
+    }
+  }
+}

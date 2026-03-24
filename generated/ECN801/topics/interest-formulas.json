@@ -1,0 +1,65 @@
+{
+  "topic_id": "interest_formulas",
+  "meta": {
+    "display_name": "Interest Formulas and Factors",
+    "course_context": "ECN801 - Engineering Economics",
+    "professor_methodology": "Emphasis on factor notation and cash flow timing",
+    "core_formula": "P = A(P/A,i,n), F = A(F/A,i,n)",
+    "description": "Uniform series, gradients, and factor relationships for time value calculations"
+  },
+  "patterns": [
+    {
+      "id": "annuity_present_worth",
+      "name": "Annuity Present Worth",
+      "recognition_signal": "Equal payments converted to present lump sum",
+      "canonical_forms": ["P = A(P/A,i,n)", "P = A[((1+i)^n-1)/(i(1+i)^n)]"],
+      "logic": "Convert uniform series to equivalent present amount",
+      "efficiency_trick": {
+        "name": "P Location",
+        "trigger": "Finding present worth of annuity",
+        "steps": ["P is always ONE PERIOD BEFORE first A"]
+      },
+      "pitfalls": [
+        {"name": "Timing error", "description": "Placing P at same time as first A"},
+        {"name": "Annuity due confusion", "description": "Not adjusting for beginning-of-period payments"}
+      ]
+    },
+    {
+      "id": "loan_payment_calculation",
+      "name": "Loan Payment Calculation",
+      "recognition_signal": "Present amount converted to equal payments",
+      "canonical_forms": ["A = P(A/P,i,n)"],
+      "logic": "Capital recovery - paying back loan in uniform installments",
+      "pitfalls": [
+        {"name": "Confusing with P/A", "description": "A/P is inverse of P/A"}
+      ]
+    },
+    {
+      "id": "linear_gradient",
+      "name": "Linear Gradient Series",
+      "recognition_signal": "Cash flows changing by constant amount",
+      "canonical_forms": ["P = G(P/G,i,n)", "P = A(P/A) + G(P/G)"],
+      "logic": "Base amount plus arithmetic progression",
+      "pitfalls": [
+        {"name": "First G location", "description": "First gradient amount at period 2, not 1"}
+      ]
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "What is the cash flow pattern?", "yes": "Single, uniform, or gradient?"},
+      {"step": 2, "question": "What direction?", "yes": "Present to future (F/P), future to present (P/F), uniform to present (P/A)"}
+    ],
+    "professor_tips": [
+      "Memorize the six basic factor formulas",
+      "Understand cash flow timing for each factor",
+      "Practice drawing the cash flow diagrams"
+    ]
+  },
+  "confidence_checklist": [
+    "I know all six factor formulas",
+    "I understand cash flow timing for each factor",
+    "I can handle annuity due vs ordinary annuity",
+    "I can decompose complex cash flows"
+  ]
+}

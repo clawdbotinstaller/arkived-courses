@@ -1,0 +1,49 @@
+{
+  "topic_id": "advanced_analysis",
+  "meta": {
+    "display_name": "Advanced Economic Analysis",
+    "course_context": "ECN801 - Engineering Economics",
+    "professor_methodology": "Perpetual projects and capitalized cost concepts",
+    "core_formula": "CC = P_0 + A/i",
+    "description": "Capitalized cost, perpetual service projects, and infinite horizon analysis"
+  },
+  "patterns": [
+    {
+      "id": "capitalized_cost_pattern",
+      "name": "Capitalized Cost",
+      "recognition_signal": "Perpetual or infinite life projects",
+      "canonical_forms": ["CC = First Cost + A/i", "CC = AW/i for perpetual"],
+      "logic": "Present worth of perpetual series is A/i",
+      "pitfalls": [
+        {"name": "Finite factor", "description": "Using P/A instead of dividing by i"},
+        {"name": "Replacement cycles", "description": "Not converting to AW first"}
+      ]
+    },
+    {
+      "id": "capital_recovery_cost",
+      "name": "Capital Recovery",
+      "recognition_signal": "Annual cost of owning equipment",
+      "canonical_forms": ["CR = P(A/P) - S(A/F)"],
+      "logic": "Equivalent annual cost of ownership",
+      "pitfalls": [
+        {"name": "Salvage omission", "description": "Forgetting to subtract salvage recovery"}
+      ]
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "Is this perpetual?", "yes": "Use A/i formula", "no": "Use standard factors"},
+      {"step": 2, "question": "Replacement involved?", "yes": "Find AW of cycle first", "no": "Direct calculation"}
+    ],
+    "professor_tips": [
+      "As n→∞, A/P factor approaches i",
+      "Break complex problems into components",
+      "Capitalized cost for public infrastructure"
+    ]
+  },
+  "confidence_checklist": [
+    "I understand the A/i formula for perpetuities",
+    "I can handle replacement cycles",
+    "I can calculate capital recovery costs"
+  ]
+}

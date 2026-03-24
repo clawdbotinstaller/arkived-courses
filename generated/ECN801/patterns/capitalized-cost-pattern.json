@@ -1,0 +1,76 @@
+{
+  "id": "capitalized_cost_pattern",
+  "name": "Capitalized Cost Pattern",
+  "description": "Calculate present worth of perpetual or infinite-life projects",
+  "canonical_form_latex": "CC = P_0 + \\frac{A}{i}",
+  "identification_signal": "Perpetual service, forever, permanent endowment, infinite horizon",
+  "frequency": "Moderate - appears in 45% of exams",
+  "estimated_time": "10-15 minutes",
+  "strategy": {
+    "step_1": "Identify first cost and perpetual annual costs",
+    "step_2": "For replacement cycles: find AW of cycle first",
+    "step_3": "Capitalized cost = First Cost + A/i for perpetual series",
+    "step_4": "Sum all components"
+  },
+  "exam_references": [
+    "2009F Q5",
+    "2013W M2"
+  ],
+  "related_techniques": ["capitalized_cost", "aw_calculation"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Identify capitalized cost",
+      "flashcards": [
+        {
+          "front": {"text": "Perpetual maintenance or endowment"},
+          "back": {"title": "Capitalized Cost", "explanation": "P = A/i for perpetual"}
+        }
+      ],
+      "spot_it": {
+        "instructions": "Spot perpetual problems",
+        "items": [
+          {
+            "prompt_latex": "Endowment to fund scholarships forever",
+            "is_match": true,
+            "key_cue": "Forever/perpetual",
+            "explanation": "Capitalized cost"
+          }
+        ]
+      }
+    },
+    "phase_2_strategy": {
+      "purpose": "Perpetual calculation",
+      "steps": [
+        {
+          "title": "Components",
+          "instruction": "Identify all perpetual costs",
+          "why": "All must be capitalized"
+        },
+        {
+          "title": "Formula",
+          "instruction": "For perpetual A: P = A/i",
+          "why": "As n→∞, A/P factor → i"
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice CC",
+      "problem_cards": [
+        {
+          "id": "cc-1",
+          "difficulty": "medium",
+          "task": "Find capitalized cost",
+          "prompt_latex": "\\$5000\\text{/year forever at } 8\\%",
+          "solution": {
+            "steps": ["CC = 5000/0.08 = \\$62,500"],
+            "final_answer_latex": "\\$62,500"
+          }
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "Perpetuity Expert", "pattern_id": "capitalized_cost_pattern"},
+      "what_mastery_means": ["Handle all perpetual cost scenarios", "Work with replacement cycles"]
+    }
+  }
+}

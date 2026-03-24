@@ -1,0 +1,77 @@
+{
+  "id": "irr_by_interpolation",
+  "name": "IRR by Interpolation",
+  "description": "Find internal rate of return by trial rates and linear interpolation",
+  "canonical_form_latex": "i^* = i_1 + (i_2-i_1) \\times \\frac{NPW_1}{NPW_1-NPW_2}",
+  "identification_signal": "Find rate where NPW=0 or rate of return",
+  "frequency": "Common - appears in 65% of exams",
+  "estimated_time": "10-15 minutes",
+  "strategy": {
+    "step_1": "Set up NPW equation with unknown rate i",
+    "step_2": "Try rate i1 that gives small positive NPW",
+    "step_3": "Try rate i2 that gives small negative NPW",
+    "step_4": "Interpolate: i* = i1 + (i2-i1) × NPW1/(NPW1-NPW2)"
+  },
+  "exam_references": [
+    "2009F Q5",
+    "2011W",
+    "2013W M2"
+  ],
+  "related_techniques": ["irr_calculation", "finding_unknowns"],
+  "workbench": {
+    "phase_1_recognition": {
+      "purpose": "Identify IRR problems",
+      "flashcards": [
+        {
+          "front": {"text": "Find rate where NPW equals zero"},
+          "back": {"title": "IRR", "explanation": "Internal rate of return"}
+        }
+      ],
+      "spot_it": {
+        "instructions": "Spot IRR problems",
+        "items": [
+          {
+            "prompt_latex": "Find rate of return on investment",
+            "is_match": true,
+            "key_cue": "Rate of return",
+            "explanation": "IRR calculation"
+          }
+        ]
+      }
+    },
+    "phase_2_strategy": {
+      "purpose": "Interpolation technique",
+      "steps": [
+        {
+          "title": "Choose Rates",
+          "instruction": "Pick rates close to expected IRR (2-5% apart)",
+          "why": "Closer rates = more accurate interpolation"
+        },
+        {
+          "title": "Interpolate",
+          "instruction": "Use linear interpolation formula",
+          "why": "Estimates IRR between trial rates"
+        }
+      ]
+    },
+    "phase_3_practice": {
+      "purpose": "Practice interpolation",
+      "problem_cards": [
+        {
+          "id": "irr-1",
+          "difficulty": "medium",
+          "task": "Estimate IRR",
+          "prompt_latex": "At 10\\%: NPW=+50; At 15\\%: NPW=-30",
+          "solution": {
+            "steps": ["IRR ≈ 10% + (15%-10%) × 50/(50+30)", "IRR = 10% + 5% × 0.625 = 13.1%"],
+            "final_answer_latex": "13.1\\%"
+          }
+        }
+      ]
+    },
+    "phase_4_mastery": {
+      "mastery_stamp": {"title": "IRR Finder", "pattern_id": "irr_by_interpolation"},
+      "what_mastery_means": ["Accurate interpolation", "Select good trial rates"]
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "topic_id": "project_evaluation",
+  "meta": {
+    "display_name": "Project Evaluation Methods",
+    "course_context": "ECN801 - Engineering Economics",
+    "professor_methodology": "NPW as primary method, IRR for rate of return",
+    "core_formula": "NPW = Σ CF_t(1+i)^(-t)",
+    "description": "Methods for evaluating and comparing investment alternatives including NPW, IRR, and payback"
+  },
+  "patterns": [
+    {
+      "id": "project_comparison_npw",
+      "name": "NPW Analysis",
+      "recognition_signal": "Project evaluation at MARR with accept/reject decision",
+      "canonical_forms": ["NPW ≥ 0: Accept", "Max NPW for mutually exclusive"],
+      "logic": "Discount all cash flows to present at MARR",
+      "pitfalls": [
+        {"name": "Wrong discount rate", "description": "Must use MARR, not IRR or other rate"},
+        {"name": "Unequal lives", "description": "Need common multiple or AW method"}
+      ]
+    },
+    {
+      "id": "irr_by_interpolation",
+      "name": "IRR Calculation",
+      "recognition_signal": "Find rate where NPW = 0",
+      "canonical_forms": ["IRR ≥ MARR: Accept (single project)"],
+      "logic": "Trial and error to find break-even rate",
+      "pitfalls": [
+        {"name": "Multiple IRRs", "description": "Non-conventional cash flows may have multiple solutions"},
+        {"name": "Incremental analysis", "description": "Mutually exclusive requires comparing increments"}
+      ]
+    },
+    {
+      "id": "simple_payback",
+      "name": "Payback Period",
+      "recognition_signal": "Time to recover initial investment",
+      "canonical_forms": ["Simple: no discounting", "Discounted: with MARR"],
+      "logic": "Screening tool - how quickly investment recovered",
+      "pitfalls": [
+        {"name": "Ignoring time value", "description": "Simple payback is approximate"},
+        {"name": "Post-payback cash flows", "description": "Ignores cash flows after payback"}
+      ]
+    }
+  ],
+  "study_strategy": {
+    "decision_tree": [
+      {"step": 1, "question": "Is this accept/reject or comparison?", "yes": "Single: NPW≥0", "no": "Compare: max NPW"},
+      {"step": 2, "question": "Using IRR?", "yes": "Check for multiple solutions, use incremental for mutually exclusive"}
+    ],
+    "professor_tips": [
+      "NPW is most reliable method",
+      "IRR can be misleading for mutually exclusive projects",
+      "Payback is only a screening tool"
+    ]
+  },
+  "confidence_checklist": [
+    "I can calculate NPW correctly",
+    "I understand when to use each method",
+    "I can handle mutually exclusive comparisons",
+    "I know the limitations of each method"
+  ]
+}
